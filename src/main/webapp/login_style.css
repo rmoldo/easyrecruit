@@ -1,0 +1,42 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Nov 12, 2020, 4:38:12 PM
+    Author     : Claudiu
+*/
+@CHARSET "UTF-8";
+
+
+
+.login-form {
+	margin: 100px auto;
+	max-width: 400px;
+}
+
+form[role=login] {
+	padding: 15px 26px 20px 26px;
+	background: #fff;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+	form[role=login] h2 {
+		font-size: 20px;
+		color: #5d5c5c;
+		margin-bottom: 0.5em;
+	}
+	form[role=login] p {
+		color: #929292;
+		margin-bottom: 25px;
+	}
+	form[role=login] input,
+	form[role=login] button,
+	form[role=login] a.btn {
+		font-size: 16px;
+	}
+	form[role=login] a.btn {
+		margin: 16px 0;		
+	}
