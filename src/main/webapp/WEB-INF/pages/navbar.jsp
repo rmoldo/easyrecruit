@@ -37,9 +37,16 @@
             <li class="nav-item ${forwardPath == '/Positions' ? ' active' : ''}">
                 <a class="nav-link" href="${contextPath}/Positions">Positions</a>
             </li>
-            <li class="nav-item ${pageContext.request.requestURI == '/easyrecruit/about.jsp' ? ' active' : ''}">
-                <a class="nav-link" href="${contextPath}/about.jsp">About</a>
-            </li>
+            <c:if test="${userType == 'Normal'}">
+                <li class="nav-item ${forwardPath == '/Applications' ? ' active' : ''}">
+                    <a class="nav-link" href="${contextPath}/Applications">My Applications</a>
+                </li>
+            </c:if>
+            <c:if test="${userType == 'Administrator' || userType == 'GeneralDirector'}">
+                <li class="nav-item ${forwardPath == '/Users' ? ' active' : ''}">
+                    <a class="nav-link" href="${contextPath}/Users">Users</a>
+                </li>
+            </c:if>
         </ul>
 
         <ul class="navbar-nav ml-auto">
@@ -51,12 +58,12 @@
                     <a class="nav-link" href="${contextPath}/register.jsp">Register</a>
                 </li>
             </c:if>
-            <c:if test="${userType == 'Normal'}">
+            <c:if test="${userType != null}">
                 <li class="nav-item navbar-text">
                     Welcome back ${userName}
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="${contextPath}/profile.jsp">Profile</a>
+                    <a class="nav-link" href="${contextPath}/Profile">Profile</a>
                 </li>
             </c:if>
         </ul>
