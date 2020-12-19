@@ -1,1 +1,29 @@
+# Directories
+build/
+bin/
 target/
+libs/
+tmp/
+
+# Windows image file caches
+Thumbs.db 
+ 
+# Folder config file
+Desktop.ini
+
+# Package files #
+node_modules/
+*.jar
+*.war
+*.ear
+*.db
+rebel.xml
+
+# Netbeans #
+nbproject/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
