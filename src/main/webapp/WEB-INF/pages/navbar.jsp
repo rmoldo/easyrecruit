@@ -52,9 +52,6 @@
         <ul class="navbar-nav ml-auto">
             <c:if test="${userType == null}">
                 <li class="nav-item">
-                    <a class="nav-link" href="${contextPath}/login.jsp">Login</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="${contextPath}/register.jsp">Register</a>
                 </li>
             </c:if>
@@ -65,7 +62,17 @@
                 <li class="nav-item">
                     <a class="nav-link" href="${contextPath}/Profile">Profile</a>
                 </li>
-            </c:if>
+            </c:if> 
+            <li class="nav-item">
+                <c:choose>
+                        <c:when test="${pageContext.request.getRemoteUser() == null}"> 
+                            <a class="nav-link" href="${contextPath}/Login">Login</a>
+                        </c:when>
+                        <c:otherwise>
+                            <a class="nav-link" href="${contextPath}/Logout">Logout</a>
+                        </c:otherwise>
+                    </c:choose>
+            </li>
         </ul>
     </div>
 </nav>
