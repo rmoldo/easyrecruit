@@ -50,14 +50,14 @@
         </ul>
 
         <ul class="navbar-nav ml-auto">
-            <c:if test="${userType == null}">
+            <c:if test="${pageContext.request.getRemoteUser() == null}">
                 <li class="nav-item">
-                    <a class="nav-link" href="${contextPath}/register.jsp">Register</a>
+                    <a class="nav-link" href="${contextPath}/Users/Register">Register</a>
                 </li>
             </c:if>
-            <c:if test="${userType != null}">
+            <c:if test="${pageContext.request.getRemoteUser() != null}">
                 <li class="nav-item navbar-text">
-                    Welcome back ${userName}
+                    Welcome back ${pageContext.request.getRemoteUser()}
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="${contextPath}/Profile">Profile</a>
@@ -65,13 +65,13 @@
             </c:if> 
             <li class="nav-item">
                 <c:choose>
-                        <c:when test="${pageContext.request.getRemoteUser() == null}"> 
-                            <a class="nav-link" href="${contextPath}/Login">Login</a>
-                        </c:when>
-                        <c:otherwise>
-                            <a class="nav-link" href="${contextPath}/Logout">Logout</a>
-                        </c:otherwise>
-                    </c:choose>
+                    <c:when test="${pageContext.request.getRemoteUser() == null}"> 
+                        <a class="nav-link" href="${contextPath}/Login">Login</a>
+                    </c:when>
+                    <c:otherwise>
+                        <a class="nav-link" href="${contextPath}/Logout">Logout</a>
+                    </c:otherwise>
+                </c:choose>
             </li>
         </ul>
     </div>
