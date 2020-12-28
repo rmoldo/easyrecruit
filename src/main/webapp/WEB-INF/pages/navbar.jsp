@@ -5,28 +5,11 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<% pageContext.setAttribute("forwardPath", request.getAttribute(RequestDispatcher.FORWARD_SERVLET_PATH)); %>
+<% pageContext.setAttribute("forwardPath", request.getAttribute(RequestDispatcher.FORWARD_SERVLET_PATH));%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
-<%-- TODO: TMP move --%>
-<%!
-    enum UserType {
-        Normal,
-        Administrator,
-        GeneralDirector,
-        DepartmentDirector,
-        HRDirector,
-        Recruiter
-    }
-%>
-<%
-    pageContext.setAttribute("userType", UserType.Normal);
-    pageContext.setAttribute("userName", "Xulescu");
-%>
-
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="${pageContext.request.contextPath}">
+    <a class="navbar-brand" href="${contextPath}}">
         EasyRecruit
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,12 +20,12 @@
             <li class="nav-item ${forwardPath == '/Positions' ? ' active' : ''}">
                 <a class="nav-link" href="${contextPath}/Positions">Positions</a>
             </li>
-            <c:if test="${userType == 'Normal'}">
+            <c:if test="${pageContext.request.isUserInRole('ClientRole')}">
                 <li class="nav-item ${forwardPath == '/Applications' ? ' active' : ''}">
                     <a class="nav-link" href="${contextPath}/Applications">My Applications</a>
                 </li>
             </c:if>
-            <c:if test="${userType == 'Administrator' || userType == 'GeneralDirector'}">
+            <c:if test="${pageContext.request.isUserInRole('AdminRole')}">
                 <li class="nav-item ${forwardPath == '/Users' ? ' active' : ''}">
                     <a class="nav-link" href="${contextPath}/Users">Users</a>
                 </li>
