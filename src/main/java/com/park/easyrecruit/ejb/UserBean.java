@@ -29,33 +29,22 @@ public class UserBean {
     private EntityManager em;
 
     public boolean createUser(String username, String email, String hashedPassword, String position) {
+        LOG.info("UserBean:createUser");
+        
         // Check if username or email is in the User database
-        
-        /*
-        Query query = em.createQuery("SELECT u FROM User u WHERE u.username = uname" OR u.email = mail)
-                .setParameter("uname", username);
-
-        List<User> users = (List<User>) query.getResultList();
-
-        if (users.size() != 0) {
-            return false;
-        }
-        */
-        
         try {
-            Query query = em.createQuery("SELECT u FROM User u");
-            List<User> users = (List<User>) query.getResultList();
-            
-            // I know this is extremely inefficient but this will do until I figure out how 
-            // how the Java Persistance Query Language works
-            for (User user : users)
-                if (user.getEmail().equals(email) || user.getUsername().equals(username))
-                    return false;
-            
-        } catch (Exception ex) {
-            throw new EJBException(ex);
+            List<User> users = (List<User>) em.createQuery("SELECT u FROM User u WHERE u.username = :uname or u.email = :mail")
+                    .setParameter("uname", username)
+                    .setParameter("mail", email)
+                    .getResultList();
+
+            if (users.size() != 0) {
+                return false;
+            }
+        } catch (Exception e) {
+            throw new EJBException(e);
         }
-        
+
         User user = new User();
 
         user.setUsername(username);
