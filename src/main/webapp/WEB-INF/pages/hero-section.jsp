@@ -38,6 +38,19 @@
           font-size: 3.5rem;
         }
       }
+      
+       
+        
+        body  {
+        background-image: url(${pageContext.request.contextPath}/images/bgphoto.jpg);
+        background-repeat: no-repeat, repeat;
+        background-color: #cccccc;
+        height: 800px; 
+        background-position: center; 
+        background-repeat: no-repeat; 
+        background-size: cover;
+        }
+      
     </style>
     <!-- Custom styles for this template -->
     <link href="starter-template.css" rel="stylesheet">
@@ -69,10 +82,6 @@
         </div>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-    </form>
   </div>
 </nav>
 
@@ -85,7 +94,6 @@
     
     <div>
         <property name="alternatedocroot_1" value="from=/images/* dir=/path/to/glassfish/domains/test/webapp" />
-        <img src="${pageContext.request.contextPath}/images/business.jpg" /> 
     </div>
 
 </main><!-- /.container -->
