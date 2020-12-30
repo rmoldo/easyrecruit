@@ -22,34 +22,63 @@ import javax.persistence.Query;
  */
 @Stateless
 public class UserBean {
+
     private static final Logger LOG = Logger.getLogger(UserBean.class.getName());
-    
+
     @PersistenceContext
     private EntityManager em;
-    
+
+    public boolean createUser(String username, String email, String hashedPassword, String position) {
+        LOG.info("UserBean:createUser");
+        
+        // Check if username or email is in the User database
+        try {
+            List<User> users = (List<User>) em.createQuery("SELECT u FROM User u WHERE u.username = :uname or u.email = :mail")
+                    .setParameter("uname", username)
+                    .setParameter("mail", email)
+                    .getResultList();
+
+            if (users.size() != 0) {
+                return false;
+            }
+        } catch (Exception e) {
+            throw new EJBException(e);
+        }
+
+        User user = new User();
+
+        user.setUsername(username);
+        user.setEmail(email);
+        user.setPassword(hashedPassword);
+        user.setPosition(position);
+
+        em.persist(user);
+        return true;
+    }
+
     public List<UserDetails> getAllUsers() {
         LOG.info("UserBean:getAllUsers");
-        
+
         try {
             Query query = em.createQuery("SELECT u FROM User u");
-            List<User> users = (List<User>)query.getResultList();
+            List<User> users = (List<User>) query.getResultList();
             return copyUsersToDetails(users);
         } catch (Exception ex) {
             throw new EJBException(ex);
         }
     }
-    
+
     private List<UserDetails> copyUsersToDetails(List<User> users) {
         List<UserDetails> detailsList = new ArrayList<>();
-        
+
         for (User user : users) {
-            UserDetails userDetails = new UserDetails(user.getId(), 
+            UserDetails userDetails = new UserDetails(user.getId(),
                     user.getUsername(),
-                    user.getEmail(), 
+                    user.getEmail(),
                     user.getPosition());
             detailsList.add(userDetails);
         }
-        
+
         return detailsList;
     }
 }
