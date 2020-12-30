@@ -31,6 +31,15 @@ public class Position implements Serializable {
     private String name;
     private String description;
     private Boolean isOpen;
+    private Integer nbOfCandidatesNeeded;
+
+    public Integer getNbOfCandidatesNeeded() {
+        return nbOfCandidatesNeeded;
+    }
+
+    public void setNbOfCandidatesNeeded(Integer nbOfCandidatesNeeded) {
+        this.nbOfCandidatesNeeded = nbOfCandidatesNeeded;
+    }
     @OneToMany(
         mappedBy = "position",
         cascade = CascadeType.ALL,

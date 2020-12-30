@@ -27,6 +27,23 @@ public class PositionBean {
     @PersistenceContext
     private EntityManager em;
     
+    public Boolean addPosition(String name, String description, Integer nbOfCandidatesNeeded) {
+         LOG.info("Position Bean:Add position");
+        
+        try {
+            Position position = new Position();
+
+            position.setName(name);
+            position.setDescription(description);
+            position.setIsOpen(false);
+            position.setNbOfCandidatesNeeded(nbOfCandidatesNeeded);
+            em.persist(position);
+            return true;
+        } catch(Exception e) {
+            return false;
+        }
+    }
+    
     public List<PositionDetails> getAllPositions() {
         LOG.info("get all positions");
         
@@ -46,6 +63,7 @@ public class PositionBean {
                             position.getName(),
                             position.getDescription(),
                             position.getIsOpen(),
+                            position.getNbOfCandidatesNeeded(),
                             position.getComments());
 			detailsList.add(positionDetails);
     	}

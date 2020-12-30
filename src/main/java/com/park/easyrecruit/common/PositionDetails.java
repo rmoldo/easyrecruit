@@ -19,14 +19,16 @@ public class PositionDetails implements Serializable {
     private String name;
     private String description;
     private Boolean isOpen;
+    private Integer nbOfCandidatesNeeded;
     private List<PositionComment> comments = new ArrayList<>();
 
-    public PositionDetails(Integer id, String name, String description, Boolean isOpen, List<PositionComment> comments) {
+    public PositionDetails(Integer id, String name, String description, Boolean isOpen, Integer nbOfCandidatesNeeded, List<PositionComment> comments) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.isOpen = isOpen;
         this.comments = comments;
+        this.nbOfCandidatesNeeded = nbOfCandidatesNeeded;
     }
 
     public Integer getId() {
@@ -43,6 +45,10 @@ public class PositionDetails implements Serializable {
 
     public Boolean getIsOpen() {
         return isOpen;
+    }
+    
+    public Integer getNbOfCandidatesNeeded() {
+        return nbOfCandidatesNeeded;
     }
 
     public List<PositionComment> getComments() {
