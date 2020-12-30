@@ -28,9 +28,24 @@ public class User implements Serializable {
     private String email;
     private String password;
     private String position;
-    
+    private String firstName;
+    private String lastName;
+    private String phoneNumber;
+
     // TODO(Moldo): Add a Collection of Application
     
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -57,6 +72,18 @@ public class User implements Serializable {
 
     public String getPosition() {
         return position;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public void setUsername(String username) {

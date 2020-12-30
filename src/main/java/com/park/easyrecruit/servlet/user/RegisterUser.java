@@ -38,10 +38,13 @@ public class RegisterUser extends HttpServlet {
         String username = request.getParameter("username");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
+        String phoneNumber = request.getParameter("phoneNumber");
 
         String hashedPassword = Password.convertToSha256(password);
 
-        if (!userBean.createUser(username, email, hashedPassword, "CLIENT")) {
+        if (!userBean.createUser(username, email, hashedPassword, "CLIENT", firstName, lastName, phoneNumber)) {
             request.setAttribute("register_error_message", "User already exists");
             request.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(request, response);
         }
