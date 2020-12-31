@@ -29,7 +29,7 @@ public class PositionComment implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private int userId;
+    private String creatorUser;
     private String text;
 
     public Integer getId() {
@@ -47,14 +47,13 @@ public class PositionComment implements Serializable {
     public void setPosition(Position position) {
         this.position = position;
     }
-    
 
-    public int getUserId() {
-        return userId;
+    public String getCreatorUser() {
+        return creatorUser;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setCreatorUser(String creatorUser) {
+        this.creatorUser = creatorUser;
     }
 
     public String getText() {
@@ -64,7 +63,7 @@ public class PositionComment implements Serializable {
     public void setText(String text) {
         this.text = text;
     }
-
+  
     @Override
     public int hashCode() {
         return getClass().hashCode();
@@ -79,8 +78,9 @@ public class PositionComment implements Serializable {
 
     @Override
     public String toString() {
-        return "PositionComment{" + "position=" + position + ", id=" + id + ", userId=" + userId + ", text=" + text + '}';
+        return "PositionComment{" + "position=" + position + ", id=" + id + ", creatorUser=" + creatorUser + ", text=" + text + '}';
     }
+
 
     
 }
