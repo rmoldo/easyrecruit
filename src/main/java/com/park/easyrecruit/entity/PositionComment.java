@@ -29,8 +29,6 @@ public class PositionComment implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    //@ManyToOne
-    //private int positionId;
     private int userId;
     private String text;
 
@@ -41,16 +39,6 @@ public class PositionComment implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
-
-    /*
-    public int getPositionId() {
-        return positionId;
-    }
-
-    public void setPositionId(int positionId) {
-        this.positionId = positionId;
-    }
-*/
 
     public Position getPosition() {
         return position;

@@ -20,6 +20,10 @@
           </div>
     </c:if>
     <form class="needs-validation" novalidate method="POST" action="${pageContext.request.contextPath}/Positions/Add">
+    	<input type="hidden" class="form-control" id="creatorUserName" name="creatorUserName" value="${pageContext.request.remoteUser}" required>
+        <div class="invalid-feedback" role="alert">
+            Please login to add a position!
+        </div>
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="positionName">Position name</label>

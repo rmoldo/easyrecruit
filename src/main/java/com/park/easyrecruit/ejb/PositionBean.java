@@ -27,7 +27,7 @@ public class PositionBean {
     @PersistenceContext
     private EntityManager em;
     
-    public Boolean addPosition(String name, String description, Integer nbOfCandidatesNeeded) {
+    public Boolean addPosition(String name, String description, Integer nbOfCandidatesNeeded, String creatorUserName) {
          LOG.info("Position Bean:Add position");
         
         try {
@@ -37,6 +37,7 @@ public class PositionBean {
             position.setDescription(description);
             position.setIsOpen(false);
             position.setNbOfCandidatesNeeded(nbOfCandidatesNeeded);
+            position.setCreatorUserName(creatorUserName);
             em.persist(position);
             return true;
         } catch(Exception e) {
@@ -64,6 +65,7 @@ public class PositionBean {
                             position.getDescription(),
                             position.getIsOpen(),
                             position.getNbOfCandidatesNeeded(),
+                            position.getCreatorUserName(),
                             position.getComments());
 			detailsList.add(positionDetails);
     	}

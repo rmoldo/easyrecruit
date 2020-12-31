@@ -32,6 +32,7 @@ public class Position implements Serializable {
     private String description;
     private Boolean isOpen;
     private Integer nbOfCandidatesNeeded;
+    private String creatorUserName;
 
     public Integer getNbOfCandidatesNeeded() {
         return nbOfCandidatesNeeded;
@@ -66,6 +67,14 @@ public class Position implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getCreatorUserName() {
+        return creatorUserName;
+    }
+
+    public void setCreatorUserName(String creatorUserName) {
+        this.creatorUserName = creatorUserName;
     }
 
     public String getDescription() {

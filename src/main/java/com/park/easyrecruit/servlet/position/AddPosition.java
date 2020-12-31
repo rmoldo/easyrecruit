@@ -39,8 +39,9 @@ public class AddPosition extends HttpServlet {
         	+ "<br/><b>Project:</b> " + request.getParameter("project")
         	+ "<br/><b>Requirements:</b> " + request.getParameter("requirements")
         	+ "<br/><b>Responsibilities:</b> " + request.getParameter("responsibilities");
+        String creatorUserName = request.getParameter("creatorUserName");
 
-        if(!positionBean.addPosition(positionName, description, neededNumber)) {
+        if(!positionBean.addPosition(positionName, description, neededNumber, creatorUserName)) {
         	request.setAttribute("position_error_message", "Error adding position");
         	request.getRequestDispatcher("/WEB-INF/pages/addPosition.jsp").forward(request, response);
         }

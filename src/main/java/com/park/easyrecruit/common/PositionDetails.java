@@ -20,15 +20,17 @@ public class PositionDetails implements Serializable {
     private String description;
     private Boolean isOpen;
     private Integer nbOfCandidatesNeeded;
+    private String creatorUserName;
     private List<PositionComment> comments = new ArrayList<>();
 
-    public PositionDetails(Integer id, String name, String description, Boolean isOpen, Integer nbOfCandidatesNeeded, List<PositionComment> comments) {
+    public PositionDetails(Integer id, String name, String description, Boolean isOpen, Integer nbOfCandidatesNeeded, String creatorUserName, List<PositionComment> comments) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.isOpen = isOpen;
         this.comments = comments;
         this.nbOfCandidatesNeeded = nbOfCandidatesNeeded;
+        this.creatorUserName = creatorUserName;
     }
 
     public Integer getId() {
@@ -49,6 +51,14 @@ public class PositionDetails implements Serializable {
     
     public Integer getNbOfCandidatesNeeded() {
         return nbOfCandidatesNeeded;
+    }
+
+    public String getCreatorUserName() {
+        return creatorUserName;
+    }
+
+    public void setCreatorUserName(String creatorUserName) {
+        this.creatorUserName = creatorUserName;
     }
 
     public List<PositionComment> getComments() {
