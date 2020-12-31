@@ -35,10 +35,10 @@ public class AddPosition extends HttpServlet {
             throws ServletException, IOException {
         String positionName = request.getParameter("positionName");
         Integer neededNumber = Integer.parseInt(request.getParameter("neededNumber"));
-        String description = "Department: " + request.getParameter("department")
-        	+ "Project: " + request.getParameter("project")
-        	+ "Requirements: " + request.getParameter("requirements")
-        	+ "Responsibilities: " + request.getParameter("responsibilities");
+        String description = "<b>Department:</b> " + request.getParameter("department")
+        	+ "<br/><b>Project:</b> " + request.getParameter("project")
+        	+ "<br/><b>Requirements:</b> " + request.getParameter("requirements")
+        	+ "<br/><b>Responsibilities:</b> " + request.getParameter("responsibilities");
 
         if(!positionBean.addPosition(positionName, description, neededNumber)) {
         	request.setAttribute("position_error_message", "Error adding position");
