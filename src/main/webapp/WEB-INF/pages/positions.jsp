@@ -10,21 +10,17 @@
 
 <t:pageTemplate pageTitle="Positions">
     <h1>Available positions: </h1>
-
+    <br>
     <c:forEach var="position" items="${positions}">
         <br>
-    	<div class="row">
-    		<div class="col-md-4">
-                    <h5>${position.name}</h5>
-    		</div>
-    		<div class="col-md-4">
-                    ${position.description}
-    		</div>
-                <c:if test="${position.isOpen}">
-                    <div class="col-md-4">
-                        <button class="btn btn-primary btn-lg btn-block" onclick="location.href='Applications/Add'" type="button">Apply</button>
-                    </div>
-                </c:if>
-    	</div>
+        <div class="card text-center">
+		  <div class="card-body">
+		    <h4 class="card-title">${position.name}</h4>
+		    <p class="card-text">${position.description}</p>
+		    <c:if test="${position.isOpen}">
+		    	<a href="Applications/Add" class="btn btn-primary">Apply</a>
+		    </c:if>
+		  </div>
+		</div>
     </c:forEach>
 </t:pageTemplate>
