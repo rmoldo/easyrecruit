@@ -28,11 +28,6 @@
                     <a class="nav-link" href="${contextPath}/Users">Users</a>
                 </li>
             </c:if>
-                <!-- c:if test="${pageContext.request.isUserInRole('AdminRole')}">' -->
-                <li class="nav-item ${forwardPath == '/Positions/Add' ? ' active' : ''}">
-                    <a class="nav-link" href="${contextPath}/Positions/Add">Add position</a>
-                </li>
-            <!--/c:if>-->
         </ul>
 
         <ul class="navbar-nav ml-auto">
