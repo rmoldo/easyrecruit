@@ -23,13 +23,19 @@
                     <a class="nav-link" href="${contextPath}/Applications">My Applications</a>
                 </li>
             </c:if>
+            <!-- Move user management into profile -->
             <c:if test="${pageContext.request.isUserInRole('AdminRole')}">
-                <li class="nav-item ${forwardPath == '/Users' ? ' active' : ''}">
-                    <a class="nav-link" href="${contextPath}/Users">Users</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Manage Users</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown01">
+                        <a class="dropdown-item" href="${contextPath}/Users">List Users</a>
+                        <a class="dropdown-item" href="${contextPath}/Users/Add">Add Users</a>
+                        <a class="dropdown-item" href="${contextPath}/Users/Edit">Edit Users</a>
+                        <a class="dropdown-item" href="${contextPath}/Users/Delete">Delete Users</a>
+                    </div>
                 </li>
             </c:if>
         </ul>
-
         <ul class="navbar-nav ml-auto">
             <c:if test="${pageContext.request.getRemoteUser() == null}">
                 <li class="nav-item">
