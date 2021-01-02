@@ -1,6 +1,6 @@
 <%-- 
-    Document   : register
-    Created on : Dec 28, 2020, 2:40:44 PM
+    Document   : addUser
+    Created on : Jan 2, 2021, 2:07:32 PM
     Author     : M Radu
 --%>
 
@@ -8,18 +8,18 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<t:pageTemplate pageTitle="Sign up">
-    <c:if test="${register_error_message != null}">
+<t:pageTemplate pageTitle="Add User">
+    <c:if test="${add_user_error_message != null}">
         <div class="alert alert-warning" role="alert">
-            ${register_error_message}
+            ${add_user_error_message}
         </div>
     </c:if>
-    <form class="needs-validation" novalidate method="POST" action="${pageContext.request.contextPath}/Users/Register"
+    <form class="needs-validation" novalidate method="POST" action="${pageContext.request.contextPath}/Users/Add"
           oninput='retypepassword.setCustomValidity(retypepassword.value != password.value ? "Passwords do not match." : "")'>
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="username">Username</label>
-                <input type="text" class="form-control" id="username" name="username" placeholder="" value="" required>
+                <input type="text" class="form-control" id="addUsername" name="addUsername" placeholder="" value="" required>
                 <div class="invalid-feedback">
                     Username is required.
                 </div>
@@ -28,7 +28,7 @@
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="firstName">First name</label>
-                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="" value="" required>
+                <input type="text" class="form-control" id="addFirstName" name="addFirstName" placeholder="" value="" required>
                 <div class="invalid-feedback">
                     First name is required.
                 </div>
@@ -37,7 +37,7 @@
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="lastName">Last name</label>
-                <input type="text" class="form-control" id="lastName" name="lastName" placeholder="" value="" required>
+                <input type="text" class="form-control" id="addLastName" name="addLastName" placeholder="" value="" required>
                 <div class="invalid-feedback">
                     Last name is required.
                 </div>
@@ -46,7 +46,7 @@
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="phoneNumber">Phone number</label>
-                <input type="text" pattern="^\+(?:[0-9] ?){6,14}[0-9]$" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="" value="" required>
+                <input type="text" pattern="^\+(?:[0-9] ?){6,14}[0-9]$" class="form-control" id="addPhoneNumber" name="addPhoneNumber" placeholder="" value="" required>
                 <div class="invalid-feedback">
                     Phone number is required.
                 </div>
@@ -55,7 +55,7 @@
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="" value="" required>
+                <input type="email" class="form-control" id="addEmail" name="addEmail" placeholder="" value="" required>
                 <div class="invalid-feedback">
                     Email is required.
                 </div>
@@ -64,7 +64,7 @@
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" name="password" placeholder="" value="" required>
+                <input type="password" class="form-control" id="addPassword" name="addPassword" placeholder="" value="" required>
                 <div class="invalid-feedback">
                     Password is required.
                 </div>
@@ -73,14 +73,27 @@
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="password">Confirm password</label>
-                <input type="password" class="form-control" id="retypepassword" name="retypepassword" placeholder="" value="" required>
+                <input type="password" class="form-control" id="addRetypePassword" name="addRetypePassword" placeholder="" value="" required>
                 <div class="invalid-feedback">
                     Please confirm the password
                 </div>
             </div>
         </div>
+        <!-- TODO: Add the rest of the roles -->
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="position"> Role </label>
+                <select class="custom-select d-block w-100" id="addPosition" name="addPosition" required>
+                    <option value="ADMINISTRATOR">Administrator</option>
+                    <option value="CLIENT">Client</option>
+                </select>
+                <div class="invalid-feedback">
+                     Please select a position
+                </div>
+            </div>
+        </div>
         <hr class="mb-4">
-        <button class="btn btn-primary btn-lg btn-block" type="submit">Register</button>
+        <button class="btn btn-primary btn-lg btn-block" type="submit">Add User</button>
     </form> 
     <script>
         // Example starter JavaScript for disabling form submissions if there are invalid fields
