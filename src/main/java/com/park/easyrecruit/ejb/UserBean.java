@@ -28,7 +28,7 @@ public class UserBean {
     @PersistenceContext
     private EntityManager em;
 
-    public boolean createUser(String username, String email, String hashedPassword, String position) {
+    public boolean createUser(String username, String email, String hashedPassword, String position, String firstName, String lastName, String phoneNumber) {
         LOG.info("UserBean:createUser");
         
         // Check if username or email is in the User database
@@ -51,6 +51,9 @@ public class UserBean {
         user.setEmail(email);
         user.setPassword(hashedPassword);
         user.setPosition(position);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setPhoneNumber(phoneNumber);
 
         em.persist(user);
         return true;
@@ -75,7 +78,10 @@ public class UserBean {
             UserDetails userDetails = new UserDetails(user.getId(),
                     user.getUsername(),
                     user.getEmail(),
-                    user.getPosition());
+                    user.getPosition(),
+                    user.getFirstName(),
+                    user.getLastName(),
+                    user.getPhoneNumber());
             detailsList.add(userDetails);
         }
 

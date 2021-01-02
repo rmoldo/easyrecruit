@@ -27,6 +27,33 @@
         </div>
         <div class="row">
             <div class="col-md-6 mb-3">
+                <label for="firstName">First name</label>
+                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="" value="" required>
+                <div class="invalid-feedback">
+                    First name is required.
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="lastName">Last name</label>
+                <input type="text" class="form-control" id="lastName" name="lastName" placeholder="" value="" required>
+                <div class="invalid-feedback">
+                    Last name is required.
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="phoneNumber">Phone number</label>
+                <input type="text" pattern="^\+(?:[0-9] ?){6,14}[0-9]$" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="" value="" required>
+                <div class="invalid-feedback">
+                    Phone number is required.
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
                 <label for="email">Email</label>
                 <input type="email" class="form-control" id="email" name="email" placeholder="" value="" required>
                 <div class="invalid-feedback">
