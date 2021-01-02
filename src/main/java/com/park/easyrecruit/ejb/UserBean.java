@@ -27,7 +27,12 @@ public class UserBean {
 
     @PersistenceContext
     private EntityManager em;
-
+    
+    public UserDetails findById(Integer userId) {
+        User user = em.find(User.class, userId);
+        return new UserDetails(user.getId(), user.getUsername(), user.getEmail(), user.getPosition(), user.getFirstName(), user.getLastName(), user.getPhoneNumber());
+    }
+    
     public boolean createUser(String username, String email, String hashedPassword, String position, String firstName, String lastName, String phoneNumber) {
         LOG.info("UserBean:createUser");
         
@@ -86,5 +91,25 @@ public class UserBean {
         }
 
         return detailsList;
+    }
+
+    public void updateUser(Integer userId, String firstName, String lastName, String email, String phoneNumber) {
+        User user = em.find(User.class, userId);
+        
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setEmail(email);
+        user.setPhoneNumber(phoneNumber);
+        
+    }
+
+    public void updateUserWithPassword(Integer userId, String firstName, String lastName, String email, String phoneNumber, String hashedPassword) {
+        User user = em.find(User.class, userId);
+        
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setEmail(email);
+        user.setPhoneNumber(phoneNumber);
+        user.setPassword(hashedPassword);
     }
 }

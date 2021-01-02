@@ -30,7 +30,7 @@
                     <div class="dropdown-menu" aria-labelledby="dropdown01">
                         <a class="dropdown-item" href="${contextPath}/Users">List Users</a>
                         <a class="dropdown-item" href="${contextPath}/Users/Add">Add Users</a>
-                        <a class="dropdown-item" href="${contextPath}/Users/Edit">Edit Users</a>
+                        <a class="dropdown-item" href="${contextPath}/Users/ListEdit">Edit Users</a>
                         <a class="dropdown-item" href="${contextPath}/Users/Delete">Delete Users</a>
                     </div>
                 </li>
