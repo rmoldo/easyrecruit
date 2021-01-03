@@ -55,6 +55,22 @@ public class PositionBean {
             throw new EJBException(ex);
         }    
     }
+    
+    public PositionDetails getPosition(Integer id) {
+        LOG.info("get position");
+        
+        Position position = em.find(Position.class, id);
+        
+        PositionDetails positionDetails = new PositionDetails(position.getId(),
+            position.getName(),
+            position.getDescription(),
+            position.getIsOpen(),
+            position.getNbOfCandidatesNeeded(),
+            position.getCreatorUserName(),
+            position.getComments());
+        
+        return positionDetails;
+    }
 
     private List<PositionDetails> copyPositionsToDetails(List<Position> positions) {
     	List<PositionDetails> detailsList = new ArrayList<>();
