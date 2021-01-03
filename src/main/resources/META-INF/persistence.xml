@@ -4,6 +4,8 @@
   <persistence-unit name="my_persistence_unit" transaction-type="JTA">
     <jta-data-source>jdbc/__default</jta-data-source>
     <class>com.park.easyrecruit.entity.User</class>
+    <class>com.park.easyrecruit.entity.Position</class>
+    <class>com.park.easyrecruit.entity.PositionComment</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/EasyRecruit"/>
       <property name="javax.persistence.jdbc.user" value="EasyRecruitUser"/>
