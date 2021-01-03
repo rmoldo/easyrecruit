@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : positions
     Created on : Dec 29, 2020, 8:05:37 PM
     Author     : Silvan
@@ -17,6 +17,9 @@
 			<div class="card-body">
 			    <h4 class="card-title">${position.name}</h4>
 			    <p class="card-text">${position.description}</p>
+				<!--c:if test="${pageContext.request.isUserInRole('ClientRole')}">-->
+					<a href="Applications/Add?positionId=${position.id}" class="btn btn-success">Apply for this position</a>
+				<!--/c:if>-->
 			    <c:choose>
 					<c:when test="${position.isOpen}">
 						<!--c:if test="${pageContext.request.isUserInRole('ClientRole')}">-->

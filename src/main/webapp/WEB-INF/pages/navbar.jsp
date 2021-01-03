@@ -18,11 +18,11 @@
             <li class="nav-item ${forwardPath == '/Positions' ? ' active' : ''}">
                 <a class="nav-link" href="${contextPath}/Positions">Positions</a>
             </li>
-            <c:if test="${pageContext.request.isUserInRole('ClientRole')}">
+            <%--<c:if test="${pageContext.request.isUserInRole('ClientRole')}">--%>
                 <li class="nav-item ${forwardPath == '/Applications' ? ' active' : ''}">
                     <a class="nav-link" href="${contextPath}/Applications">My Applications</a>
                 </li>
-            </c:if>
+            <%--</c:if>--%>
             <!-- Move user management into profile -->
             <c:if test="${pageContext.request.isUserInRole('AdminRole')}">
                 <li class="nav-item dropdown">
