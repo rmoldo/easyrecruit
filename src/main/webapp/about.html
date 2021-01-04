@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>About Us</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            .body{
+                background: white;
+            }
+            
+            .wrapper{
+                width: 78%;
+                margin: 12%;
+            }
+            
+            .box{
+                height: 297px;
+                width: 30%;
+                float: left;
+                overflow: hidden;
+                position: relative;
+                margin: 0 19px;
+            }
+            
+            .img1{
+                position: absolute;
+                z-index: 2;
+                transition: .4s;
+                transform-origin: 50%,50%;
+                width:100%;
+             }
+             
+             .img2{
+                 filter: blur(20px);
+                 transform: scale(1.1);
+                 opacity: 1;
+                 transition: .4s;
+                 width: 100%;
+             }
+             
+             .box:hover .img1{
+                 filter: blur(20px);
+                 transform: scale(1.1);
+                 opacity: 0;
+             }             
+             
+             .box:hover .img2{
+                 filter: blur(0);
+                 transform: scale(1);
+                 opacity: 1;
+             }
+            
+             .title{
+                font-family: Arial;
+                font-size: 29px;
+                margin: 13%;
+                margin-top: 0px;
+             }
+             .arrow {
+                border: solid black;
+                border-width: 0 3px 3px 0;
+                display: inline-block;
+                padding: 8px;
+              }
+ 
+              .left {
+                transform: rotate(135deg);
+                -webkit-transform: rotate(135deg);
+              }
+              
+
+            .arrows {
+                    width: 60px;
+                    height: 72px;
+                    position: absolute;
+                    margin-left: 925px;
+                    bottom: 20px;
+            }
+
+            .arrows path {
+                    stroke: #2994D1;
+                    fill: transparent;
+                    stroke-width: 1px;	
+                    animation: arrow 2s infinite;
+                    -webkit-animation: arrow 2s infinite; 
+            }
+
+            @keyframes arrow
+            {
+            0% {opacity:0}
+            40% {opacity:1}
+            80% {opacity:0}
+            100% {opacity:0}
+            }
+
+            @-webkit-keyframes arrow /*Safari and Chrome*/
+            {
+            0% {opacity:0}
+            40% {opacity:1}
+            80% {opacity:0}
+            100% {opacity:0}
+            }
+
+            .arrows path.a1 {
+                    animation-delay:-1s;
+                    -webkit-animation-delay:-1s; /* Safari 和 Chrome */
+            }
+
+            .arrows path.a2 {
+                    animation-delay:-0.5s;
+                    -webkit-animation-delay:-0.5s; /* Safari 和 Chrome */
+            }
+
+            .arrows path.a3 {	
+                    animation-delay:0s;
+                    -webkit-animation-delay:0s; /* Safari 和 Chrome */
+            }
+            
+            
+            
+        </style>
+        
+    </head>
+    <body>
+        <div class="title">
+            
+            <h1><i class="arrow left"></i>At EasyRecruit,  we are all about</h1>
+            
+        </div>
+        <svg class="arrows">
+            <path class="a1" d="M0 0 L30 32 L60 0"></path>
+            <path class="a2" d="M0 20 L30 52 L60 20"></path>
+            <path class="a3" d="M0 40 L30 72 L60 40"></path>
+	</svg>
+              <div class="wrapper">
+            <div class="box">
+                <img src ="images/img1.jpg" alt="" class="img1">
+                <img src ="images/img11.jpg" alt="" class="img2">
+            </div><!-- comment -->
+            <div class ="box">
+                <img src ="images/img6.jpg" alt="" class="img1">
+                <img src ="images/img8.jpg" alt="" class="img2">
+            </div>
+            <div class="box">
+                <img src ="images/img9.jpg" alt="" class="img1">
+                <img src ="images/img10.jpg" alt="" class="img2">
+            </div> 
+            <div class="container">
+                <div class="chevron"></div>
+                <div class="chevron"></div>
+                <div class="chevron"></div>
+            </div>
+    </body>
+</html>

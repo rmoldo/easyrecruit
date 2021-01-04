@@ -5,7 +5,7 @@
 --%>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:include page="about.jsp" />
+
 
 <!doctype html>
 <html lang="en">
@@ -228,7 +228,7 @@
                  <p id="detail">We are leaders in our industry when it comes to quick, effortless and efficient recruiting. </p>
              </div>
              <div id="explore">
-                 <p id="txt1">Explore</p> <a class="link"  href="#top">Home</a> <a class="link" href="about.jsp">About us</a> <a class="link" href="#">Gallery</a> <a class="link" href="#">Careers</a>
+                 <p id="txt1">Explore</p> <a class="link"  href="#top">Home</a> <a class="link" href="about.html">About us</a> <a class="link" href="#">Gallery</a> <a class="link" href="#">Careers</a>
              </div>
              <div id="visit">
                  <p id="txt2">Visit at</p>
@@ -239,7 +239,7 @@
                  <p class="text">E-mail: easyRecruit@ulbsibiu.ro</p>
              </div>
              <div id="legal">
-                 <p id="txt3">Legal</p> <a class="link1" href="#">Terms and Conditions</a> <a class="link1" href="#">Private Policy</a>
+                 <p id="txt3">Legal</p> <a class="link1" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=PLahKLy8pQdCM0SiXNn3EfGIXX19QGzUG3">Terms and Conditions</a> <a class="link1" href="#">Private Policy</a>
              </div>
              <div id="connect">
                  <p id="txt5">Connect With US</p> <i class="fab fa-facebook-square social fa-2x"></i> <i class="fab fa-linkedin social fa-2x"></i> <i class="fab fa-twitter-square social fa-2x"></i>
