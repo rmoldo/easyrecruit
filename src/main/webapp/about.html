@@ -10,17 +10,15 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
-            .body{
-                background: white;
-            }
             
             .wrapper{
                 width: 78%;
                 margin: 12%;
+                
             }
             
             .box{
-                height: 297px;
+                height: 293px;
                 width: 30%;
                 float: left;
                 overflow: hidden;
@@ -61,100 +59,166 @@ and open the template in the editor.
                 font-size: 29px;
                 margin: 13%;
                 margin-top: 0px;
+                color: white;
              }
-             .arrow {
-                border: solid black;
-                border-width: 0 3px 3px 0;
+             a {
+                text-decoration: none;
                 display: inline-block;
-                padding: 8px;
+                padding: 12px 20px;
+                margin-top: 21px;
+                margin-left: 84px;
               }
- 
-              .left {
-                transform: rotate(135deg);
-                -webkit-transform: rotate(135deg);
+
+              a:hover {
+                background-color: #ddd;
+                color: black;
+                transition: .4s;
+              } 
+               
+              .previous {
+                background-color: #f1f1f1;
+                color: black;
+              }
+
+              .round {
+                border-radius: 50%;
+              }
+            
+             body{
+                 background-image: url("images/bg1.jpg");
+                 height: 100%;
+                 background-position: center;
+                 background-repeat: no-repeat;
+                 background-size: cover;
+             }
+             
+             .line {
+                width: 29%;
+                height: 0px;
+                margin-top: -21px;
+                border-bottom: 2px solid #795548;
               }
               
-
-            .arrows {
-                    width: 60px;
-                    height: 72px;
-                    position: absolute;
-                    margin-left: 925px;
-                    bottom: 20px;
-            }
-
-            .arrows path {
-                    stroke: #2994D1;
-                    fill: transparent;
-                    stroke-width: 1px;	
-                    animation: arrow 2s infinite;
-                    -webkit-animation: arrow 2s infinite; 
-            }
-
-            @keyframes arrow
-            {
-            0% {opacity:0}
-            40% {opacity:1}
-            80% {opacity:0}
-            100% {opacity:0}
-            }
-
-            @-webkit-keyframes arrow /*Safari and Chrome*/
-            {
-            0% {opacity:0}
-            40% {opacity:1}
-            80% {opacity:0}
-            100% {opacity:0}
-            }
-
-            .arrows path.a1 {
-                    animation-delay:-1s;
-                    -webkit-animation-delay:-1s; /* Safari 和 Chrome */
-            }
-
-            .arrows path.a2 {
-                    animation-delay:-0.5s;
-                    -webkit-animation-delay:-0.5s; /* Safari 和 Chrome */
-            }
-
-            .arrows path.a3 {	
-                    animation-delay:0s;
-                    -webkit-animation-delay:0s; /* Safari 和 Chrome */
-            }
-            
-            
-            
+              .minititle{
+                font-family: Arial;
+                color: white;
+                font-size: 36px;
+                font-weight: 500;  
+              }
+              
+              .first{
+                margin-left: 17px;  
+              }
+              
+              .second{
+                  margin-top: -79px;
+                  margin-left: 500px;
+              }
+              
+              .third{
+                  margin-top: -77px;
+                  margin-left: 1256px
+              }
+              
+              .line-a{
+                  margin-left: 1220px;
+                  width: 200px;
+                  border-bottom: 2px solid #795548;
+              }
+              
+              .line-b{
+                 margin-left: 610px;
+                 width: 200px; 
+                 border-bottom: 2px solid #795548;
+              }
+              
+              .line-c{
+                 width: 200px;
+                 margin-left: 21px;
+                 border-bottom: 2px solid #795548;
+              }
+              
+              .line-d{
+                 width: 1415px;
+                 margin-top: 349px;
+                 margin-left: 247px;
+                 opacity: 0.6;
+                 border-bottom: 8px solid #795548;
+              }
+              
+              .vl {
+                border-left: 3px solid transparent;
+                height: 500px;
+              }
+              
+              .about-text{
+                  text-align: left;
+                  font-family: Arial;
+                  color: white;
+                  font-size: 27px;
+                  margin-left: 245px;
+              }
+              
+              .easy-recruit{
+                  font-size: 45px;
+              }
+              
+              #txt6 {
+                    color: white;
+                    position: relative;
+                    top: 13px;
+                    left: 8%;
+                    width: 80%;
+                    color: black;
+                    text-align: center;
+                    font-family: Arial;
+              }
+                #part2 {
+                    width: 100%;
+                    height: 50px;
+                    background-color: none;
+                    position: relative;
+                    top: -15px
+                }
         </style>
         
     </head>
     <body>
-        <div class="title">
-            
-            <h1><i class="arrow left"></i>At EasyRecruit,  we are all about</h1>
-            
-        </div>
-        <svg class="arrows">
-            <path class="a1" d="M0 0 L30 32 L60 0"></path>
-            <path class="a2" d="M0 20 L30 52 L60 20"></path>
-            <path class="a3" d="M0 40 L30 72 L60 40"></path>
-	</svg>
-              <div class="wrapper">
-            <div class="box">
-                <img src ="images/img1.jpg" alt="" class="img1">
-                <img src ="images/img11.jpg" alt="" class="img2">
-            </div><!-- comment -->
-            <div class ="box">
-                <img src ="images/img6.jpg" alt="" class="img1">
-                <img src ="images/img8.jpg" alt="" class="img2">
-            </div>
-            <div class="box">
-                <img src ="images/img9.jpg" alt="" class="img1">
-                <img src ="images/img10.jpg" alt="" class="img2">
-            </div> 
-            <div class="container">
-                <div class="chevron"></div>
-                <div class="chevron"></div>
-                <div class="chevron"></div>
+            <a href="index.jsp" class="previous round">&#8249;</a>
+            <div class="title">
+                <h1>At EasyRecruit,  we are all about</h1>
+                <p class="line"></p>
+            </div>    
+            <div class="wrapper">
+                <p class="minititle first">Hard work</p>
+                <p class="line line-a"></p>
+                <div class="box">
+                    <img src ="images/img1.jpg" alt="" class="img1">
+                    <img src ="images/img11.jpg" alt="" class="img2">
+                </div>
+                <p class="minititle second">Professional environment</p>
+                <p class="line line-b"></p>
+                <div class ="box">
+                    <img src ="images/img6.jpg" alt="" class="img1">
+                    <img src ="images/img8.jpg" alt="" class="img2">
+                </div>
+                <p class="minititle third">Teamwork</p>
+                <p class="line line-c"></p>
+                <div class="box">
+                    <img src ="images/img9.jpg" alt="" class="img1">
+                    <img src ="images/img10.jpg" alt="" class="img2">
+                </div> 
+            </div>  
+            <p class="line line-d"></p> 
+            <p class="about-text">
+                <span class="easy-recruit">EasyRecruit</span> is the biggest recruiting company in Romania. It was founded in Sibiu almost 10 years ago <br>
+                by a group of 5 ambitious students, who believed they can offer what is best on the market when it comes <br>
+                to quick and effortless recruiting services. After almost a decade, the company has more than 250 <br>
+                employees in 3 locations based in Sibiu, Munchen and London. Our goal is to provide the absolute best <br>
+                services on the market while reaching out to clients around Europe and beyond. 
+            </p>
+            <div id="part2">
+                 <p id="txt6"><span>&#169;</span> copyright 2021 EasyRecruit - All rights reserved</p>
             </div>
     </body>
 </html>
