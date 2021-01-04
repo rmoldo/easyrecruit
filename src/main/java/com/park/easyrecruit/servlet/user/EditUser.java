@@ -13,6 +13,8 @@ import java.io.PrintWriter;
 import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.HttpConstraint;
+import javax.servlet.annotation.ServletSecurity;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +25,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author M Radu
  */
 @WebServlet(name = "EditUser", urlPatterns = {"/Users/Edit"})
+@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"AdminRole", "CeoRole"}))
 public class EditUser extends HttpServlet {
 
     @Inject
@@ -49,13 +52,14 @@ public class EditUser extends HttpServlet {
         String password = request.getParameter("edit_password");
         String phoneNumber = request.getParameter("edit_phone_number");
         String email = request.getParameter("edit_email");
+        String position = request.getParameter("edit_position");
         
         // Check whether the password was changed or not
         if (password.equals("")) {
-            userBean.updateUser(userId, firstName, lastName, email, phoneNumber);
+            userBean.updateUser(userId, firstName, lastName, email, phoneNumber, position);
         } else {
             String hashedPassword = Password.convertToSha256(password);
-            userBean.updateUserWithPassword(userId, firstName, lastName, email, phoneNumber, hashedPassword);
+            userBean.updateUserWithPassword(userId, firstName, lastName, email, phoneNumber, hashedPassword, position);
         }
 
         response.sendRedirect(request.getContextPath() + "/Users");
