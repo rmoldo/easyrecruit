@@ -23,9 +23,9 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author M Radu
  */
-@WebServlet(name = "Users", urlPatterns = {"/Users"})
+@WebServlet(name = "EditListUser", urlPatterns = {"/Users/ListEdit"})
 @ServletSecurity(value = @HttpConstraint(rolesAllowed = {"AdminRole", "CeoRole"}))
-public class Users extends HttpServlet {
+public class EditListUser extends HttpServlet {
 
     @Inject
     private UserBean userBean;
@@ -33,13 +33,10 @@ public class Users extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute("activePage", "Users");
-
         List<UserDetails> users = userBean.getAllUsers();
-        request.setAttribute("users", users);
-
-        // Forward the extracted users to the UI
-        request.getRequestDispatcher("/WEB-INF/pages/users.jsp").forward(request, response);
+        request.setAttribute("listUsers", users);
+        
+        request.getRequestDispatcher("/WEB-INF/pages/editListUser.jsp").forward(request, response);
     }
 
     @Override
@@ -49,6 +46,6 @@ public class Users extends HttpServlet {
 
     @Override
     public String getServletInfo() {
-        return "Users servlet";
+        return "EasyRecruit:EditListUser:servlet";
     }
 }
