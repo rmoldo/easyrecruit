@@ -6,16 +6,8 @@
 package com.park.easyrecruit.entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import java.util.*;
+import javax.persistence.*;
 
 /**
  *
@@ -23,23 +15,49 @@ import javax.persistence.Table;
  */
 @Entity
 @IdClass(ApplicationId.class)
-@Table(name = "APPLICATIONS")
+@Table(name = "Applications")
 public class Application implements Serializable {
-    
-    private static final long serialVersionUID = 1L;
-    
-    @Id
-    private Integer candidateId;
-    
-    @Id
-    private Integer positionId;
-    
+
+    private static final long serialVersionUID = 2L;
+
+    public Application() {
+    }
+
+    public Application(Position position, User candidate, String cvLink) {
+        this.position = position;
+        this.candidate = candidate;
+        this.cvLink = cvLink;
+    }
+
     private String cvLink;
-    
-//    @OneToMany(
-//        mappedBy = "position",
-//        cascade = CascadeType.ALL,
-//        orphanRemoval = true
-//    )
-//    private List<ApplicationComment> comments = new ArrayList<>();
+
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "positionId")
+    private Position position;
+
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "candidateId")
+    private User candidate;
+
+    @OneToMany(mappedBy = "application")
+    private Collection<ApplicationComment> comments = new ArrayList<>();
+
+    public Collection<ApplicationComment> getComments() {
+        return comments;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public User getCandidate() {
+        return candidate;
+    }
+
+    public String getCvLink() {
+        return cvLink;
+    }
+
 }

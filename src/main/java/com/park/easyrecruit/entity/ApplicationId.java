@@ -14,8 +14,16 @@ import java.util.Objects;
  */
 public class ApplicationId implements Serializable {
 
-    private Integer candidateId;
-    private Integer positionId;
+    public ApplicationId() {
+    }
+
+    public ApplicationId(int positionId, int candidateId) {
+        this.position = positionId;
+        this.candidate = candidateId;
+    }
+
+    private int candidate;
+    private int position;
 
     @Override
     public boolean equals(Object o) {
@@ -28,15 +36,15 @@ public class ApplicationId implements Serializable {
         }
 
         ApplicationId other = (ApplicationId) o;
-        return this.candidateId == other.candidateId
-                && this.positionId == other.positionId;
+        return this.candidate == other.candidate
+                && this.position == other.position;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 13 * hash + Objects.hashCode(this.candidateId);
-        hash = 13 * hash + Objects.hashCode(this.positionId);
+        hash = 13 * hash + Objects.hashCode(this.candidate);
+        hash = 13 * hash + Objects.hashCode(this.position);
         return hash;
     }
 }
