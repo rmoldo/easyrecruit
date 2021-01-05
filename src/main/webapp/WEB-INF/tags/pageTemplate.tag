@@ -20,8 +20,7 @@
     </head>
     <body>
         <jsp:include page="/WEB-INF/pages/navbar.jsp" />
-        <jsp:include page="/WEB-INF/pages/hero-section.jsp" />
-
+        
         <main role="main" class="container mt-3">
             <jsp:doBody />
         </main>
