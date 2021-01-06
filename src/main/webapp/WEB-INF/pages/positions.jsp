@@ -47,6 +47,7 @@
                         <c:if test="${pageContext.request.getRemoteUser() != null}">
                             <form class="needs-validation" novalidate method="POST" action="${pageContext.request.contextPath}/Positions/AddComment">
                                 <input type="hidden" class="form-control" id="creatorUser" name="creatorUser" value="${pageContext.request.remoteUser}" required>
+                                <input type="hidden" class="form-control" id="positionId" name="positionId" value="${position.id}" required>
                                 <div class="invalid-feedback" role="alert">
                                     Please login to add a comment!
                                 </div>
