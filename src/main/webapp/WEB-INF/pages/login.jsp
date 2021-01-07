@@ -30,12 +30,11 @@
                         <input type="password" id="password" name="j_password" required>
                         <label>Password</label>
                     </div>
-                    
                     <div class="field">
                         <input type="submit" value="Login">
                     </div>
-                    <div class="signup-link">
-                        Not a member? <a href="register.jsp">Sign up now</a>
+                    <div class="signup-link"> 
+                        Not a member? <a href="login.jsp">Sign up now</a> <%-- To do for later (if time allows) --%>
                     </div>
                 </form>
             </div>

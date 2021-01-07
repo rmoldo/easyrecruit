@@ -4,6 +4,16 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
 /* 
+    Created on : Jan 6, 2021, 9:21:24 PM
+    Author     : Dragos
+*/
+
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
     Created on : Jan 6, 2021, 6:08:31 PM
     Author     : Dragos
 */
@@ -64,29 +74,7 @@ html,body{
     border-radius: 25px;
     transition: all 0.3s ease;
 }
-.wrapper form .field input:focus,
-form .field input:valid{
-    border-color: #4158d0;
-}
-.wrapper form .field label{
-    position: absolute;
-    top: 50%;
-    left: 20px;
-    color: #999999;
-    font-weight: 400;
-    font-size: 17px;
-    pointer-events: none;
-    transform: translateY(-50%);
-    transition: all 0.3s ease;
-}
-form .field input:focus ~ label,
-form .field input:valid ~ label{
-    top: 0%;
-    font-size: 16px;
-    color: #4158d0;
-    background: #fff;
-    transform: translateY(-50%);
-}
+
 form .content{
     display: flex;
     width: 100%;
@@ -95,7 +83,11 @@ form .content{
     align-items: center;
     justify-content: space-around;
 }
-
+form .content .checkbox{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 form .content input{
     width: 15px;
     height: 15px;
@@ -106,12 +98,14 @@ form .content label{
     user-select: none;
     padding-left: 5px;
 }
-
+form .content .pass-link{
+    color: "";
+}
 form .field input[type="submit"]{
     color: #fff;
     border: none;
     padding-left: 0;
-    margin-top: -10px;
+    margin-top: 10px;
     font-size: 20px;
     font-weight: 500;
     cursor: pointer;
@@ -134,5 +128,38 @@ form .signup-link a{
 form .pass-link a:hover,
 form .signup-link a:hover{
     text-decoration: underline;
+}
+.invalid-feedback{
+    display: none;
+    width: 100%;
+    margin-top: .25rem;
+    font-size: 80%;
+    color: #dc3545;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.form-control.is-invalid, .was-validated .form-control:invalid {
+    border-color: #dc3545;
+    padding-right: calc(1.5em + .75rem);
+
+}
+
+.is-invalid~.invalid-feedback, .is-invalid~.invalid-tooltip, .was-validated :invalid~.invalid-feedback, .was-validated :invalid~.invalid-tooltip {
+    display: block;
 }
 
