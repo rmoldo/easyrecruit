@@ -9,8 +9,24 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <t:pageTemplate pageTitle="Positions">
+    <c:if test="${visibility_error != null}">
+        <div class="alert alert-warning" role="alert">
+            ${visibility_error}
+        </div>
+    </c:if>
+    <c:if test="${visibility_status != null}">
+        <div class="alert alert-info" role="alert">
+            ${visibility_status}
+          </div>
+    </c:if>
     <h1>Available positions: </h1>
     <br>
+    <c:if test="${pageContext.request.isUserInRole('AdminRole')}">
+    <div class="row justify-content-center">
+        <a href="Positions/Add" class="btn btn-primary">Add position</a>
+    </div>
+    <br>
+    </c:if>
     <c:forEach var="position" items="${positions}">
         <br>
         <div class="card text-center">
@@ -22,18 +38,21 @@
                         <c:if test="${pageContext.request.isUserInRole('ClientRole')}">
                             <a href="Applications/Add" class="btn btn-primary">Apply</a>
                         </c:if>
+                        <c:if test="${pageContext.request.isUserInRole('CeoRole')}">
+                            <a href="Positions/Visibility?positionId=${position.id}&action=close" class="btn btn-primary">Close</a>
+                        </c:if>
                     </c:when>
                     <c:otherwise>
                         <c:if test="${pageContext.request.isUserInRole('CeoRole')}">
-                            <a href="Positions/Add" class="btn btn-primary">Approve position</a>
+                            <a href="Positions/Visibility?positionId=${position.id}&action=open" class="btn btn-primary">Approve/Reopen</a>
                         </c:if>
                     </c:otherwise>
                 </c:choose>
                 <c:if test="${pageContext.request.isUserInRole('CeoRole')}">
-                    <a href="Applications/Add" class="btn btn-primary">Edit position</a>
+                    <a href="Applications/Add" class="btn btn-primary">Edit</a>
                 </c:if>
                 <c:if test="${pageContext.request.isUserInRole('CeoRole')}">
-                    <a href="Applications/Add" class="btn btn-danger">Delete position</a>
+                    <a href="Applications/Add" class="btn btn-danger">Delete</a>
                 </c:if>
                 <br>
                 <br>
@@ -93,11 +112,5 @@
             </div>
         </div>
     </c:forEach>
-    <c:if test="${pageContext.request.isUserInRole('AdminRole')}">
-    <br><br>
-    <div class="row justify-content-center">
-        <a href="Positions/Add" class="btn btn-primary">Add position</a>
-    </div>
-    </c:if>
-    <br><br>
+    <br>
 </t:pageTemplate>

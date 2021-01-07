@@ -69,6 +69,8 @@ public class PositionBean {
     }
     
     public Boolean addComment(Integer positionId, String creatorUser, String text) {
+        LOG.info("add comment");
+        
         try {
             Position position = getPositionById(positionId);
             PositionComment comment = new PositionComment();
@@ -81,6 +83,30 @@ public class PositionBean {
         } catch(Exception e) {
             return false;
         }        
+    }
+    
+    public boolean openPosition(Integer positionId) {
+        LOG.info("open position");
+        
+        Position position = getPositionById(positionId);
+        //TODO Silvan: change this check in final variant according to application impl
+        if (position.getNbOfCandidatesNeeded() > 0 && !position.getIsOpen()) {
+            position.setIsOpen(true);
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean closePosition(Integer positionId) {
+        LOG.info("close position");
+        
+        Position position = getPositionById(positionId);
+        //TODO Silvan: change this check in final variant according to application impl
+        if (position.getIsOpen()) {
+            position.setIsOpen(false);
+            return true;
+        }
+        return false;
     }
 
     private List<PositionDetails> copyPositionsToDetails(List<Position> positions) {
