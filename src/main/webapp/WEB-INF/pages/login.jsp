@@ -33,9 +33,9 @@
                     <div class="field">
                         <input type="submit" value="Login">
                     </div>
-                    <div class="signup-link"> 
+<!--                    <div class="signup-link"> 
                         Not a member? <a href="login.jsp">Sign up now</a> <%-- To do for later (if time allows) --%>
-                    </div>
+                    </div>-->
                 </form>
             </div>
         </body>
