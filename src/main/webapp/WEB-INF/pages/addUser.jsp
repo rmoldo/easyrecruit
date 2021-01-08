@@ -14,108 +14,127 @@
             ${add_user_error_message}
         </div>
     </c:if>
-    <form class="needs-validation" novalidate method="POST" action="${pageContext.request.contextPath}/Users/Add"
-          oninput='retypepassword.setCustomValidity(retypepassword.value != password.value ? "Passwords do not match." : "")'>
-        <div class="row">
-            <div class="col-md-6 mb-3">
-                <label for="username">Username</label>
-                <input type="text" class="form-control" id="addUsername" name="addUsername" placeholder="" value="" required>
-                <div class="invalid-feedback">
-                    Username is required.
-                </div>
+    <div class="container">
+        
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                <h5 class="card-title text-uppercase mb-0">Add Users</h5>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 mb-3">
-                <label for="firstName">First name</label>
-                <input type="text" class="form-control" id="addFirstName" name="addFirstName" placeholder="" value="" required>
-                <div class="invalid-feedback">
-                    First name is required.
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 mb-3">
-                <label for="lastName">Last name</label>
-                <input type="text" class="form-control" id="addLastName" name="addLastName" placeholder="" value="" required>
-                <div class="invalid-feedback">
-                    Last name is required.
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 mb-3">
-                <label for="phoneNumber">Phone number</label>
-                <input type="text" pattern="^\+(?:[0-9] ?){6,14}[0-9]$" class="form-control" id="addPhoneNumber" name="addPhoneNumber" placeholder="" value="" required>
-                <div class="invalid-feedback">
-                    Phone number is required.
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 mb-3">
-                <label for="email">Email</label>
-                <input type="email" class="form-control" id="addEmail" name="addEmail" placeholder="" value="" required>
-                <div class="invalid-feedback">
-                    Email is required.
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 mb-3">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" id="addPassword" name="addPassword" placeholder="" value="" required>
-                <div class="invalid-feedback">
-                    Password is required.
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 mb-3">
-                <label for="password">Confirm password</label>
-                <input type="password" class="form-control" id="addRetypePassword" name="addRetypePassword" placeholder="" value="" required>
-                <div class="invalid-feedback">
-                    Please confirm the password
-                </div>
-            </div>
-        </div>
-        <!-- TODO: Add the rest of the roles -->
-        <div class="row">
-            <div class="col-md-6 mb-3">
-                <label for="position"> Role </label>
-                <select class="custom-select d-block w-100" id="addPosition" name="addPosition" required>
-                    <option value="ADMINISTRATOR">Administrator</option>
-                    <option value="CLIENT">Client</option>
-                </select>
-                <div class="invalid-feedback">
-                     Please select a position
-                </div>
-            </div>
-        </div>
-        <hr class="mb-4">
-        <button class="btn btn-primary btn-lg btn-block" type="submit">Add User</button>
-    </form> 
-    <script>
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
-        (function () {
-            'use strict'
+                    <div class="card-body">
 
-            window.addEventListener('load', function () {
-                // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                var forms = document.getElementsByClassName('needs-validation')
+                        <form class="form-horizontal" class="needs-validation" novalidate method="POST" action="${pageContext.request.contextPath}/Users/Add"
+                              oninput='retypepassword.setCustomValidity(retypepassword.value != password.value ? "Passwords do not match." : "")'>
 
-                // Loop over them and prevent submission
-                Array.prototype.filter.call(forms, function (form) {
-                    form.addEventListener('submit', function (event) {
-                        if (form.checkValidity() === false) {
-                            event.preventDefault()
-                            event.stopPropagation()
-                        }
+                            <div class="form-group">
+                                <label for="username" class="cols-sm-2 control-label">Username</label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group">
 
-                        form.classList.add('was-validated')
-                    }, false)
-                })
-            }, false)
-        })()
-    </script>
+                                        <input type="text" class="form-control" name="addUsername" id="addUsername" placeholder="Enter a Username" required/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="firstName" class="cols-sm-2 control-label">First Name</label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group">
+
+                                        <input type="text" class="form-control" name="addFirstName" id="addFirstName" placeholder="Enter your First Name" required/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName" class="cols-sm-2 control-label">Last Name</label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group">
+
+                                        <input type="text" class="form-control" name="addLastName" id="addLastName" placeholder="Enter your Last Name" required/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="phoneNumber" class="cols-sm-2 control-label">Phone Number</label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group">
+
+                                        <input type="text" class="form-control" name="addPhoneNumber" id="addPhoneNumber" placeholder="Enter your Phone Number" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="cols-sm-2 control-label">Email</label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group">
+
+                                        <input type="text" class="form-control" name="addEmail" id="addEmail" placeholder="Enter your Email" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="cols-sm-2 control-label">Password</label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group">
+
+                                        <input type="password" class="form-control" name="addPassword" id="addPassword" placeholder="Enter your Password" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="cols-sm-2 control-label">Confirm Password</label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group">
+
+                                        <input type="password" class="form-control" name="addRetypePassword" id="addRetypePassword" placeholder="Confirm your Password" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- TODO: Add the rest of the roles -->
+                            <div class="form-group">
+                                <label for="position" class="cols-sm-2 control-label"> Role </label>
+                                <div class="col-md-10" style="padding: 0;width: 100%;">
+                                    <div class="input-group">
+                                        <select class="form-control form-control-md" id="addPosition" name="addPosition" required>
+                                            <option value="ADMINISTRATOR">Administrator</option>
+                                            <option value="CLIENT">Client</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <button type="submit" class="btn btn-primary btn-lg btn-block login-button">Add User</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form> 
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+        'use strict'
+
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        }, false)
+    })()
+</script>
 </t:pageTemplate>
