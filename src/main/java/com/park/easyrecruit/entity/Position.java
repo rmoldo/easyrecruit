@@ -29,7 +29,10 @@ public class Position implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String name;
-    private String description;
+    private String department;
+    private String project;
+    private String requirements;
+    private String responsibilities;
     private Boolean isOpen;
     private Integer nbOfCandidatesNeeded;
     private String creatorUserName;
@@ -77,13 +80,38 @@ public class Position implements Serializable {
         this.creatorUserName = creatorUserName;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDepartment() {
+        return department;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDepartment(String department) {
+        this.department = department;
     }
+
+    public String getProject() {
+        return project;
+    }
+
+    public void setProject(String project) {
+        this.project = project;
+    }
+
+    public String getRequirements() {
+        return requirements;
+    }
+
+    public void setRequirements(String requirements) {
+        this.requirements = requirements;
+    }
+
+    public String getResponsibilities() {
+        return responsibilities;
+    }
+
+    public void setResponsibilities(String responsibilities) {
+        this.responsibilities = responsibilities;
+    }
+
 
     public Boolean getIsOpen() {
         return isOpen;

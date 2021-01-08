@@ -32,7 +32,11 @@
         <div class="card text-center">
             <div class="card-body">
                 <h4 class="card-title">${position.name}</h4>
-                <p class="card-text">${position.description}</p>
+                <p class="card-text"><b>Department:</b> ${position.department}<br>
+                    <b>Project:</b> ${position.project}<br>
+                    <b>Requirements:</b> ${position.requirements}<br>
+                    <b>Responsibilities:</b> ${position.responsibilities}<br>
+                </p>
                 <c:choose>
                     <c:when test="${position.isOpen}">
                         <c:if test="${pageContext.request.isUserInRole('ClientRole')}">
@@ -49,10 +53,10 @@
                     </c:otherwise>
                 </c:choose>
                 <c:if test="${pageContext.request.isUserInRole('CeoRole')}">
-                    <a href="Applications/Add" class="btn btn-primary">Edit</a>
+                    <a href="Positions/Edit?positionId=${position.id}" class="btn btn-primary">Edit</a>
                 </c:if>
                 <c:if test="${pageContext.request.isUserInRole('CeoRole')}">
-                    <a href="Applications/Add" class="btn btn-danger">Delete</a>
+                    <a href="Positions/Delete?positionId=${position.id}" class="btn btn-danger">Delete</a>
                 </c:if>
                 <br>
                 <br>
