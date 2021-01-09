@@ -5,6 +5,7 @@
  */
 package com.park.easyrecruit.servlet.position;
 
+import com.park.easyrecruit.common.PositionDetails;
 import com.park.easyrecruit.ejb.PositionBean;
 import java.io.IOException;
 import javax.inject.Inject;
@@ -20,22 +21,29 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Silvan
  */
-@WebServlet(name = "AddPosition", urlPatterns = {"/Positions/Add"})
-@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"AdminRole", "CeoRole"}))
-public class AddPosition extends HttpServlet {
+@WebServlet(name = "EditPosition", urlPatterns = {"/Positions/Edit"})
+@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"CeoRole"}))
+public class EditPosition extends HttpServlet {
 
-    @Inject
+   @Inject
     private PositionBean positionBean;
-
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/pages/addPosition.jsp").forward(request, response);
+        Integer positionId = Integer.parseInt(request.getParameter("positionId"));
+        PositionDetails position = positionBean.getPosition(positionId);
+        request.setAttribute("position", position);
+
+        //Forward position to UI
+        request.getRequestDispatcher("/WEB-INF/pages/editPosition.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        Integer positionId = Integer.parseInt(request.getParameter("positionId"));
         String positionName = request.getParameter("positionName");
         Integer neededNumber = Integer.parseInt(request.getParameter("neededNumber"));
         String department = request.getParameter("department");
@@ -47,21 +55,19 @@ public class AddPosition extends HttpServlet {
         String responsibilities = request.getParameter("responsibilities");
         String creatorUserName = request.getParameter("creatorUserName");
 
-        if(!positionBean.addPosition(positionName, department, project, requirements, responsibilities, neededNumber, creatorUserName)) {
-        	request.setAttribute("position_error_message", "Error adding position");
-        	request.getRequestDispatcher("/WEB-INF/pages/addPosition.jsp").forward(request, response);
+        if(!positionBean.editPosition(positionId, positionName, department, project, requirements, responsibilities, neededNumber, creatorUserName)) {
+        	request.setAttribute("position_error_message", "Error editing position");
         }
         else {
-        	request.setAttribute("position_status_message", "Your position has been added succesfully and was sent to General Director for review!");
-        	request.getRequestDispatcher("/WEB-INF/pages/addPosition.jsp").forward(request, response);
+        	request.setAttribute("position_status_message", "Position saved succesfully! Geneal Director has to approve changes.");
         }
-
-        response.sendRedirect(request.getContextPath());
+        //should be replaced with forward to show messages, but because of dependencies keep it as this now
+        response.sendRedirect(request.getContextPath()+ "/Positions");
     }
+
 
     @Override
     public String getServletInfo() {
-        return "add position servlet";
+        return "Servlet that edits position";
     }
-
 }

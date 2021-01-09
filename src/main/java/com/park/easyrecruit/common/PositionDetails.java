@@ -17,20 +17,26 @@ import java.util.List;
 public class PositionDetails implements Serializable {
     private Integer id;
     private String name;
-    private String description;
+    private String department;
+    private String project;
+    private String requirements;
+    private String responsibilities;
     private Boolean isOpen;
     private Integer nbOfCandidatesNeeded;
     private String creatorUserName;
     private List<PositionComment> comments = new ArrayList<>();
 
-    public PositionDetails(Integer id, String name, String description, Boolean isOpen, Integer nbOfCandidatesNeeded, String creatorUserName, List<PositionComment> comments) {
+    public PositionDetails(Integer id, String name, String department, String project, String requirements, String responsibilities, Boolean isOpen, Integer nbOfCandidatesNeeded, String creatorUserName, List<PositionComment> comments) {
         this.id = id;
         this.name = name;
-        this.description = description;
+        this.department = department;
+        this.project = project;
+        this.requirements = requirements;
+        this.responsibilities = responsibilities;
         this.isOpen = isOpen;
-        this.comments = comments;
         this.nbOfCandidatesNeeded = nbOfCandidatesNeeded;
         this.creatorUserName = creatorUserName;
+        this.comments = comments;
     }
 
     public Integer getId() {
@@ -41,14 +47,26 @@ public class PositionDetails implements Serializable {
         return name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDepartment() {
+        return department;
+    }
+
+    public String getProject() {
+        return project;
+    }
+
+    public String getRequirements() {
+        return requirements;
+    }
+
+    public String getResponsibilities() {
+        return responsibilities;
     }
 
     public Boolean getIsOpen() {
         return isOpen;
     }
-    
+
     public Integer getNbOfCandidatesNeeded() {
         return nbOfCandidatesNeeded;
     }
@@ -57,12 +75,8 @@ public class PositionDetails implements Serializable {
         return creatorUserName;
     }
 
-    public void setCreatorUserName(String creatorUserName) {
-        this.creatorUserName = creatorUserName;
-    }
-
     public List<PositionComment> getComments() {
         return comments;
     }
-    
+   
 }

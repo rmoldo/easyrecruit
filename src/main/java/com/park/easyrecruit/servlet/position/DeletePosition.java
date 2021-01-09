@@ -20,39 +20,35 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Silvan
  */
-@WebServlet(name = "AddPositionComment", urlPatterns = {"/Positions/AddComment"})
-@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"AdminRole", "CeoRole", "ClientRole"}))
-public class AddPositionComment extends HttpServlet {
+@WebServlet(name = "DeletePosition", urlPatterns = {"/Positions/Delete"})
+@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"CeoRole"}))
+public class DeletePosition extends HttpServlet {
 
     @Inject
     private PositionBean positionBean;
-
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/pages/positions.jsp").forward(request, response);
+        Integer positionId = Integer.parseInt(request.getParameter("positionId"));
+        if(positionBean.deletePosition(positionId)) {
+            request.setAttribute("delete_successfull", "Position deleted successfully!");
+        }
+        else {
+            request.setAttribute("delete_successfull", "Failed to delete position!");
+        }
+        //should be replaced with forward to show messages, but second time link won't work, so keep it as this now
+        response.sendRedirect(request.getContextPath()+ "/Positions");
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Integer positionId = Integer.parseInt(request.getParameter("positionId"));
-        String creatorUser = request.getParameter("creatorUser");
-        String text = request.getParameter("text");
-
-
-        if(positionBean.addComment(positionId, creatorUser, text)) {
-            response.sendRedirect(request.getContextPath()+ "/Positions");
-        }
-        else {
-            request.setAttribute("comment_error", "We encounted an error while adding your comment!");
-            request.getRequestDispatcher("/WEB-INF/pages/positions.jsp").forward(request, response);
-        }
     }
+
 
     @Override
     public String getServletInfo() {
-        return "add position servlet";
+        return "Servlet that deletes position";
     }
-
 }
