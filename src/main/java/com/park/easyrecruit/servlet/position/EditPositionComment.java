@@ -5,7 +5,6 @@
  */
 package com.park.easyrecruit.servlet.position;
 
-import com.park.easyrecruit.common.PositionDetails;
 import com.park.easyrecruit.ejb.PositionBean;
 import java.io.IOException;
 import javax.inject.Inject;
