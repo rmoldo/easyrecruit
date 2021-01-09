@@ -5,11 +5,13 @@
  */
 package com.park.easyrecruit.ejb;
 
+import com.park.easyrecruit.common.ApplicationDetails;
 import com.park.easyrecruit.entity.*;
+import java.util.*;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import javax.persistence.*;
 
 /**
  *
@@ -23,11 +25,21 @@ public class ApplicationBean {
     @PersistenceContext
     private EntityManager em;
 
+    public Collection<ApplicationDetails> getMany(String username) {
+        LOG.info("get many applications for username");
+
+        return em
+                .createQuery("SELECT a FROM Application a WHERE a.candidate.username = ?1", Application.class)
+                .setParameter(1, username)
+                .getResultStream()
+                .map(a -> ApplicationDetails.From(a))
+                .collect(Collectors.toList());
+    }
+
     public void create(Integer positionId, Integer candidateId, String cvLink) {
         LOG.info("create application");
-        
-        // TODO: not tested
 
+        // TODO: not tested
         User u = em.find(User.class, candidateId);
         Position p = em.find(Position.class, candidateId);
         Application a = new Application(p, u, cvLink);
@@ -39,12 +51,11 @@ public class ApplicationBean {
     }
 
     public void delete(Integer positionId, Integer candidateId) {
-        LOG.info("create application");
-        
+        LOG.info("delete application");
+
         // TODO: not tested
-        
         Application a = em.find(Application.class, new ApplicationId(positionId, candidateId));
-        
+
         em.remove(a);
     }
 }
