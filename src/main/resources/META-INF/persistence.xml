@@ -7,6 +7,7 @@
     <class>com.park.easyrecruit.entity.Position</class>
     <class>com.park.easyrecruit.entity.PositionComment</class>
     <class>com.park.easyrecruit.entity.Application</class>
+    <class>com.park.easyrecruit.entity.ApplicationComment</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/EasyRecruit"/>
       <property name="javax.persistence.jdbc.user" value="EasyRecruitUser"/>

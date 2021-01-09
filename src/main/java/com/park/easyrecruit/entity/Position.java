@@ -108,12 +108,10 @@ public class Position implements Serializable {
         comments.add(comment);
         comment.setPosition(this);
     }
-
     public void removeComment(PositionComment comment) {
         comments.remove(comment);
         comment.setPosition(null);
     }
-
     @Override
     public int hashCode() {
         int hash = 0;

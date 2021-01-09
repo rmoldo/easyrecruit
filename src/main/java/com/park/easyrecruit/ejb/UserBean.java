@@ -28,9 +28,16 @@ public class UserBean {
     @PersistenceContext
     private EntityManager em;
 
+    public UserDetails findById(Integer userId) {
+        LOG.info("UserBean:findById");
+
+        User user = em.find(User.class, userId);
+        return new UserDetails(user.getId(), user.getUsername(), user.getEmail(), user.getPosition(), user.getFirstName(), user.getLastName(), user.getPhoneNumber());
+    }
+
     public boolean createUser(String username, String email, String hashedPassword, String position, String firstName, String lastName, String phoneNumber) {
         LOG.info("UserBean:createUser");
-        
+
         // Check if username or email is in the User database
         try {
             List<User> users = (List<User>) em.createQuery("SELECT u FROM User u WHERE u.username = :uname or u.email = :mail")
@@ -72,6 +79,8 @@ public class UserBean {
     }
 
     private List<UserDetails> copyUsersToDetails(List<User> users) {
+        LOG.info("UserBean:copyUsersToDetails");
+
         List<UserDetails> detailsList = new ArrayList<>();
 
         for (User user : users) {
@@ -86,5 +95,47 @@ public class UserBean {
         }
 
         return detailsList;
+    }
+
+    public void updateUser(Integer userId, String firstName, String lastName, String email, String phoneNumber, String position) {
+        LOG.info("UserBean:updateUser");
+
+        User user = em.find(User.class, userId);
+
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setEmail(email);
+        user.setPhoneNumber(phoneNumber);
+        user.setPosition(position);
+    }
+
+    public void updateUserWithPassword(Integer userId, String firstName, String lastName, String email, String phoneNumber, String hashedPassword, String position) {
+        LOG.info("UserBean:updateUserWithPassword");
+
+        User user = em.find(User.class, userId);
+
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setEmail(email);
+        user.setPhoneNumber(phoneNumber);
+        user.setPassword(hashedPassword);
+        user.setPosition(position);
+    }
+
+    public void deleteUsers(List<Integer> ids) {
+        LOG.info("UserBean:deleteUserByIds");
+
+        for (Integer id : ids) {
+            User user = em.find(User.class, id);
+            em.remove(user);
+        }
+    }
+
+    public void deleteUser(Integer userId) {
+        LOG.info("UserBean:deleteUserByIds");
+
+        User user = em.find(User.class, userId);
+
+        em.remove(user);
     }
 }

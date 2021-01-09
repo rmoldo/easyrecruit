@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.HttpConstraint;
+import javax.servlet.annotation.ServletSecurity;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Silvan
  */
 @WebServlet(name = "AddPositionComment", urlPatterns = {"/Positions/AddComment"})
+@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"AdminRole", "CeoRole", "ClientRole"}))
 public class AddPositionComment extends HttpServlet {
 
     @Inject
@@ -34,26 +37,18 @@ public class AddPositionComment extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        Integer positionId = Integer.parseInt(request.getParameter("positionId"));
         String creatorUser = request.getParameter("creatorUser");
         String text = request.getParameter("text");
-        /*String positionName = request.getParameter("positionName");
-        Integer neededNumber = Integer.parseInt(request.getParameter("neededNumber"));
-        String description = "<b>Department:</b> " + request.getParameter("department")
-            + "<br/><b>Project:</b> " + request.getParameter("project")
-            + "<br/><b>Requirements:</b> " + request.getParameter("requirements")
-            + "<br/><b>Responsibilities:</b> " + request.getParameter("responsibilities");
-        String creatorUserName = request.getParameter("creatorUserName");
 
-        if(!positionBean.addPosition(positionName, description, neededNumber, creatorUserName)) {
-            request.setAttribute("position_error_message", "Error adding position");
-            request.getRequestDispatcher("/WEB-INF/pages/addPosition.jsp").forward(request, response);
+
+        if(positionBean.addComment(positionId, creatorUser, text)) {
+            response.sendRedirect(request.getContextPath()+ "/Positions");
         }
         else {
-            request.setAttribute("position_status_message", "Your position has been added succesfully and was sent to General Director for review!");
-            request.getRequestDispatcher("/WEB-INF/pages/addPosition.jsp").forward(request, response);
-        }*/
-
-       // response.sendRedirect(request.getContextPath());
+            request.setAttribute("comment_error", "We encounted an error while adding your comment!");
+            request.getRequestDispatcher("/WEB-INF/pages/positions.jsp").forward(request, response);
+        }
     }
 
     @Override

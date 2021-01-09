@@ -24,13 +24,13 @@
                 </li>
             <%--</c:if>--%>
             <!-- Move user management into profile -->
-            <c:if test="${pageContext.request.isUserInRole('AdminRole')}">
+            <c:if test="${pageContext.request.isUserInRole('AdminRole') or pageContext.request.isUserInRole('CeoRole')}">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Manage Users</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown01">
                         <a class="dropdown-item" href="${contextPath}/Users">List Users</a>
                         <a class="dropdown-item" href="${contextPath}/Users/Add">Add Users</a>
-                        <a class="dropdown-item" href="${contextPath}/Users/Edit">Edit Users</a>
+                        <a class="dropdown-item" href="${contextPath}/Users/ListEdit">Edit Users</a>
                         <a class="dropdown-item" href="${contextPath}/Users/Delete">Delete Users</a>
                     </div>
                 </li>

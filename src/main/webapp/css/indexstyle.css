@@ -1,0 +1,201 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jan 5, 2021, 8:21:50 PM
+    Author     : Dragos
+*/
+
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}
+
+body  {
+    background-image: url(../images/bgphoto.jpg);
+    background-repeat: no-repeat, repeat;
+    background-color: #D3D3D3;
+    height: 800px; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-size: cover;
+    width: 100%;
+    max-height: 100px;
+    height: 100px;
+}
+
+h1 {
+    left: 0;
+    line-height: 200px;
+    margin-top: -350px;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    width: 100%;
+    color: #FFFFFF;
+    text-shadow: 2px 2px #778899;
+    font-size: 80px;
+    padding-left: 159px;
+    padding-right: 159px;
+
+}
+
+#container {
+    width: 100%;
+    height: 330px
+}
+
+#part1 {
+    width: 118%;
+    height: 295px;
+    background-color: #D3D3D3;
+    margin-top: 586px;
+}
+
+#part2 {
+    width: 100%;
+    height: 50px;
+    background-color: #D3D3D3;
+    position: relative;
+    top: -15px
+}
+
+#companyinfo {
+    width: 14%;
+    height: 280px;
+    position: relative;
+    left: 8%;
+    top: 30px;
+    font-size: 35px;
+    color: black;
+}
+
+#detail {
+    color: gray;
+    font-size: 16px
+}
+
+#explore {
+    width: 14%;
+    height: 280px;
+    position: relative;
+    top: -235px;
+    left: 29%
+}
+
+#txt1,
+#txt2,
+#txt3,
+#txt4,
+#txt5 {
+    color: white;
+    font-size: 20px
+}
+
+.link {
+    display: flex;
+    width: 90px;
+    height: 40px;
+    color: grey;
+    background-color: transparent;
+    border-top: 2px solid white;
+    position: relative;
+    top: -10px
+}
+
+.link:hover,
+.link1:hover {
+    color: #e65100
+}
+
+#visit {
+    width: 14%;
+    height: 280px;
+    position: relative;
+    top: -515px;
+    left: 42%
+}
+
+.text {
+    color: gray;
+    font-size: 14px;
+    margin-top: -10px
+}
+
+#legal {
+    width: 14%;
+    height: 280px;
+    position: relative;
+    top: -800px;
+    left: 59.5%
+}
+
+.link1 {
+    display: flex;
+    width: 150px;
+    height: 40px;
+    color: grey;
+    background-color: transparent;
+    border-top: 2px solid white;
+    position: relative;
+    top: -10px;
+    margin-top: 7px
+}
+
+#connect {
+    position: relative;
+    top: -1080px;
+    left: 78%;
+    width: 14%;
+    height: 280px
+}
+
+#txt5 {
+    position: relative;
+    top: 0px
+}
+
+.social {
+    position: relative;
+    top: -5px;
+    margin-right: 10px;
+    color: white;
+    cursor: pointer
+}
+
+.fa-facebook-square:hover {
+    color: #3B579D
+}
+
+.fa-linkedin:hover {
+    color: #007BB6
+}
+
+.fa-twitter-square:hover {
+    color: #2CAAE1
+}
+#txt6 {
+    color: white;
+    position: relative;
+    top: 13px;
+    left: 8%;
+    width: 80%;
+    color: #aaa7a7
+}
+
+.material-icons {
+    position: relative;
+    top: 3px
+}  
