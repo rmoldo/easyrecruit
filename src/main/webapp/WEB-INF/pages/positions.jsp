@@ -23,7 +23,7 @@
     <br>
     <c:if test="${pageContext.request.isUserInRole('AdminRole')}">
     <div class="row justify-content-center">
-        <a href="Positions/Add" class="btn btn-primary">Add position</a>
+        <a href="Positions/Add" class="btn btn-primary btn-lg">Add position</a>
     </div>
     <br>
     </c:if>
@@ -65,8 +65,15 @@
                         <h5 class="card-header">Comments</h5>
                         <div class="card-body">
                             <c:forEach var="comment" items="${position.comments}">
-                                <b>${comment.creatorUser}: </b>
-                                <p>${comment.text}</p>
+                                <div class="border border-dark rounded justify-content-center">
+                                    <b>${comment.creatorUser}: </b>
+                                    <p>${comment.text}</p>
+                                    <c:if test="${pageContext.request.getRemoteUser() == comment.creatorUser}">
+                                        <a href="Positions/EditComment?positionId=${position.id}&commentId=${comment.id}" class="card-link">Edit</a>
+                                        <a href="Positions/DeleteComment?positionId=${position.id}&commentId=${comment.id}" class="card-link">Delete</a>
+                                    </c:if>
+                                </div>
+                                <br>
                             </c:forEach>
                             <c:if test="${pageContext.request.getRemoteUser() != null}">
                                 <form class="needs-validation" novalidate method="POST" action="${pageContext.request.contextPath}/Positions/AddComment">
