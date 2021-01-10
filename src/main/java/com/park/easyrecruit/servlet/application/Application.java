@@ -24,9 +24,9 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author andrei
  */
-@WebServlet(name = "AddApplication", urlPatterns = {"/Applications/Add"})
-@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"ClientRole"}))
-public class AddApplication extends HttpServlet {
+@WebServlet(name = "Application", urlPatterns = {"/Application"})
+@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"ClientRole" /* ... */}))
+public class Application extends HttpServlet {
 
     @Inject
     private PositionBean positionBean;
@@ -47,30 +47,53 @@ public class AddApplication extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String username = request.getUserPrincipal().getName();
+        // anyone GET + positionId => read application for current user, or create if not exists
+        // HR GET + positionId + candidateId => read application for specified user
         Integer positionId;
+        Integer candidateId = null;
+
         try {
             positionId = Integer.parseInt(request.getParameter("positionId"));
+
+            String candidateIdStr = request.getParameter("candidateId");
+            if (candidateIdStr != null) {
+                candidateId = Integer.parseInt(candidateIdStr);
+            }
         } catch (NumberFormatException e) {
             response.setStatus(404);
             return;
         }
-        
-        if (applicationBean.get(positionId, username) != null)
-        {
-            response.sendRedirect(request.getContextPath() + "/Applications/Edit?positionId=" + positionId);
-            return;
+
+        ApplicationDetails application = null;
+
+        // TODO andrei: fix role check
+        if (candidateId != null && request.isUserInRole("HR")) {
+            application = applicationBean.get(positionId, candidateId);
+            if (application == null) {
+                response.setStatus(404);
+                return;
+            }
+            
+            request.setAttribute("comments", true);
+        } else if (candidateId == null) {
+            // application for current user
+
+            String username = request.getUserPrincipal().getName();
+            application = applicationBean.get(positionId, username);
+            if (application == null) {
+                PositionDetails position = positionBean.getPosition(positionId);
+                if (position == null) {
+                    response.setStatus(404);
+                    return;
+                }
+                application = new ApplicationDetails();
+                application.setPosition(position);
+                application.setCandidate(userBean.findByUsername(username));
+                application.setCvLink("");
+            }
+            request.setAttribute("edit", true);
         }
 
-        PositionDetails position = positionBean.getPosition(positionId);
-        if (position == null) {
-            response.setStatus(404);
-            return;
-        }
-
-        ApplicationDetails application = new ApplicationDetails();
-        application.setPosition(position);
-        application.setCandidate(userBean.findByUsername(username));
         request.setAttribute("application", application);
         request.getRequestDispatcher("/WEB-INF/pages/application.jsp").forward(request, response);
     }

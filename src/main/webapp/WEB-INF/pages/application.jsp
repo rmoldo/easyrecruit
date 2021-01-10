@@ -39,9 +39,13 @@
         </table>
 
         <h4>Candidate details:</h4><br />
-        Please include all the necessary details in your CV, upload it to any accessible
-        file hosting website and add the link to it below.
-        <br /><br />
+
+        <c:if test="${edit}">
+            Please include all the necessary details in your CV, upload it to any accessible
+            file hosting website and add the link to it below.
+            <br />
+        </c:if>
+        <br />
 
         <input type="hidden" name="positionId" value="${application.position.id}">
         <table class="table table-sm table-borderless text-nowrap">
@@ -66,12 +70,17 @@
         </table>
         <div class="form-group">
             <label for="positionName">Link to curriculum vitae:</label>
-            <input type="text" class="form-control" name="cvLink" value="" required>
+            <input type="text" class="form-control" name="cvLink" value="${application.cvLink}" required ${edit ? "" : "readonly"}>
             <div class="invalid-feedback">
                 Link to curriculum vitae is required.
             </div>
         </div>
         <hr class="mb-4">
-        <button class="btn btn-primary btn-lg btn-block" type="submit">Submit application</button>
+        <c:if test="${edit}">
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Submit</button>
+        </c:if>
+        <c:if test="${comments}">
+            <h4>Comments:</h4>
+        </c:if>
     </form>
 </t:pageTemplate>

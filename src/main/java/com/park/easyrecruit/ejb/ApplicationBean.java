@@ -41,6 +41,22 @@ public class ApplicationBean {
         }
     }
 
+    public ApplicationDetails get(Integer positionId, Integer candidateId) {
+        LOG.info("get application for position & candidateId");
+
+        try {
+            return ApplicationDetails.From(em
+                    .createQuery(
+                            "SELECT a FROM Application a WHERE a.position.id = ?1 AND a.candidate.id = ?2",
+                            Application.class)
+                    .setParameter(1, positionId)
+                    .setParameter(2, candidateId)
+                    .getSingleResult());
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     public Collection<ApplicationDetails> getMany(String username) {
         LOG.info("get many applications for username");
 

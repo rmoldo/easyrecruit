@@ -38,6 +38,10 @@ public class Applications extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        // anyone GET => applications of current user (My Applications)
+        // HR GET + positionId => list all applications for specified position
+        
         request.setAttribute("applications", applicationBean.getMany(request.getUserPrincipal().getName()));
         request.getRequestDispatcher("/WEB-INF/pages/applications.jsp").forward(request, response);
     }

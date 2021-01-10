@@ -25,7 +25,7 @@
             <c:forEach var="app" items="${applications}">
                 <tr>
                     <td>
-                        <a href="">👁‍ Open</a>
+                        <a href="Application?positionId=${app.position.id}">👁‍ Open</a>
                     </td>
                     <td>${app.position.name}</td>
                     <td>${app.position.department}</td>
