@@ -9,6 +9,8 @@ import com.park.easyrecruit.ejb.ApplicationBean;
 import java.io.IOException;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.HttpConstraint;
+import javax.servlet.annotation.ServletSecurity;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author andrei
  */
 @WebServlet(name = "Applications", urlPatterns = {"/Applications"})
+@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"ClientRole"}))
 public class Applications extends HttpServlet {
 
     @Inject
@@ -36,6 +39,6 @@ public class Applications extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setAttribute("applications", applicationBean.getMany(request.getUserPrincipal().getName()));
-        request.getRequestDispatcher("/WEB-INF/pages/positions.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/pages/applications.jsp").forward(request, response);
     }
 }

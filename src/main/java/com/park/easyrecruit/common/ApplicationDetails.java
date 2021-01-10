@@ -7,6 +7,7 @@ package com.park.easyrecruit.common;
 
 import com.park.easyrecruit.entity.Application;
 import com.park.easyrecruit.entity.ApplicationComment;
+import com.park.easyrecruit.entity.Position;
 import java.util.*;
 
 /**
@@ -17,11 +18,13 @@ public class ApplicationDetails {
     
     private String cvLink;
     private Collection<ApplicationComment> comments = new ArrayList<>();
+    private Position position;
     
     public static ApplicationDetails From(Application a) {
         ApplicationDetails ad = new ApplicationDetails();
         ad.cvLink = a.getCvLink();
         ad.comments = new ArrayList<>(a.getComments());
+        ad.position = a.getPosition();
         return ad;
     }
 
@@ -31,5 +34,9 @@ public class ApplicationDetails {
 
     public String getCvLink() {
         return cvLink;
+    }
+
+    public Position getPosition() {
+        return position;
     }
 }
