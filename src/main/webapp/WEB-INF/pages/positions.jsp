@@ -41,7 +41,9 @@
                     <c:choose>
                         <c:when test="${position.isOpen}">
                             <c:if test="${pageContext.request.isUserInRole('ClientRole')}">
-                                <a href="Applications/Add" class="btn btn-primary">Apply</a>
+                                <a href="Applications/Add?positionId=${position.id}" class="btn btn-primary">
+                                    Apply for this position
+                                </a>
                             </c:if>
                             <c:if test="${pageContext.request.isUserInRole('CeoRole')}">
                                 <a href="Positions/Visibility?positionId=${position.id}&action=close" class="btn btn-primary">Close</a>
@@ -85,29 +87,6 @@
                                     </div>
                                     <button class="btn btn-secondary" type="submit">Add comment</button>
                                 </form>
-                                <script>
-                                    // Example starter JavaScript for disabling form submissions if there are invalid fields
-                                    (function () {
-                                        'use strict'
-
-                                        window.addEventListener('load', function () {
-                                            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                                            var forms = document.getElementsByClassName('needs-validation')
-
-                                            // Loop over them and prevent submission
-                                            Array.prototype.filter.call(forms, function (form) {
-                                                form.addEventListener('submit', function (event) {
-                                                    if (form.checkValidity() === false) {
-                                                        event.preventDefault()
-                                                        event.stopPropagation()
-                                                    }
-
-                                                    form.classList.add('was-validated')
-                                                }, false)
-                                            })
-                                        }, false)
-                                    })()
-                                </script>
                             </c:if>
                         </div>
                     </div>

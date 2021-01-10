@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : login
     Created on : Dec 25, 2020, 11:08:29 AM
     Author     : M Radu
@@ -45,7 +45,7 @@
                         <input type="text" pattern="^\+(?:[0-9] ?){6,14}[0-9]$" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="Phone Number" value="" required>
                         <div class="invalid-feedback">
                             Phone number is required.
-                        </div> 
+                        </div>
                     </div>
                     <div class="field">
                         <input type="email" class="form-control" id="email" name="email" placeholder="Email address" value="" required>
@@ -73,33 +73,6 @@
                     </div>-->
                 </form>
             </div>
-            <script>
-                // Example starter JavaScript for disabling form submissions if there are invalid fields
-                (function () {
-                    'use strict'
-
-                    window.addEventListener('load', function () {
-                        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                        var forms = document.getElementsByClassName('needs-validation')
-
-                        // Loop over them and prevent submission
-                        Array.prototype.filter.call(forms, function (form) {
-                            form.addEventListener('submit', function (event) {
-                                if (form.checkValidity() === false) {
-                                    event.preventDefault()
-                                    event.stopPropagation()
-                                }
-
-                                form.classList.add('was-validated')
-                            }, false)
-                        })
-                    }, false)
-                })()
-            </script>
         </body>
     </html>
 </t:pageTemplate>
-
-
-
-
