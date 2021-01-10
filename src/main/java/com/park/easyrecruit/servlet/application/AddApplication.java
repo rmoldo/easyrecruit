@@ -5,11 +5,12 @@
  */
 package com.park.easyrecruit.servlet.application;
 
+import com.park.easyrecruit.common.ApplicationDetails;
 import com.park.easyrecruit.common.PositionDetails;
 import com.park.easyrecruit.ejb.ApplicationBean;
 import com.park.easyrecruit.ejb.PositionBean;
+import com.park.easyrecruit.ejb.UserBean;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.HttpConstraint;
@@ -31,6 +32,8 @@ public class AddApplication extends HttpServlet {
     private PositionBean positionBean;
     @Inject
     private ApplicationBean applicationBean;
+    @Inject
+    private UserBean userBean;
 
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -44,6 +47,7 @@ public class AddApplication extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        String username = request.getUserPrincipal().getName();
         Integer positionId;
         try {
             positionId = Integer.parseInt(request.getParameter("positionId"));
@@ -52,7 +56,7 @@ public class AddApplication extends HttpServlet {
             return;
         }
         
-        if (applicationBean.get(positionId, request.getUserPrincipal().getName()) != null)
+        if (applicationBean.get(positionId, username) != null)
         {
             response.sendRedirect(request.getContextPath() + "/Applications/Edit?positionId=" + positionId);
             return;
@@ -64,7 +68,10 @@ public class AddApplication extends HttpServlet {
             return;
         }
 
-        request.setAttribute("position", position);
-        request.getRequestDispatcher("/WEB-INF/pages/addApplication.jsp").forward(request, response);
+        ApplicationDetails application = new ApplicationDetails();
+        application.setPosition(position);
+        application.setCandidate(userBean.findByUsername(username));
+        request.setAttribute("application", application);
+        request.getRequestDispatcher("/WEB-INF/pages/application.jsp").forward(request, response);
     }
 }

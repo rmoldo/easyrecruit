@@ -5,9 +5,7 @@
  */
 package com.park.easyrecruit.common;
 
-import com.park.easyrecruit.entity.Application;
-import com.park.easyrecruit.entity.ApplicationComment;
-import com.park.easyrecruit.entity.Position;
+import com.park.easyrecruit.entity.*;
 import java.util.*;
 
 /**
@@ -17,8 +15,9 @@ import java.util.*;
 public class ApplicationDetails {
     
     private String cvLink;
+    private UserDetails candidate;
     private Collection<ApplicationComment> comments = new ArrayList<>();
-    private Position position;
+    private PositionDetails position;
     
     public static ApplicationDetails From(Application a) {
         if (a == null)
@@ -26,8 +25,9 @@ public class ApplicationDetails {
         
         ApplicationDetails ad = new ApplicationDetails();
         ad.cvLink = a.getCvLink();
+        ad.candidate = new UserDetails(a.getCandidate());
         ad.comments = new ArrayList<>(a.getComments());
-        ad.position = a.getPosition();
+        ad.position = new PositionDetails(a.getPosition());
         return ad;
     }
 
@@ -35,11 +35,31 @@ public class ApplicationDetails {
         return comments;
     }
 
+    public UserDetails getCandidate() {
+        return candidate;
+    }
+
     public String getCvLink() {
         return cvLink;
     }
 
-    public Position getPosition() {
+    public PositionDetails getPosition() {
         return position;
+    }
+
+    public void setCvLink(String cvLink) {
+        this.cvLink = cvLink;
+    }
+
+    public void setCandidate(UserDetails candidate) {
+        this.candidate = candidate;
+    }
+
+    public void setComments(Collection<ApplicationComment> comments) {
+        this.comments = comments;
+    }
+
+    public void setPosition(PositionDetails position) {
+        this.position = position;
     }
 }
