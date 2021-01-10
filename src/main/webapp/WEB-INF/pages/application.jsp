@@ -16,7 +16,7 @@
         <table class="table table-sm table-borderless text-nowrap">
             <tbody>
                 <tr>
-                    <td style="width: 1px">Name:</td>
+                    <td class="column-fit">Name:</td>
                     <td>${application.position.name}</td>
                 </tr>
                 <tr>
@@ -47,7 +47,7 @@
         <table class="table table-sm table-borderless text-nowrap">
             <tbody>
                 <tr>
-                    <td style="width: 1px">First name:</td>
+                    <td class="column-fit">First name:</td>
                     <td>${application.candidate.firstName}</td>
                 </tr>
                 <tr>
