@@ -1,5 +1,5 @@
 <%--
-    Document   : addApplication
+    Document   : application
     Created on : Jan 3, 2021, 12:39:21 PM
     Author     : andrei
 --%>
@@ -9,7 +9,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <t:pageTemplate pageTitle="Submit application">
-    <form class="needs-validation" novalidate method="POST" action="${pageContext.request.contextPath}/Applications/Add">
+    <form class="needs-validation" novalidate method="POST">
         <h3>Application for ${application.position.name}:</h3>
         <br />
         <h4>Position details:</h4>
@@ -47,7 +47,6 @@
         </c:if>
         <br />
 
-        <input type="hidden" name="positionId" value="${application.position.id}">
         <table class="table table-sm table-borderless text-nowrap">
             <tbody>
                 <tr>

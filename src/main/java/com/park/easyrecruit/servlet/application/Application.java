@@ -35,14 +35,6 @@ public class Application extends HttpServlet {
     @Inject
     private UserBean userBean;
 
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -73,7 +65,7 @@ public class Application extends HttpServlet {
                 response.setStatus(404);
                 return;
             }
-            
+
             request.setAttribute("comments", true);
         } else if (candidateId == null) {
             // application for current user
@@ -96,5 +88,25 @@ public class Application extends HttpServlet {
 
         request.setAttribute("application", application);
         request.getRequestDispatcher("/WEB-INF/pages/application.jsp").forward(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        Integer positionId;
+        try {
+            positionId = Integer.parseInt(request.getParameter("positionId"));
+        } catch (NumberFormatException e) {
+            response.setStatus(404);
+            return;
+        }
+
+        ApplicationDetails ad = new ApplicationDetails();
+        ad.setCvLink(request.getParameter("cvLink"));
+
+        applicationBean.save(positionId, request.getUserPrincipal().getName(), ad);
+
+        response.sendRedirect(request.getContextPath() + "/Applications");
     }
 }
