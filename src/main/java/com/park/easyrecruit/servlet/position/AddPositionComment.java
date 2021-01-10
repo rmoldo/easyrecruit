@@ -40,7 +40,7 @@ public class AddPositionComment extends HttpServlet {
         String creatorUser = request.getParameter("creatorUser");
         String text = request.getParameter("text");
 
-        
+
         if(positionBean.addComment(positionId, creatorUser, text)) {
             response.sendRedirect(request.getContextPath()+ "/Positions");
         }

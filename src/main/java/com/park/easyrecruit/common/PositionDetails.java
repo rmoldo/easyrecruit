@@ -5,6 +5,7 @@
  */
 package com.park.easyrecruit.common;
 
+import com.park.easyrecruit.entity.Position;
 import com.park.easyrecruit.entity.PositionComment;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import java.util.List;
  * @author Silvan
  */
 public class PositionDetails implements Serializable {
+
     private Integer id;
     private String name;
     private String department;
@@ -25,6 +27,19 @@ public class PositionDetails implements Serializable {
     private Integer nbOfCandidatesNeeded;
     private String creatorUserName;
     private List<PositionComment> comments = new ArrayList<>();
+
+    public PositionDetails(Position position) {
+        this(position.getId(),
+                position.getName(),
+                position.getDepartment(),
+                position.getProject(),
+                position.getRequirements(),
+                position.getResponsibilities(),
+                position.getIsOpen(),
+                position.getNbOfCandidatesNeeded(),
+                position.getCreatorUserName(),
+                position.getComments());
+    }
 
     public PositionDetails(Integer id, String name, String department, String project, String requirements, String responsibilities, Boolean isOpen, Integer nbOfCandidatesNeeded, String creatorUserName, List<PositionComment> comments) {
         this.id = id;
@@ -78,5 +93,5 @@ public class PositionDetails implements Serializable {
     public List<PositionComment> getComments() {
         return comments;
     }
-   
+
 }
