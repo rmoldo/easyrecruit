@@ -8,23 +8,33 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<t:pageTemplate pageTitle="Create application">
+<t:pageTemplate pageTitle="Submit application">
+    <h1>Submit application for ${position.name}:</h1>
+    <br />
+    <h4>Position details:</h4>
+    Name: ${position.name}<br />
+    Department: ${position.department}<br />
+    Project: ${position.project}<br />
+    Requirements: ${position.requirements}<br />
+    Responsibilities: ${position.responsibilities}<br />
+    <br />
+    <h4>Application details:</h4><br />
+    Please include all the necessary details in your CV, upload it to any accessible
+    file hosting website and add the link to it below:
+    <br /><br />
+
     <form class="needs-validation" novalidate method="POST" action="${pageContext.request.contextPath}/Applications/Add">
-        <input type="hidden" class="form-control" id="creatorUserName" name="creatorUserName" value="${pageContext.request.remoteUser}">
-        <div class="invalid-feedback" role="alert">
-            Please login to add a position!
-        </div>
-        ${position.name}
+        <input type="hidden" name="positionId" value="${position.id}">
         <div class="row">
-            <div class="col-md-6 mb-3">
-                <label for="positionName">Position name</label>
-                <input type="text" class="form-control" id="positionName" name="positionName" placeholder="Position name" value="" required>
+            <div class="col">
+                <label for="positionName">Link to curriculum vitae:</label>
+                <input type="text" class="form-control" name="cvLink" value="" required>
                 <div class="invalid-feedback">
-                    Position name is required.
+                    Link to curriculum vitae is required.
                 </div>
             </div>
         </div>
         <hr class="mb-4">
-        <button class="btn btn-primary btn-lg btn-block" type="submit">Add position</button>
+        <button class="btn btn-primary btn-lg btn-block" type="submit">Submit application</button>
     </form>
 </t:pageTemplate>

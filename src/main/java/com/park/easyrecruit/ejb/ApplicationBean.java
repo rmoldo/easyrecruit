@@ -25,6 +25,22 @@ public class ApplicationBean {
     @PersistenceContext
     private EntityManager em;
 
+    public ApplicationDetails get(Integer positionId, String username) {
+        LOG.info("get application for position & username");
+
+        try {
+            return ApplicationDetails.From(em
+                    .createQuery(
+                            "SELECT a FROM Application a WHERE a.position.id = ?1 AND a.candidate.username = ?2",
+                            Application.class)
+                    .setParameter(1, positionId)
+                    .setParameter(2, username)
+                    .getSingleResult());
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     public Collection<ApplicationDetails> getMany(String username) {
         LOG.info("get many applications for username");
 

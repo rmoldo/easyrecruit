@@ -21,6 +21,9 @@ public class ApplicationDetails {
     private Position position;
     
     public static ApplicationDetails From(Application a) {
+        if (a == null)
+            return null;
+        
         ApplicationDetails ad = new ApplicationDetails();
         ad.cvLink = a.getCvLink();
         ad.comments = new ArrayList<>(a.getComments());
