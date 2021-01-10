@@ -102,11 +102,16 @@ public class Application extends HttpServlet {
             return;
         }
 
-        ApplicationDetails ad = new ApplicationDetails();
-        ad.setCvLink(request.getParameter("cvLink"));
+        if ("true".equals(request.getParameter("delete"))) {
+            applicationBean.delete(positionId, request.getUserPrincipal().getName());
+        } else {
 
-        applicationBean.save(positionId, request.getUserPrincipal().getName(), ad);
+            ApplicationDetails ad = new ApplicationDetails();
+            ad.setCvLink(request.getParameter("cvLink"));
 
+            applicationBean.save(positionId, request.getUserPrincipal().getName(), ad);
+        }
+        
         response.sendRedirect(request.getContextPath() + "/Applications");
     }
 }

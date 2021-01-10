@@ -29,13 +29,7 @@ public class ApplicationBean {
         LOG.info("get application for position & username");
 
         try {
-            return ApplicationDetails.From(em
-                    .createQuery(
-                            "SELECT a FROM Application a WHERE a.position.id = ?1 AND a.candidate.username = ?2",
-                            Application.class)
-                    .setParameter(1, positionId)
-                    .setParameter(2, username)
-                    .getSingleResult());
+            return ApplicationDetails.From(getApplication(positionId, username));
         } catch (Exception e) {
             return null;
         }
@@ -72,14 +66,7 @@ public class ApplicationBean {
         LOG.info("create application");
 
         try {
-            Application a = em
-                    .createQuery(
-                            "SELECT a FROM Application a WHERE a.position.id = ?1 AND a.candidate.username = ?2",
-                            Application.class)
-                    .setParameter(1, positionId)
-                    .setParameter(2, username)
-                    .getSingleResult();
-
+            Application a = getApplication(positionId, username);
             a.setCvLink(ad.getCvLink());
         } catch (Exception e) {
             Position p = em.find(Position.class, positionId);
@@ -94,12 +81,25 @@ public class ApplicationBean {
         }
     }
 
-    public void delete(Integer positionId, Integer candidateId) {
+    public void delete(Integer positionId, String username) {
         LOG.info("delete application");
 
-        // TODO: not tested
-        Application a = em.find(Application.class, new ApplicationId(positionId, candidateId));
+        Application a = getApplication(positionId, username);
+        if (a != null)
+            em.remove(a);
+    }
 
-        em.remove(a);
+    private Application getApplication(Integer positionId, String username) {
+        try {
+            return em
+                    .createQuery(
+                            "SELECT a FROM Application a WHERE a.position.id = ?1 AND a.candidate.username = ?2",
+                            Application.class)
+                    .setParameter(1, positionId)
+                    .setParameter(2, username)
+                    .getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

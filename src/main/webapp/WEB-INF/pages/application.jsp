@@ -9,7 +9,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <t:pageTemplate pageTitle="Submit application">
-    <form class="needs-validation" novalidate method="POST">
+    <form id="applicationForm" class="needs-validation" novalidate method="POST">
         <h3>Application for ${application.position.name}:</h3>
         <br />
         <h4>Position details:</h4>
@@ -74,12 +74,20 @@
                 Link to curriculum vitae is required.
             </div>
         </div>
-        <hr class="mb-4">
-        <c:if test="${edit}">
-            <button class="btn btn-primary btn-lg btn-block" type="submit">Submit</button>
-        </c:if>
-        <c:if test="${comments}">
-            <h4>Comments:</h4>
-        </c:if>
     </form>
+    <hr class="mb-4">
+    <c:if test="${edit}">
+        <div class="row">
+            <div class="col d-flex justify-content-around">
+                <button class="btn btn-primary btn-lg" type="submit" form="applicationForm">Submit</button>
+                <form method="POST">
+                    <input type="hidden" name="delete" value="true" />
+                    <button class="btn btn-danger btn-lg" type="submit">Delete</button>
+                </form>
+            </div>
+        </div>
+    </c:if>
+    <c:if test="${comments}">
+        <h4>Comments:</h4>
+    </c:if>
 </t:pageTemplate>
