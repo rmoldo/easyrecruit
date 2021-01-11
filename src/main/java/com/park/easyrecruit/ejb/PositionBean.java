@@ -10,6 +10,7 @@ import com.park.easyrecruit.entity.Position;
 import com.park.easyrecruit.entity.PositionComment;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Logger;
 import javax.ejb.EJBException;
 import javax.ejb.Stateless;
@@ -79,7 +80,6 @@ public class PositionBean {
             PositionComment comment = new PositionComment();
 
             comment.setCreatorUser(creatorUser);
-            comment.setPosition(position);
             comment.setText(text);
             position.addComment(comment);
             return true;
@@ -138,8 +138,9 @@ public class PositionBean {
             return false;
         }
     }
-
+    
     public boolean deletePosition(Integer positionId) {
+        LOG.info("delete position");
         try {
             em.remove(getPositionById(positionId));
             return true;
@@ -148,6 +149,56 @@ public class PositionBean {
         }
     }
 
+    
+    private PositionComment findComment(List<PositionComment> comments, Integer commentId) {
+        for(PositionComment comment:comments) {
+            if(Objects.equals(comment.getId(), commentId)) {
+                return comment;
+            }
+        }
+        return new PositionComment();
+    }
+    
+    public String getCommentText(Integer positionId, Integer commentId) {
+        LOG.info("edit position");
+        
+        try {
+            Position position = getPositionById(positionId);
+            List<PositionComment> comments = position.getComments();
+            PositionComment comment = findComment(comments, commentId);
+            return comment.getText();
+        } catch(Exception e) {
+            return "";
+        }
+    }
+    
+    public boolean editComment(Integer positionId, Integer commentId, String text) {
+        LOG.info("edit comment");
+        
+        try {
+            Position position = getPositionById(positionId);
+            List<PositionComment> comments = position.getComments();
+            PositionComment comment = findComment(comments, commentId);
+            comment.setText(text);
+            return true;
+        } catch(Exception e) {
+            return false;
+        }
+    }
+    
+    public void deleteComment(Integer positionId, Integer commentId) {
+        LOG.info("delete comment");
+        
+        try {
+            Position position = getPositionById(positionId);
+            List<PositionComment> comments = position.getComments();
+            PositionComment comment = findComment(comments, commentId);
+            position.removeComment(comment);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
     private PositionDetails copyPositionToDetails(Position position) {
         PositionDetails positionDetails = new PositionDetails(position.getId(),
             position.getName(),
@@ -171,5 +222,5 @@ public class PositionBean {
     	}
 
     	return detailsList;
-    }
+    } 
 }
