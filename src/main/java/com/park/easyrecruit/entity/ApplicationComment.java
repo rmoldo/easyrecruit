@@ -17,13 +17,15 @@ import javax.persistence.*;
 @Table(name = "ApplicationComments")
 public class ApplicationComment implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2L;
 
     @Id
     @GeneratedValue
     private int id;
 
-    private String creatorUser;
+    @ManyToOne
+    private User user;  
+    
     private String text;
 
     @ManyToOne
@@ -33,8 +35,8 @@ public class ApplicationComment implements Serializable {
         return id;
     }
 
-    public String getCreatorUser() {
-        return creatorUser;
+    public User getUser() {
+        return user;
     }
 
     public String getText() {
