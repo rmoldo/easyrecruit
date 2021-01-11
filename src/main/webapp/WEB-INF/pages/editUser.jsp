@@ -64,9 +64,11 @@
             <div class="col-md-6 mb-3">
                 <label for="position"> Role </label>
                 <select class="custom-select d-block w-100" id="edit_position" name="edit_position" required>
-                    <option value="CEO">CEO</option>
-                    <option value="ADMINISTRATOR">Administrator</option>
                     <option value="CLIENT">Client</option>
+                    <option value="ADMINISTRATOR">Administrator</option>
+                    <option value="CEO">Chief executive officer</option>
+                    <option value="DEPARTMENTDIRECTOR">Department director</option>
+                    <option value="RECRUITER">Recruiter</option>
                 </select>
                 <div class="invalid-feedback">
                     Please select a position

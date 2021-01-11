@@ -62,7 +62,7 @@ public class EditUser extends HttpServlet {
             userBean.updateUserWithPassword(userId, firstName, lastName, email, phoneNumber, hashedPassword, position);
         }
 
-        response.sendRedirect(request.getContextPath() + "/Users");
+        response.sendRedirect(request.getContextPath() + "/Users/ListEdit");
     }
 
     @Override
