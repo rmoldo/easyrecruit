@@ -60,4 +60,11 @@ public class Application implements Serializable {
         return cvLink;
     }
 
+    public void setCvLink(String cvLink) {
+        this.cvLink = cvLink;
+    }
+
+    public void setComments(Collection<ApplicationComment> comments) {
+        this.comments = comments;
+    }
 }
