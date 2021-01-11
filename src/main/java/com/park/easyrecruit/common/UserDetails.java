@@ -5,6 +5,7 @@
  */
 package com.park.easyrecruit.common;
 
+import com.park.easyrecruit.entity.User;
 import java.io.Serializable;
 
 /**
@@ -19,6 +20,10 @@ public class UserDetails implements Serializable{
     private String firstName;
     private String lastName;
     private String phoneNumber;
+    
+    public UserDetails(User user) {
+        this(user.getId(), user.getUsername(), user.getEmail(), user.getPosition(), user.getFirstName(), user.getLastName(), user.getPhoneNumber());
+    }
 
     public UserDetails(Integer id, String username, String email, String position, String firstName, String lastName, String phoneNumber) {
         this.id = id;

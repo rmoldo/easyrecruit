@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : editUser
     Created on : Jan 2, 2021, 4:21:48 PM
     Author     : M Radu
@@ -76,28 +76,5 @@
         <hr class="mb-4">
         <input type="hidden" name="edit_user_id" value="${editUser.id}"/>
         <button class="btn btn-primary btn-lg btn-block" type="submit">Save</button>
-    </form> 
-    <script>
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
-        (function () {
-            'use strict'
-
-            window.addEventListener('load', function () {
-                // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                var forms = document.getElementsByClassName('needs-validation')
-
-                // Loop over them and prevent submission
-                Array.prototype.filter.call(forms, function (form) {
-                    form.addEventListener('submit', function (event) {
-                        if (form.checkValidity() === false) {
-                            event.preventDefault()
-                            event.stopPropagation()
-                        }
-
-                        form.classList.add('was-validated')
-                    }, false)
-                })
-            }, false)
-        })()
-    </script>
+    </form>
 </t:pageTemplate>

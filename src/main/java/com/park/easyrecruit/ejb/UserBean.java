@@ -35,6 +35,20 @@ public class UserBean {
         return new UserDetails(user.getId(), user.getUsername(), user.getEmail(), user.getPosition(), user.getFirstName(), user.getLastName(), user.getPhoneNumber());
     }
 
+    public UserDetails findByUsername(String username) {
+        LOG.info("UserBean:findById");
+
+        try {
+            User user = em
+                    .createQuery("SELECT u FROM User u WHERE u.username = ?1", User.class)
+                    .setParameter(1, username)
+                    .getSingleResult();
+            return new UserDetails(user.getId(), user.getUsername(), user.getEmail(), user.getPosition(), user.getFirstName(), user.getLastName(), user.getPhoneNumber());
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     public boolean createUser(String username, String email, String hashedPassword, String position, String firstName, String lastName, String phoneNumber) {
         LOG.info("UserBean:createUser");
 

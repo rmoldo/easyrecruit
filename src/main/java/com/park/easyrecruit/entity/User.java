@@ -6,10 +6,14 @@
 package com.park.easyrecruit.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -32,8 +36,13 @@ public class User implements Serializable {
     private String lastName;
     private String phoneNumber;
 
-    // TODO(Moldo): Add a Collection of Application
-    
+    @OneToMany(mappedBy = "candidate")
+    private Collection<Application> applications = new ArrayList<>();
+
+    public Collection<Application> getApplications() {
+        return applications;
+    }
+
     public String getFirstName() {
         return firstName;
     }
