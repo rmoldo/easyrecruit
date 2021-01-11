@@ -52,30 +52,28 @@
                 <tr>
                     <td class="column-fit">First name:</td>
                     <td>${application.candidate.firstName}</td>
-                </tr>
-                <tr>
-                    <td style="width: 1px">Last name:</td>
+                    <td class="column-fit">Last name:</td>
                     <td>${application.candidate.lastName}</td>
                 </tr>
                 <tr>
-                    <td style="width: 1px">Phone number:</td>
+                    <td>Phone number:</td>
                     <td>${application.candidate.phoneNumber}</td>
-                </tr>
-                <tr>
-                    <td style="width: 1px">Email:</td>
+                    <td>Email:</td>
                     <td>${application.candidate.email}</td>
                 </tr>
             </tbody>
         </table>
         <div class="form-group">
             <label for="positionName">Link to curriculum vitae:</label>
-            <input type="text" class="form-control" name="cvLink" value="${application.cvLink}" required ${edit ? "" : "readonly"}>
+            <input type="url" class="form-control" name="cvLink" value="${application.cvLink}" required ${edit ? "" : "readonly"}>
             <div class="invalid-feedback">
-                Link to curriculum vitae is required.
+                A valid link to curriculum vitae is required.
             </div>
         </div>
     </form>
+
     <hr class="mb-4">
+
     <c:if test="${edit}">
         <div class="row">
             <div class="col d-flex justify-content-around">
@@ -87,7 +85,88 @@
             </div>
         </div>
     </c:if>
+
+
     <c:if test="${comments}">
         <h4>Comments:</h4>
+
+        <form id="comments" class="needs-validation" novalidate method="POST"
+              action="/ActionComments?positionId=${application.position.id}&candidateId=${application.candidate.id}">
+            <table class="table table-sm table-borderless">
+                <thead>
+                    <tr>
+                        <td colspan="2">
+                            <textarea id="newCommentText" class="form-control" name="text" placeholder="New Comment" required></textarea>
+                            <div class="invalid-feedback">
+                                Comment text is required.
+                            </div>
+                        </td>
+                        <td>
+                            <button id="submitNewComment" class="btn btn-primary" type="submit" form="comments">Submit</button>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="comment">
+                        <td class="text-nowrap ">
+                            <span class="comment-username">Mihai Someone</span><br />
+                            <small class="comment-time">20/19/1111 at 18:30</small>
+                        </td>
+                        <td class="comment-text">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-light" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="bi bi-three-dots-vertical"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <button class="comment-edit dropdown-item" type="button">Edit</button>
+                                <button class="comment-delete dropdown-item text-danger" type="button">Delete</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="comment">
+                        <td class="text-nowrap">
+                            <span class="comment-username">Mihai Someone</span><br />
+                            <small class="comment-time">20/19/1111 at 18:30</small>
+                        </td>
+                        <td class="comment-text">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                        </td>
+
+                        <td>
+                            <button type="button" class="btn btn-light" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="bi bi-three-dots-vertical"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <button class="comment-edit dropdown-item" type="button">Edit</button>
+                                <button class="comment-delete dropdown-item text-danger" type="button">Delete</button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr class="no-comments-message text-center">
+                        <td colspan="99">No comments yet.</td>
+                    </tr>
+                    <tr id="commentTemplate" class="comment">
+                        <td class="text-nowrap">
+                            <span class="comment-username"></span><br />
+                            <small class="comment-time"></small>
+                        </td>
+                        <td class="comment-text">
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-light" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="bi bi-three-dots-vertical"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <button class="comment-edit dropdown-item" type="button">Edit</button>
+                                <button class="comment-delete dropdown-item text-danger" type="button">Delete</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
     </c:if>
 </t:pageTemplate>

@@ -84,6 +84,9 @@ public class Application extends HttpServlet {
                 application.setCvLink("");
             }
             request.setAttribute("edit", true);
+            
+            // TODO andrei: remove once roles are done
+            request.setAttribute("comments", true);
         }
 
         request.setAttribute("application", application);
