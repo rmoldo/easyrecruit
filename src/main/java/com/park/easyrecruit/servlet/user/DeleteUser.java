@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author M Radu
  */
 @WebServlet(name = "DeleteUser", urlPatterns = {"/Users/Delete"})
-@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"AdminRole", "CeoRole"}))
+@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"ManageUsersRole"}))
 public class DeleteUser extends HttpServlet {
 
     @Inject

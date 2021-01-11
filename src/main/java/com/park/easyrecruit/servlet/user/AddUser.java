@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author M Radu
  */
 @WebServlet(name = "AddUser", urlPatterns = {"/Users/Add"})
-@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"AdminRole", "CeoRole"}))
+@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"ManageUsersRole"}))
 public class AddUser extends HttpServlet {
     
     @Inject
