@@ -29,12 +29,22 @@ public class ApplicationBean {
         LOG.info("get application for position & username");
 
         try {
+            return ApplicationDetails.From(getApplication(positionId, username));
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public ApplicationDetails get(Integer positionId, Integer candidateId) {
+        LOG.info("get application for position & candidateId");
+
+        try {
             return ApplicationDetails.From(em
                     .createQuery(
-                            "SELECT a FROM Application a WHERE a.position.id = ?1 AND a.candidate.username = ?2",
+                            "SELECT a FROM Application a WHERE a.position.id = ?1 AND a.candidate.id = ?2",
                             Application.class)
                     .setParameter(1, positionId)
-                    .setParameter(2, username)
+                    .setParameter(2, candidateId)
                     .getSingleResult());
         } catch (Exception e) {
             return null;
@@ -52,26 +62,44 @@ public class ApplicationBean {
                 .collect(Collectors.toList());
     }
 
-    public void create(Integer positionId, Integer candidateId, String cvLink) {
+    public void save(Integer positionId, String username, ApplicationDetails ad) {
         LOG.info("create application");
 
-        // TODO: not tested
-        User u = em.find(User.class, candidateId);
-        Position p = em.find(Position.class, candidateId);
-        Application a = new Application(p, u, cvLink);
-
-        u.getApplications().add(a);
-//        p.getApplications().add(a);
-
-        em.persist(a);
+        try {
+            Application a = getApplication(positionId, username);
+            a.setCvLink(ad.getCvLink());
+        } catch (Exception e) {
+            Position p = em.find(Position.class, positionId);
+            User u = em
+                    .createQuery("SELECT u FROM User u WHERE u.username = ?1", User.class)
+                    .setParameter(1, username)
+                    .getSingleResult();
+            Application a = new Application(p, u, ad.getCvLink());
+            u.getApplications().add(a);
+            p.getApplications().add(a);
+            em.persist(a);
+        }
     }
 
-    public void delete(Integer positionId, Integer candidateId) {
+    public void delete(Integer positionId, String username) {
         LOG.info("delete application");
 
-        // TODO: not tested
-        Application a = em.find(Application.class, new ApplicationId(positionId, candidateId));
+        Application a = getApplication(positionId, username);
+        if (a != null)
+            em.remove(a);
+    }
 
-        em.remove(a);
+    private Application getApplication(Integer positionId, String username) {
+        try {
+            return em
+                    .createQuery(
+                            "SELECT a FROM Application a WHERE a.position.id = ?1 AND a.candidate.username = ?2",
+                            Application.class)
+                    .setParameter(1, positionId)
+                    .setParameter(2, username)
+                    .getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

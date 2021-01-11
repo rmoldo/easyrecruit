@@ -1,5 +1,5 @@
 <%--
-    Document   : addApplication
+    Document   : application
     Created on : Jan 3, 2021, 12:39:21 PM
     Author     : andrei
 --%>
@@ -9,14 +9,14 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <t:pageTemplate pageTitle="Submit application">
-    <form class="needs-validation" novalidate method="POST" action="${pageContext.request.contextPath}/Applications/Add">
+    <form id="applicationForm" class="needs-validation" novalidate method="POST">
         <h3>Application for ${application.position.name}:</h3>
         <br />
         <h4>Position details:</h4>
         <table class="table table-sm table-borderless text-nowrap">
             <tbody>
                 <tr>
-                    <td style="width: 1px">Name:</td>
+                    <td class="column-fit">Name:</td>
                     <td>${application.position.name}</td>
                 </tr>
                 <tr>
@@ -39,15 +39,18 @@
         </table>
 
         <h4>Candidate details:</h4><br />
-        Please include all the necessary details in your CV, upload it to any accessible
-        file hosting website and add the link to it below.
-        <br /><br />
 
-        <input type="hidden" name="positionId" value="${application.position.id}">
+        <c:if test="${edit}">
+            Please include all the necessary details in your CV, upload it to any accessible
+            file hosting website and add the link to it below.
+            <br />
+        </c:if>
+        <br />
+
         <table class="table table-sm table-borderless text-nowrap">
             <tbody>
                 <tr>
-                    <td style="width: 1px">First name:</td>
+                    <td class="column-fit">First name:</td>
                     <td>${application.candidate.firstName}</td>
                 </tr>
                 <tr>
@@ -66,12 +69,25 @@
         </table>
         <div class="form-group">
             <label for="positionName">Link to curriculum vitae:</label>
-            <input type="text" class="form-control" name="cvLink" value="" required>
+            <input type="text" class="form-control" name="cvLink" value="${application.cvLink}" required ${edit ? "" : "readonly"}>
             <div class="invalid-feedback">
                 Link to curriculum vitae is required.
             </div>
         </div>
-        <hr class="mb-4">
-        <button class="btn btn-primary btn-lg btn-block" type="submit">Submit application</button>
     </form>
+    <hr class="mb-4">
+    <c:if test="${edit}">
+        <div class="row">
+            <div class="col d-flex justify-content-around">
+                <button class="btn btn-primary btn-lg" type="submit" form="applicationForm">Submit</button>
+                <form method="POST">
+                    <input type="hidden" name="delete" value="true" />
+                    <button class="btn btn-danger btn-lg" type="submit">Delete</button>
+                </form>
+            </div>
+        </div>
+    </c:if>
+    <c:if test="${comments}">
+        <h4>Comments:</h4>
+    </c:if>
 </t:pageTemplate>
