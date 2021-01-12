@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Silvan
  */
 @WebServlet(name = "EditPosition", urlPatterns = {"/Positions/Edit"})
-@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"CeoRole"}))
+@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"ManagePositionsRole"}))
 public class EditPosition extends HttpServlet {
 
    @Inject
