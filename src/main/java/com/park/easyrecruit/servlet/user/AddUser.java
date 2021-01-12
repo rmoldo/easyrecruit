@@ -46,10 +46,11 @@ public class AddUser extends HttpServlet {
         String firstName = request.getParameter("addFirstName");
         String lastName = request.getParameter("addLastName");
         String phoneNumber = request.getParameter("addPhoneNumber");
+        String position = request.getParameter("addPosition");
 
         String hashedPassword = Password.convertToSha256(password);
 
-        if (!userBean.createUser(username, email, hashedPassword, "CLIENT", firstName, lastName, phoneNumber)) {
+        if (!userBean.createUser(username, email, hashedPassword, position, firstName, lastName, phoneNumber)) {
             request.setAttribute("add_user_error_message", "User already exists with these credentials");
             request.getRequestDispatcher("/WEB-INF/pages/addUser.jsp").forward(request, response);
         }
