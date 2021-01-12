@@ -77,6 +77,8 @@ public class PositionBean {
 
         try {
             Position position = getPositionById(positionId);
+            if(!position.getIsOpen())
+                return false;
             PositionComment comment = new PositionComment();
 
             comment.setCreatorUser(creatorUser);

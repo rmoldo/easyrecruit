@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Silvan
  */
 @WebServlet(name = "DeletePositionComment", urlPatterns = {"/Positions/DeleteComment"})
-@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"AdminRole", "CeoRole", "ClientRole"}))
+@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"ManageCommentsRole"}))
 public class DeletePositionComment extends HttpServlet {
 
     @Inject
