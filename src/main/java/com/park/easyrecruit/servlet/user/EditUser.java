@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author M Radu
  */
 @WebServlet(name = "EditUser", urlPatterns = {"/Users/Edit"})
-@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"AdminRole", "CeoRole"}))
+@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"ManageUsersRole"}))
 public class EditUser extends HttpServlet {
 
     @Inject
@@ -62,7 +62,7 @@ public class EditUser extends HttpServlet {
             userBean.updateUserWithPassword(userId, firstName, lastName, email, phoneNumber, hashedPassword, position);
         }
 
-        response.sendRedirect(request.getContextPath() + "/Users");
+        response.sendRedirect(request.getContextPath() + "/Users/ListEdit");
     }
 
     @Override

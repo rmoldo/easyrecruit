@@ -24,7 +24,7 @@
                 </li>
             </c:if>
             <!-- Move user management into profile -->
-            <c:if test="${pageContext.request.isUserInRole('AdminRole') or pageContext.request.isUserInRole('CeoRole')}">
+            <c:if test="${pageContext.request.isUserInRole('ManageUsersRole')}">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Manage Users</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown01">
