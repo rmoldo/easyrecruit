@@ -1,4 +1,4 @@
-<%--
+<%-- 
     Document   : editUser
     Created on : Jan 2, 2021, 4:21:48 PM
     Author     : M Radu
@@ -74,9 +74,9 @@
                     Please select a position
                 </div>
             </div>
-        </div>
+        </div>       
         <hr class="mb-4">
         <input type="hidden" name="edit_user_id" value="${editUser.id}"/>
         <button class="btn btn-primary btn-lg btn-block" type="submit">Save</button>
-    </form>
+    </form> 
 </t:pageTemplate>
