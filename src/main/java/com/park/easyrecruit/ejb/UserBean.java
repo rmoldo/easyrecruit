@@ -6,6 +6,8 @@
 package com.park.easyrecruit.ejb;
 
 import com.park.easyrecruit.common.UserDetails;
+import com.park.easyrecruit.entity.Application;
+import com.park.easyrecruit.entity.ApplicationComment;
 import com.park.easyrecruit.entity.User;
 import java.util.ArrayList;
 import java.util.List;
@@ -142,10 +144,11 @@ public class UserBean {
         for (Integer id : ids) {
             User user = em.find(User.class, id);
             
-            if (user.getApplications().size() > 0) {
-                return false;
+            for (Application application : user.getApplications()) {
+                em.remove(application);
             }
             
+            user.getApplications().clear();
             em.remove(user);
         }
         
