@@ -20,39 +20,26 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Silvan
  */
-@WebServlet(name = "AddPositionComment", urlPatterns = {"/Positions/AddComment"})
+@WebServlet(name = "DeletePositionComment", urlPatterns = {"/Positions/DeleteComment"})
 @ServletSecurity(value = @HttpConstraint(rolesAllowed = {"ManageCommentsRole"}))
-public class AddPositionComment extends HttpServlet {
+public class DeletePositionComment extends HttpServlet {
 
     @Inject
     private PositionBean positionBean;
-
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/pages/positions.jsp").forward(request, response);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
         Integer positionId = Integer.parseInt(request.getParameter("positionId"));
-        String creatorUser = request.getParameter("creatorUser");
-        String text = request.getParameter("text");
+        Integer commentId = Integer.parseInt(request.getParameter("commentId"));
+        positionBean.deleteComment(positionId, commentId);
 
-
-        if(positionBean.addComment(positionId, creatorUser, text)) {
-            response.sendRedirect(request.getContextPath()+ "/Positions");
-        }
-        else {
-            request.setAttribute("comment_error", "We encounted an error while adding your comment!");
-            request.getRequestDispatcher("/WEB-INF/pages/positions.jsp").forward(request, response);
-        }
+        response.sendRedirect(request.getContextPath()+ "/Positions");
     }
-
+    
     @Override
     public String getServletInfo() {
-        return "add position servlet";
+        return "Servlet that deletes position comment";
     }
-
+    
 }

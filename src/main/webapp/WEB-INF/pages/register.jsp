@@ -68,11 +68,9 @@
                     <div class="field">
                         <input type="submit" value="Register">
                     </div>
-<!--                    <div class="signup-link">
-                        Already a member? <a href="/WEB-INF/pages/login.jsp"">Log in</a> <%-- To do for later (if time allows) --%>
-                    </div>-->
                 </form>
             </div>
+            <script src="${pageContext.request.contextPath}/js/validation.js"></script>
         </body>
     </html>
 </t:pageTemplate>

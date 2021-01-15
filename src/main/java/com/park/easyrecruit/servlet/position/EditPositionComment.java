@@ -20,39 +20,48 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Silvan
  */
-@WebServlet(name = "AddPositionComment", urlPatterns = {"/Positions/AddComment"})
+@WebServlet(name = "EditPositionComment", urlPatterns = {"/Positions/EditComment"})
 @ServletSecurity(value = @HttpConstraint(rolesAllowed = {"ManageCommentsRole"}))
-public class AddPositionComment extends HttpServlet {
+public class EditPositionComment extends HttpServlet {
 
     @Inject
     private PositionBean positionBean;
-
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/pages/positions.jsp").forward(request, response);
+        Integer positionId = Integer.parseInt(request.getParameter("positionId"));
+        Integer commentId = Integer.parseInt(request.getParameter("commentId"));
+        String commentText = positionBean.getCommentText(positionId, commentId);
+        request.setAttribute("commentText", commentText);
+        request.setAttribute("positionId", positionId);
+        request.setAttribute("commentId", commentId);
+
+        request.getRequestDispatcher("/WEB-INF/pages/editComment.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         Integer positionId = Integer.parseInt(request.getParameter("positionId"));
-        String creatorUser = request.getParameter("creatorUser");
+        Integer commentId = Integer.parseInt(request.getParameter("commentId"));
         String text = request.getParameter("text");
+        
 
-
-        if(positionBean.addComment(positionId, creatorUser, text)) {
-            response.sendRedirect(request.getContextPath()+ "/Positions");
+        if(!positionBean.editComment(positionId, commentId, text)) {
+        	request.setAttribute("commentmessage", "Comment edited succesfully");
         }
         else {
-            request.setAttribute("comment_error", "We encounted an error while adding your comment!");
-            request.getRequestDispatcher("/WEB-INF/pages/positions.jsp").forward(request, response);
+        	request.setAttribute("commentmessage", "Comment could not be edited");
         }
+        
+        response.sendRedirect(request.getContextPath()+ "/Positions");
     }
+
 
     @Override
     public String getServletInfo() {
-        return "add position servlet";
+        return "Servlet that edits position comment";
     }
-
 }

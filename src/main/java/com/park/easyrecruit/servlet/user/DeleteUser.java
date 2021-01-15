@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author M Radu
  */
 @WebServlet(name = "DeleteUser", urlPatterns = {"/Users/Delete"})
-@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"AdminRole", "CeoRole"}))
+@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"ManageUsersRole"}))
 public class DeleteUser extends HttpServlet {
 
     @Inject
@@ -47,14 +47,17 @@ public class DeleteUser extends HttpServlet {
 
         if (userIds != null) {
             List<Integer> ids = new ArrayList<>();
-            
+
             // Convert ids to integer
             for (String id : userIds) {
                 ids.add(Integer.parseInt(id));
             }
-            
+
             // Delete users by their ids
-            userBean.deleteUsers(ids);
+            if (!userBean.deleteUsers(ids)) {
+                request.setAttribute("delete_error", "Cannot delete users. One or more users have open applications");
+                request.getRequestDispatcher("/WEB-INF/pages/deleteUser.jsp").forward(request, response);
+            }
         }
 
         response.sendRedirect(request.getContextPath() + "/Users/Delete");

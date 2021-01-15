@@ -1,4 +1,4 @@
-<%--
+<%-- 
     Document   : editUser
     Created on : Jan 2, 2021, 4:21:48 PM
     Author     : M Radu
@@ -64,17 +64,19 @@
             <div class="col-md-6 mb-3">
                 <label for="position"> Role </label>
                 <select class="custom-select d-block w-100" id="edit_position" name="edit_position" required>
-                    <option value="CEO">CEO</option>
-                    <option value="ADMINISTRATOR">Administrator</option>
                     <option value="CLIENT">Client</option>
+                    <option value="ADMINISTRATOR">Administrator</option>
+                    <option value="CEO">Chief executive officer</option>
+                    <option value="DEPARTMENTDIRECTOR">Department director</option>
+                    <option value="RECRUITER">Recruiter</option>
                 </select>
                 <div class="invalid-feedback">
                     Please select a position
                 </div>
             </div>
-        </div>
+        </div>       
         <hr class="mb-4">
         <input type="hidden" name="edit_user_id" value="${editUser.id}"/>
         <button class="btn btn-primary btn-lg btn-block" type="submit">Save</button>
-    </form>
+    </form> 
 </t:pageTemplate>
