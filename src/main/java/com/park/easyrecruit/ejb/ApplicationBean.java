@@ -106,10 +106,12 @@ public class ApplicationBean {
 
     public Collection<ApplicationDetails> getAll() {
         LOG.info("get all applications");
-        return em
+        Collection<ApplicationDetails> c = em
                 .createQuery("SELECT a FROM Application a", Application.class)
                 .getResultStream()
                 .map(a -> ApplicationDetails.From(a))
                 .collect(Collectors.toList());
+        return c;
     }
+    
 }
