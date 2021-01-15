@@ -5,7 +5,7 @@
  */
 
 $(() => {
-    $("form#comments").on("submit", onCommentSubmit);
+    $("form#commentSection").on("submit", onCommentSubmit);
     $(document).on("click", ".comment .comment-edit", onCommentEditClick);
     $(document).on("click", ".comment .comment-delete", onCommentDeleteClick);
 });
@@ -16,6 +16,8 @@ function onCommentSubmit(e) {
     if (!e.target.checkValidity())
         return;
 
+    const editMode = $("#commentSection .comment-save-row").hasClass("edit-mode");
+
     $.ajax({
         url: $(e.target).attr("action"),
         data: new FormData(e.target),
@@ -25,8 +27,10 @@ function onCommentSubmit(e) {
             console.error("Comment submit failed.");
             console.error(jqXHR);
             console.error(textStatus);
+            $(e.target).toggleClass('was-validated', false);
         },
         success: () => {
+            $(e.target).toggleClass('was-validated', false);
 
         }
     });
@@ -35,11 +39,17 @@ function onCommentSubmit(e) {
 }
 
 function onCommentEditClick(e) {
+    const editUrl = $(e.target).data("edit-url");
     const comment = $(e.target).closest(".comment");
+    const text = comment.find(".comment-text").text().trim();
+    const saveRow = $("#commentSection .comment-save-row");
+    const saveTextArea = saveRow.find("#saveCommentText");
+    const saveButton = saveRow.find("#submitCommentEdit");
 
-    const text = comment.text();
-
-    console.log("edit", comment);
+    saveRow.toggleClass("edit-mode", true);
+    saveButton.data("edit-target", comment);
+    saveButton.attr("formaction", editUrl);
+    saveTextArea.val(text);
 }
 
 function onCommentDeleteClick(e) {
