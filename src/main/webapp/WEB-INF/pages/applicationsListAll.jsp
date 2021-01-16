@@ -10,7 +10,7 @@
 
 <t:pageTemplate pageTitle="Applications">
     <link href="css/applicationsListAllstyle.css" rel="stylesheet" type="text/css">
-    <h1>My Applications:</h1>
+    <h1>All Applications:</h1>
     <br>
     <table class="table table-layout-fixed">
         <thead>

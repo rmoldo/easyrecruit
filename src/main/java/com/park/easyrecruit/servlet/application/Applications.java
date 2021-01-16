@@ -6,6 +6,7 @@
 package com.park.easyrecruit.servlet.application;
 
 import com.park.easyrecruit.ejb.ApplicationBean;
+import com.park.easyrecruit.ejb.InterviewBean;
 import java.io.IOException;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -21,12 +22,15 @@ import javax.servlet.http.HttpServletResponse;
  * @author andrei
  */
 @WebServlet(name = "Applications", urlPatterns = {"/Applications"})
-@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"ClientRole"}))
+@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"InterviewStatusRole"}))
 public class Applications extends HttpServlet {
 
     @Inject
     private ApplicationBean applicationBean;
-
+    
+    @Inject  
+    private InterviewBean interviewBean;
+            
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -45,4 +49,16 @@ public class Applications extends HttpServlet {
         request.setAttribute("applications", applicationBean.getMany(request.getUserPrincipal().getName()));
         request.getRequestDispatcher("/WEB-INF/pages/applications.jsp").forward(request, response);
     }
+    
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String interviewer = request.getParameter("interviewer");
+        String typeOfInterview = request.getParameter("typeOfInterview");
+        String date = request.getParameter("date");
+        String comment = request.getParameter("comment");    
+        interviewBean.addInterview(date, interviewer, typeOfInterview, comment);
+        request.getRequestDispatcher("/WEB-INF/pages/index.jsp").forward(request, response);
+
+    } 
 }

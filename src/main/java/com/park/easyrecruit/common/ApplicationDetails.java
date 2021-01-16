@@ -18,6 +18,9 @@ public class ApplicationDetails {
     private UserDetails candidate;
     private Collection<ApplicationComment> comments = new ArrayList<>();
     private PositionDetails position;
+    private Interview interview;
+
+    
     
     public static ApplicationDetails From(Application a) {
         if (a == null)
@@ -28,9 +31,14 @@ public class ApplicationDetails {
         ad.candidate = new UserDetails(a.getCandidate());
         ad.comments = new ArrayList<>(a.getComments());
         ad.position = new PositionDetails(a.getPosition());
+        ad.interview = a.getInterview();
         return ad;
     }
-
+    
+    public Interview getInterview() {
+        return interview;
+    }
+    
     public Collection<ApplicationComment> getComments() {
         return comments;
     }
