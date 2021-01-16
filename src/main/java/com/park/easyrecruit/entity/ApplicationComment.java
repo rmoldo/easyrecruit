@@ -47,6 +47,22 @@ public class ApplicationComment implements Serializable {
         return application;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public void setApplication(Application application) {
+        this.application = application;
+    }
+    
     @Override
     public boolean equals(Object o) {
         if (o == this) {
