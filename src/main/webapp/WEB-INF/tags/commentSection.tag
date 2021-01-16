@@ -11,7 +11,7 @@
 <%@attribute name="message"%>
 
 <form id="commentSection" class="needs-validation" novalidate method="POST"
-      action="/ActionComments?positionId=${application.position.id}&candidateId=${application.candidate.id}">
+      action="${pageContext.request.contextPath}/ApplicationComments?positionId=${application.position.id}&candidateId=${application.candidate.id}">
 
     <table class="table table-sm table-borderless">
         <thead>
@@ -27,13 +27,13 @@
                         Submit
                     </button>
                     <button id="submitCommentEdit" class="btn btn-success" type="submit"
-                            formaction="/ActionComments?">
+                            formaction="">
                         Save
                     </button>
                 </td>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="comment-rows-container">
             <t:commentRow
                 username="Mihai Someone" 
                 time="20/19/1111 at 18:30"
@@ -53,7 +53,8 @@
                 username="((username))" 
                 time="((time))"
                 text="((text))"
-                editable="true"/>
+                editable="true"
+                editUrl="${pageContext.request.contextPath}/ApplicationComments?id=((id))"/>
         </tbody>
     </table>
 </form>

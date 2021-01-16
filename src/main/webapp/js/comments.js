@@ -20,18 +20,28 @@ function onCommentSubmit(e) {
 
     $.ajax({
         url: $(e.target).attr("action"),
-        data: new FormData(e.target),
+        data: $(e.target).serialize(),
         processData: false,
-        type: $(e.target).attr("method"),
+        method: $(e.target).attr("method"),
         error: (jqXHR, textStatus) => {
             console.error("Comment submit failed.");
             console.error(jqXHR);
             console.error(textStatus);
             $(e.target).toggleClass('was-validated', false);
         },
-        success: () => {
+        success: (data) => {
             $(e.target).toggleClass('was-validated', false);
+            let newCommentHtml = $("#commentSection .comment-template").html();
+            newCommentHtml = newCommentHtml.replace("((id))", data.id);
+            newCommentHtml = newCommentHtml.replace("((text))", data.text);
+            newCommentHtml = newCommentHtml.replace("((username))", data.username);
+            newCommentHtml = newCommentHtml.replace("((time))", data.time);
 
+            const newCommentElement = $(newCommentHtml);
+            newCommentElement.toggleClass("comment-editable", true);
+            $("#commentSection .comment-rows-container").prepend(newCommentElement);
+
+            $("#commentSection #saveCommentText").val("");
         }
     });
 
