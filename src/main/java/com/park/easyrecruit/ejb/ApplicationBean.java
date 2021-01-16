@@ -10,6 +10,7 @@ import com.park.easyrecruit.entity.*;
 import java.util.*;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import javax.ejb.EJBException;
 import javax.ejb.Stateless;
 import javax.persistence.*;
 
@@ -102,4 +103,15 @@ public class ApplicationBean {
             return null;
         }
     }
+
+    public Collection<ApplicationDetails> getAll() {
+        LOG.info("get all applications");
+        Collection<ApplicationDetails> c = em
+                .createQuery("SELECT a FROM Application a", Application.class)
+                .getResultStream()
+                .map(a -> ApplicationDetails.From(a))
+                .collect(Collectors.toList());
+        return c;
+    }
+    
 }
