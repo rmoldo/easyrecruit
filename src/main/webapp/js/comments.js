@@ -72,5 +72,16 @@ function onCommentEditClick(e) {
 }
 
 function onCommentDeleteClick(e) {
-    const comment = $(e.target).closest(".comment").remove();
+    $.ajax({
+        url: $(e.target).data("edit-url"),
+        method: "DELETE",
+        error: (jqXHR, textStatus) => {
+            console.error("Comment delete failed.");
+            console.error(jqXHR);
+            console.error(textStatus);
+        },
+        success: () => {
+            $(e.target).closest(".comment").remove();
+        }
+    });
 }

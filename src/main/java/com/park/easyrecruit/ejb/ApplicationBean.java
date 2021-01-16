@@ -106,6 +106,7 @@ public class ApplicationBean {
 
         ApplicationComment ac = em.find(ApplicationComment.class, id);
         if (ac != null && ac.getUser().getUsername().equals(username)) {
+            ac.getApplication().getComments().remove(ac);
             em.remove(ac);
             return true;
         }
