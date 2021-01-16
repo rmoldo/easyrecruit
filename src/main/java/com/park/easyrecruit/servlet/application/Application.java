@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author andrei
  */
 @WebServlet(name = "Application", urlPatterns = {"/Application"})
-@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"ClientRole" /* ... */}))
+@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"ClientRole","ManageInterviewRole"}))
 public class Application extends HttpServlet {
 
     @Inject

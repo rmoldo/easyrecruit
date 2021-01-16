@@ -93,5 +93,4 @@ public class PositionDetails implements Serializable {
     public List<PositionComment> getComments() {
         return comments;
     }
-
 }

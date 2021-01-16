@@ -7,7 +7,6 @@ package com.park.easyrecruit.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -52,13 +51,25 @@ public class Position implements Serializable {
     )
     private List<PositionComment> comments = new ArrayList<>();
 
-    @OneToMany(mappedBy = "position")
-    private Collection<Application> applications = new ArrayList<>();
+   /* @OneToMany(mappedBy = "position")
+    private List<Application> applications = new ArrayList<>();
 
-    public Collection<Application> getApplications() {
+    public List<Application> getApplications() {
         return applications;
     }
 
+    public void setApplications(List<Application> applications) {
+        this.applications = applications;
+    }
+
+    public void addApplication(Application application) {
+        applications.add(application);
+    }
+    
+    public void removeApplication(Application application) {
+        applications.remove(application);
+    }
+    */
     public Integer getId() {
         return id;
     }
@@ -115,7 +126,6 @@ public class Position implements Serializable {
         this.responsibilities = responsibilities;
     }
 
-
     public Boolean getIsOpen() {
         return isOpen;
     }
@@ -136,10 +146,12 @@ public class Position implements Serializable {
         comments.add(comment);
         comment.setPosition(this);
     }
+    
     public void removeComment(PositionComment comment) {
         comments.remove(comment);
         comment.setPosition(null);
     }
+    
     @Override
     public int hashCode() {
         int hash = 0;

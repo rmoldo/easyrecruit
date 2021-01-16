@@ -18,16 +18,18 @@ public class ApplicationDetails {
     private UserDetails candidate;
     private Collection<ApplicationComment> comments = new ArrayList<>();
     private PositionDetails position;
+    private Status status;
     
     public static ApplicationDetails From(Application a) {
         if (a == null)
             return null;
         
-        ApplicationDetails ad = new ApplicationDetails();
+        ApplicationDetails ad = new ApplicationDetails();                                  
         ad.cvLink = a.getCvLink();
         ad.candidate = new UserDetails(a.getCandidate());
         ad.comments = new ArrayList<>(a.getComments());
         ad.position = new PositionDetails(a.getPosition());
+        ad.status = a.getStatus();
         return ad;
     }
 
@@ -47,6 +49,10 @@ public class ApplicationDetails {
         return position;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+    
     public void setCvLink(String cvLink) {
         this.cvLink = cvLink;
     }
