@@ -38,14 +38,15 @@ function onCommentSubmit(e) {
                 editedComment.find(".comment-text").text(saveTextArea.val());
             }
             else {
-                let newCommentHtml = $("#commentSection .comment-template").html();
+                let newCommentHtml = $("#commentSection .comment-template")[0].outerHTML;
+                newCommentHtml = newCommentHtml.replace("((id))", data.id);
                 newCommentHtml = newCommentHtml.replace("((id))", data.id);
                 newCommentHtml = newCommentHtml.replace("((text))", data.text);
                 newCommentHtml = newCommentHtml.replace("((username))", data.username);
                 newCommentHtml = newCommentHtml.replace("((time))", data.time);
 
                 const newCommentElement = $(newCommentHtml);
-                newCommentElement.toggleClass("comment-editable", true);
+                newCommentElement.toggleClass("comment-template", false);
                 $("#commentSection .comment-rows-container").prepend(newCommentElement);
             }
 
