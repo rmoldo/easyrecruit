@@ -24,13 +24,12 @@
     </td>
     <td class="column-fit">
         <button type="button" class="btn btn-light comment-edit-btn"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                data-edit-url="${editUrl}">
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="bi bi-three-dots-vertical"></i>
         </button>
         <div class="dropdown-menu dropdown-menu-right">
-            <button class="comment-edit dropdown-item" type="button">Edit</button>
-            <button class="comment-delete dropdown-item text-danger" type="button">Delete</button>
+            <button class="comment-edit dropdown-item" type="button" data-edit-url="${editUrl}">Edit</button>
+            <button class="comment-delete dropdown-item text-danger" type="button" data-edit-url="${editUrl}">Delete</button>
         </div>
     </td>
 </tr>

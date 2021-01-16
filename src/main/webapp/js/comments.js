@@ -19,7 +19,7 @@ function onCommentSubmit(e) {
     const editMode = $("#commentSection .comment-save-row").hasClass("edit-mode");
 
     $.ajax({
-        url: $(e.target).attr("action"),
+        url: editMode ? $("#submitCommentEdit")[0].formAction : $(e.target).attr("action"),
         data: $(e.target).serialize(),
         processData: false,
         method: $(e.target).attr("method"),
@@ -31,17 +31,26 @@ function onCommentSubmit(e) {
         },
         success: (data) => {
             $(e.target).toggleClass('was-validated', false);
-            let newCommentHtml = $("#commentSection .comment-template").html();
-            newCommentHtml = newCommentHtml.replace("((id))", data.id);
-            newCommentHtml = newCommentHtml.replace("((text))", data.text);
-            newCommentHtml = newCommentHtml.replace("((username))", data.username);
-            newCommentHtml = newCommentHtml.replace("((time))", data.time);
 
-            const newCommentElement = $(newCommentHtml);
-            newCommentElement.toggleClass("comment-editable", true);
-            $("#commentSection .comment-rows-container").prepend(newCommentElement);
+            if (editMode) {
+                const saveTextArea = $("#commentSection #saveCommentText");
+                const editedComment = $("#submitCommentEdit").data("edit-target");
+                editedComment.find(".comment-text").text(saveTextArea.val());
+            }
+            else {
+                let newCommentHtml = $("#commentSection .comment-template").html();
+                newCommentHtml = newCommentHtml.replace("((id))", data.id);
+                newCommentHtml = newCommentHtml.replace("((text))", data.text);
+                newCommentHtml = newCommentHtml.replace("((username))", data.username);
+                newCommentHtml = newCommentHtml.replace("((time))", data.time);
+
+                const newCommentElement = $(newCommentHtml);
+                newCommentElement.toggleClass("comment-editable", true);
+                $("#commentSection .comment-rows-container").prepend(newCommentElement);
+            }
 
             $("#commentSection #saveCommentText").val("");
+            $("#commentSection .comment-save-row").removeClass("edit-mode")
         }
     });
 
@@ -58,7 +67,7 @@ function onCommentEditClick(e) {
 
     saveRow.toggleClass("edit-mode", true);
     saveButton.data("edit-target", comment);
-    saveButton.attr("formaction", editUrl);
+    saveButton[0].formAction = editUrl;
     saveTextArea.val(text);
 }
 

@@ -42,7 +42,7 @@
                 <t:commentRow
                     username="${comment.user.firstName} ${comment.user.lastName}" 
                     time="${comment.dateTimeString}"
-                    text="${comment.text} ${editableCommentsUserId}"
+                    text="${comment.text}"
                     editable="${comment.user.id == editableCommentsUserId}"
                     editUrl="${servletUrl}?id=${comment.id}" />
             </c:forEach>
