@@ -14,7 +14,7 @@
 
 
 <tr class="comment ${className} ${editable ? 'comment-editable' : ''}">
-    <td class="text-nowrap">
+    <td class="column-fit text-nowrap">
         <span class="comment-username">${username}</span>
         <br />
         <small class="comment-time">${time}</small>
@@ -22,7 +22,7 @@
     <td class="comment-text">
         ${text}
     </td>
-    <td>
+    <td class="column-fit">
         <button type="button" class="btn btn-light comment-edit-btn"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                 data-edit-url="${editUrl}">

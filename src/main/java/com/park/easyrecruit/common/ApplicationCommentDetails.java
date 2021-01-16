@@ -6,7 +6,9 @@
 package com.park.easyrecruit.common;
 
 import com.park.easyrecruit.entity.*;
-import java.util.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 /**
  *
@@ -17,6 +19,7 @@ public class ApplicationCommentDetails {
     private int id;
     private User user;
     private String text;
+    private LocalDateTime time;
 
     public ApplicationCommentDetails() {
     }
@@ -25,6 +28,7 @@ public class ApplicationCommentDetails {
         id = ac.getId();
         user = ac.getUser();
         text = ac.getText();
+        time = ac.getDateTime();
     }
 
     public int getId() {
@@ -51,11 +55,24 @@ public class ApplicationCommentDetails {
         this.text = text;
     }
 
+    public LocalDateTime getTime() {
+        return time;
+    }
+
+    public String getTimeString() {
+        return time.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT));
+    }
+
+    public void setTime(LocalDateTime time) {
+        this.time = time;
+    }
+    
     public ApplicationComment toApplicationComment() {
         ApplicationComment ac = new ApplicationComment();
         ac.setId(id);
         ac.setText(text);
         ac.setUser(user);
+        ac.setDateTime(time);
         return ac;
     }
 
@@ -65,8 +82,9 @@ public class ApplicationCommentDetails {
                 + "\"id\": %d,"
                 + "\"text\": \"%s\","
                 + "\"username\": \"%s\","
-                + "\"time\": \"20/19/1111 at 18:30\""
+                + "\"time\": \"%s\""
                 + "}",
-                id, text, user.getFullName());
+                id, text, user.getFullName(),
+                time.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT)));
     }
 }

@@ -6,6 +6,9 @@
 package com.park.easyrecruit.entity;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.Objects;
 import javax.persistence.*;
 
@@ -17,7 +20,7 @@ import javax.persistence.*;
 @Table(name = "ApplicationComments")
 public class ApplicationComment implements Serializable {
 
-    private static final long serialVersionUID = 2L;
+    private static final long serialVersionUID = 3L;
 
     @Id
     @GeneratedValue
@@ -27,6 +30,7 @@ public class ApplicationComment implements Serializable {
     private User user;  
     
     private String text;
+    private LocalDateTime dateTime;
 
     @ManyToOne
     private Application application;
@@ -61,6 +65,18 @@ public class ApplicationComment implements Serializable {
 
     public void setApplication(Application application) {
         this.application = application;
+    }
+
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
+    public String getDateTimeString() {
+        return dateTime.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT));
+    }
+
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
     }
     
     @Override

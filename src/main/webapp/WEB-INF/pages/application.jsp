@@ -87,9 +87,12 @@
     </c:if>
 
 
-    <c:if test="${comments}">
-        <h4>Comments:</h4>
-        
-        <t:commentSection />
-    </c:if>
+    <h4>Comments:</h4>
+    <t:commentSection comments="${application.comments}" 
+                      positionId="${application.position.id}"
+                      candidateId="${application.candidate.id}"
+                      editableCommentsUserId="${application.editableCommentsUserId}"
+                      servletUrl="${pageContext.request.contextPath}/ApplicationComments"
+                      />
+
 </t:pageTemplate>

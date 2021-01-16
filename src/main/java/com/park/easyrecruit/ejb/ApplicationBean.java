@@ -8,6 +8,7 @@ package com.park.easyrecruit.ejb;
 import com.park.easyrecruit.common.ApplicationCommentDetails;
 import com.park.easyrecruit.common.ApplicationDetails;
 import com.park.easyrecruit.entity.*;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -83,8 +84,10 @@ public class ApplicationBean {
         }
 
         ApplicationComment ac = acd.toApplicationComment();
+        ac.setDateTime(LocalDateTime.now());
         ac.setUser(u);
         ac.setApplication(a);
+        a.getComments().add(ac);
         em.persist(ac);
         return new ApplicationCommentDetails(ac);
     }

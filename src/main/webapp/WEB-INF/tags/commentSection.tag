@@ -8,11 +8,15 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%@tag description="put the tag description here" pageEncoding="UTF-8"%>
-<%@attribute name="message"%>
+<%@attribute name="comments" required="true" type="java.util.Collection"%>
+<%@attribute name="editableCommentsUserId"%>
+<%@attribute name="positionId"%>
+<%@attribute name="candidateId"%>
+<%@attribute name="servletUrl"%>
+
 
 <form id="commentSection" class="needs-validation" novalidate method="POST"
-      action="${pageContext.request.contextPath}/ApplicationComments?positionId=${application.position.id}&candidateId=${application.candidate.id}">
-
+      action="${servletUrl}?positionId=${positionId}&candidateId=${candidateId}">
     <table class="table table-sm table-borderless">
         <thead>
             <tr class="comment-save-row">
@@ -34,17 +38,14 @@
             </tr>
         </thead>
         <tbody class="comment-rows-container">
-            <t:commentRow
-                username="Mihai Someone" 
-                time="20/19/1111 at 18:30"
-                text="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-                editable="true"
-                editUrl="/ActionComments?id=123" />
-            <t:commentRow
-                username="Mihai Someone" 
-                time="20/19/1111 at 18:30"
-                text="Lorem ipsum dolor sit amet, consectetur adipiscing elit." />
-
+            <c:forEach var="comment" items="${comments}">
+                <t:commentRow
+                    username="${comment.user.firstName} ${comment.user.lastName}" 
+                    time="${comment.dateTimeString}"
+                    text="${comment.text} ${editableCommentsUserId}"
+                    editable="${comment.user.id == editableCommentsUserId}"
+                    editUrl="${servletUrl}?id=${comment.id}" />
+            </c:forEach>
             <tr class="no-comments-message text-center">
                 <td colspan="99">No comments yet.</td>
             </tr>
@@ -54,7 +55,7 @@
                 time="((time))"
                 text="((text))"
                 editable="true"
-                editUrl="${pageContext.request.contextPath}/ApplicationComments?id=((id))"/>
+                editUrl="${servletUrl}?id=((id))"/>
         </tbody>
     </table>
 </form>
