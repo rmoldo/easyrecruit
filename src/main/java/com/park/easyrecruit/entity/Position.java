@@ -51,25 +51,6 @@ public class Position implements Serializable {
     )
     private List<PositionComment> comments = new ArrayList<>();
 
-   /* @OneToMany(mappedBy = "position")
-    private List<Application> applications = new ArrayList<>();
-
-    public List<Application> getApplications() {
-        return applications;
-    }
-
-    public void setApplications(List<Application> applications) {
-        this.applications = applications;
-    }
-
-    public void addApplication(Application application) {
-        applications.add(application);
-    }
-    
-    public void removeApplication(Application application) {
-        applications.remove(application);
-    }
-    */
     public Integer getId() {
         return id;
     }
