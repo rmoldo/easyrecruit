@@ -34,7 +34,7 @@
             <c:forEach var="app" items="${applicationsAll}">
                 <tr>
                     <td>
-                        <a href="Application?positionId=${app.position.id}">👁‍ Open</a>
+                        <a href="Application?positionId=${app.position.id}&candidateId=${app.candidate.id}">👁‍ Open</a>
                     </td>
                     <td>${app.candidate.firstName} ${app.candidate.lastName}</td>
                     <td>${app.position.department}</td>

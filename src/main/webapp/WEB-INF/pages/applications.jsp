@@ -19,9 +19,7 @@
                 <th>Department</th>
                 <th>Project</th>
                 <th>Submitted CV</th>
-                <c:if test="${pageContext.request.isUserInRole('StatusViewerRole')}">
-                    <th>Status</th>
-                </c:if>
+                <th>Status</th>
             </tr>
         </thead>
         <tbody>
@@ -36,9 +34,7 @@
                     <td class="text-truncate">
                         <a href="${app.cvLink}">${app.cvLink}</a>
                     </td>
-                    <c:if test="${pageContext.request.isUserInRole('StatusViewerRole')}">
-                        <td class="text-truncate">${app.status}</td>
-                    </c:if>
+                    <td class="text-truncate">${app.status}</td>
                 </tr>
             </c:forEach>
         </tbody>

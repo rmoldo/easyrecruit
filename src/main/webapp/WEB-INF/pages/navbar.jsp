@@ -32,7 +32,6 @@
                     </c:if>
                 </c:otherwise>
             </c:choose>
-            <!-- Move user management into profile -->
             <c:if test="${pageContext.request.isUserInRole('ManageUsersRole')}">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Manage Users</a>
@@ -54,9 +53,6 @@
             <c:if test="${pageContext.request.getRemoteUser() != null}">
                 <li class="nav-item navbar-text">
                     Welcome back ${pageContext.request.getRemoteUser()}
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="${contextPath}/Profile">Profile</a>
                 </li>
             </c:if> 
             <li class="nav-item">
