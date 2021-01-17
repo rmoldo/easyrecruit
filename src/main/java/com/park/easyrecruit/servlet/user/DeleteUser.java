@@ -55,7 +55,7 @@ public class DeleteUser extends HttpServlet {
 
             // Delete users by their ids
             if (!userBean.deleteUsers(ids)) {
-                request.setAttribute("delete_error", "Cannot delete users. One or more users have open applications");
+                request.setAttribute("delete_error", "One or more users have open applications. Could not delete those users");
                 request.getRequestDispatcher("/WEB-INF/pages/deleteUser.jsp").forward(request, response);
             }
         }

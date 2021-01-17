@@ -18,8 +18,7 @@
                 <th>Position</th>
                 <th>Department</th>
                 <th>Project</th>
-                <th>Submitted CV</th>
-                <th>Interview status</th>
+                <th>Submitted CV</th>   
             </tr>
         </thead>
         <tbody>
@@ -34,6 +33,7 @@
                     <td class="text-truncate">
                         <a href="${app.cvLink}">${app.cvLink}</a>
                     </td>
+                    <td class="text-truncate">${app.status}</td>
                     <td>
                         <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Show Details</button>
                             <div id="demo" class="collapse">

@@ -3,7 +3,7 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
-/* 
+/*
     Created on : Jan 10, 2021, 4:37:21 PM
     Author     : andrei
 */
@@ -14,4 +14,16 @@ and open the template in the editor.
 
 .column-fit {
     width: 1px;
+}
+
+#commentSection .comment-template,
+#commentSection .no-comments-message:not(:first-child) {
+    display: none;
+}
+
+/* Comment edit */
+#commentSection .comment-save-row.edit-mode #submitNewComment,
+#commentSection .comment-save-row:not(.edit-mode) #submitCommentEdit,
+#commentSection .comment:not(.comment-editable) .comment-edit-btn {
+    display: none;
 }

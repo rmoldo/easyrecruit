@@ -5,10 +5,8 @@
  */
 package com.park.easyrecruit.servlet.application;
 
-import com.park.easyrecruit.common.ApplicationDetails;
 import com.park.easyrecruit.ejb.ApplicationBean;
 import java.io.IOException;
-import java.util.Collection;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.HttpConstraint;
@@ -23,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author dragos
  */
 @WebServlet(name = "ApplicationsListAll", urlPatterns = {"/ApplicationsListAll"})
-@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"ManageInterviewRole"}))
+@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"ReadAllApplicationsRole"}))
 public class ApplicationsListAll extends HttpServlet {
 
     @Inject

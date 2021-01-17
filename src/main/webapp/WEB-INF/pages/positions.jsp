@@ -40,7 +40,7 @@
                     </p>
                     <c:choose>
                         <c:when test="${position.isOpen}">
-                            <c:if test="${pageContext.request.isUserInRole('ClientRole')}">
+                            <c:if test="${pageContext.request.isUserInRole('ManageMyApplicationsRole')}">
                                 <a href="Application?positionId=${position.id}" class="btn btn-primary">
                                     Apply for this position
                                 </a>

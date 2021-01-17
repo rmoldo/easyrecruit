@@ -38,6 +38,25 @@
     <group-name>RECRUITER</group-name>
     <group-name>CLIENT</group-name>
   </security-role-mapping>
+  <security-role-mapping>
+    <role-name>ReadAllApplicationsRole</role-name>
+    <group-name>CEO</group-name>
+    <group-name>DEPARTMENTDIRECTOR</group-name>
+    <group-name>RECRUITER</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>ManageMyApplicationsRole</role-name>
+    <group-name>CLIENT</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>DepartmentDirectorRole</role-name>
+    <group-name>DEPARTMENTDIRECTOR</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>StatusViewerRole</role-name>
+    <group-name>CLIENT</group-name>
+    <group-name>RECRUITER</group-name>
+  </security-role-mapping>
   <class-loader delegate="true"/>
   <jsp-config>
     <property name="keepgenerated" value="true">
