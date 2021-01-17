@@ -22,10 +22,10 @@
                 <th>Position</th> 
                 <th>Submitted CV</th>
                 <th>Interview</th>
-                <c:if test="${pageContext.request.isUserInRole('ClientRole')}">
+                <c:if test="${pageContext.request.isUserInRole('StatusViewerRole')}">
                     <th>Status</th>
                 </c:if>
-                <c:if test="${pageContext.request.isUserInRole('ManageInterviewRole')}">
+                <c:if test="${pageContext.request.isUserInRole('DepartmentDirectorRole')}">
                     <th>Actions</th>
                 </c:if>
             </tr>
@@ -46,13 +46,23 @@
                     <td class="text-nowrap">
                         <a href="${pageContext.request.contextPath}/Interview" class="interview"> Set Interview</a>
                     </td>
-                    <c:if test="${pageContext.request.isUserInRole('ClientRole')}">
+                    <c:if test="${pageContext.request.isUserInRole('StatusViewerRole')}">
                         <td class="text-truncate">${app.status}</td>
                     </c:if>
-                    <c:if test="${pageContext.request.isUserInRole('ManageInterviewRole') and app.status eq 'OPEN'}">
+                    <c:if test="${pageContext.request.isUserInRole('DepartmentDirectorRole') and app.status eq 'OPEN'}">
                         <td class="text-nowrap">
-                            <a href="Applications?positionId=${app.position.id}&username=${app.candidate.username}&action=approve" class="btn btn-success btn-sm">Approve</a>
-                            <a href="Applications?positionId=${app.position.id}&username=${app.candidate.username}&action=reject" class="btn btn-danger btn-sm">Reject</a>
+                            <form class="needs-validation" novalidate method="POST" action="${pageContext.request.contextPath}/Applications">
+                                <input type="hidden" class="form-control" id="positionId" name="positionId" value="${app.position.id}" required>
+                                <input type="hidden" class="form-control" id="username" name="username" value="${app.candidate.username}" required>
+                                <input type="hidden" class="form-control" id="action" name="action" value="approve" required>
+                                <button class="btn btn-success btn-sm" type="submit">Approve</button>
+                            </form>
+                            <form class="needs-validation" novalidate method="POST" action="${pageContext.request.contextPath}/Applications">
+                                <input type="hidden" class="form-control" id="positionId" name="positionId" value="${app.position.id}" required>
+                                <input type="hidden" class="form-control" id="username" name="username" value="${app.candidate.username}" required>
+                                <input type="hidden" class="form-control" id="action" name="action" value="reject" required>
+                                <button class="btn btn-danger btn-sm" type="submit">Reject</button>
+                            </form>
                         </td>
                     </c:if>
                 </tr>

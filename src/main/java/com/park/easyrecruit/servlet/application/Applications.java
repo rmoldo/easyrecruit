@@ -33,6 +33,15 @@ public class Applications extends HttpServlet {
 
         // anyone GET => applications of current user (My Applications)
         // HR GET + positionId => list all applications for specified position
+        
+        request.setAttribute("applications", applicationBean.getMany(request.getUserPrincipal().getName()));
+        request.getRequestDispatcher("/WEB-INF/pages/applications.jsp").forward(request, response);
+    }
+    
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
         String action = (String) request.getParameter("action");
         if(action != null) {
             applicationBean.executeAction(action,
