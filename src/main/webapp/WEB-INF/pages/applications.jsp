@@ -18,7 +18,8 @@
                 <th>Position</th>
                 <th>Department</th>
                 <th>Project</th>
-                <th>Submitted CV</th>   
+                <th>Submitted CV</th>
+                <th>Status</th>
             </tr>
         </thead>
         <tbody>
@@ -33,6 +34,7 @@
                     <td class="text-truncate">
                         <a href="${app.cvLink}">${app.cvLink}</a>
                     </td>
+                    <td class="text-truncate">${app.status}</td>
                 </tr>
             </c:forEach>
         </tbody>

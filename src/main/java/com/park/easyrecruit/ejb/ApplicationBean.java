@@ -7,12 +7,12 @@ package com.park.easyrecruit.ejb;
 
 import com.park.easyrecruit.common.ApplicationCommentDetails;
 import com.park.easyrecruit.common.ApplicationDetails;
+import com.park.easyrecruit.common.Status;
 import com.park.easyrecruit.entity.*;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
-import javax.ejb.EJBException;
 import javax.ejb.Stateless;
 import javax.persistence.*;
 
@@ -68,9 +68,8 @@ public class ApplicationBean {
         } catch (Exception e) {
             Position p = em.find(Position.class, positionId);
             User u = getUser(username);
-            Application a = new Application(p, u, ad.getCvLink());
+            Application a = new Application(p, u, ad.getCvLink(), Status.OPEN);
             u.getApplications().add(a);
-            p.getApplications().add(a);
             em.persist(a);
         }
     }
@@ -169,5 +168,23 @@ public class ApplicationBean {
                 .map(a -> ApplicationDetails.From(a))
                 .collect(Collectors.toList());
         return c;
+    }
+    
+    public void executeAction(String action, Integer positionId, String username) {
+        LOG.info("approve or reject application");
+        
+        Application a = getApplication(positionId, username);
+        if (action.equals("approve")) {
+            Position p = em.find(Position.class, positionId);
+            a.setStatus(Status.APPROVED);
+            Integer nbOfCandidates = p.getNbOfCandidatesNeeded();
+            if (nbOfCandidates.equals(1)) {
+                p.setIsOpen(false);
+            }
+            p.setNbOfCandidatesNeeded(nbOfCandidates - 1); 
+        }
+        else {
+            a.setStatus(Status.REJECTED);
+        }
     }
 }
