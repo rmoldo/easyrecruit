@@ -58,7 +58,7 @@ public class Applications extends HttpServlet {
         String date = request.getParameter("date");
         String comment = request.getParameter("comment");    
         interviewBean.addInterview(date, interviewer, typeOfInterview, comment);
-        request.getRequestDispatcher("/WEB-INF/pages/index.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/pages/applications.jsp").forward(request, response);
 
     } 
 }
