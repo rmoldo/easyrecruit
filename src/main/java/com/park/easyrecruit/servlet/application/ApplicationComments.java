@@ -19,7 +19,7 @@ import javax.servlet.http.*;
  * @author andrei
  */
 @WebServlet(name = "ApplicationComments", urlPatterns = {"/ApplicationComments"})
-@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"ClientRole" /* ... */}))
+@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"ManageCommentsRole"}))
 public class ApplicationComments extends HttpServlet {
 
     @Inject

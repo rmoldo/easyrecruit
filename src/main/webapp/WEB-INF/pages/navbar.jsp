@@ -19,13 +19,13 @@
                 <a class="nav-link" href="${contextPath}/Positions">Positions</a>
             </li>
             <c:choose>
-                <c:when test="${pageContext.request.isUserInRole('ClientRole')}">
+                <c:when test="${pageContext.request.isUserInRole('ManageMyApplicationsRole')}">
                     <li class="nav-item ${forwardPath == '/Applications' ? ' active' : ''}">
                         <a class="nav-link" href="${contextPath}/Applications">My Applications</a>
                     </li>
                 </c:when>    
                 <c:otherwise>
-                    <c:if test="${pageContext.request.isUserInRole('ManageInterviewRole')}"> 
+                    <c:if test="${pageContext.request.isUserInRole('ReadAllApplicationsRole')}"> 
                         <li class="nav-item ${forwardPath == '/ApplicationsListAll' ? ' active' : ''}">
                             <a class="nav-link" href="${contextPath}/ApplicationsListAll">All Applications</a>
                         </li>
