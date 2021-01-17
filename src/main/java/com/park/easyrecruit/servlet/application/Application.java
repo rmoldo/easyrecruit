@@ -7,6 +7,7 @@ package com.park.easyrecruit.servlet.application;
 
 import com.park.easyrecruit.common.ApplicationDetails;
 import com.park.easyrecruit.common.PositionDetails;
+import com.park.easyrecruit.common.UserDetails;
 import com.park.easyrecruit.ejb.ApplicationBean;
 import com.park.easyrecruit.ejb.PositionBean;
 import com.park.easyrecruit.ejb.UserBean;
@@ -57,6 +58,8 @@ public class Application extends HttpServlet {
         }
 
         ApplicationDetails application = null;
+        String username = request.getUserPrincipal().getName();
+        UserDetails user = userBean.findByUsername(username);
 
         // TODO andrei: fix role check
         if (candidateId != null && request.isUserInRole("HR")) {
@@ -65,12 +68,8 @@ public class Application extends HttpServlet {
                 response.setStatus(404);
                 return;
             }
-
-            request.setAttribute("comments", true);
         } else if (candidateId == null) {
             // application for current user
-
-            String username = request.getUserPrincipal().getName();
             application = applicationBean.get(positionId, username);
             if (application == null) {
                 PositionDetails position = positionBean.getPosition(positionId);
@@ -80,12 +79,14 @@ public class Application extends HttpServlet {
                 }
                 application = new ApplicationDetails();
                 application.setPosition(position);
-                application.setCandidate(userBean.findByUsername(username));
+                application.setCandidate(user);
                 application.setCvLink("");
             }
             request.setAttribute("edit", true);
         }
-
+        
+        application.getComments().sort((a, b) -> b.getDateTime().compareTo(a.getDateTime()));
+        application.setEditableCommentsUserId(user.getId());
         request.setAttribute("application", application);
         request.getRequestDispatcher("/WEB-INF/pages/application.jsp").forward(request, response);
     }
