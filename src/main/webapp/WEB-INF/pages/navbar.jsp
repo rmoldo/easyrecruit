@@ -18,11 +18,20 @@
             <li class="nav-item ${forwardPath == '/Positions' ? ' active' : ''}">
                 <a class="nav-link" href="${contextPath}/Positions">Positions</a>
             </li>
-            <c:if test="${pageContext.request.isUserInRole('ClientRole')}">
-                <li class="nav-item ${forwardPath == '/Applications' ? ' active' : ''}">
-                    <a class="nav-link" href="${contextPath}/Applications">My Applications</a>
-                </li>
-            </c:if>
+            <c:choose>
+                <c:when test="${pageContext.request.isUserInRole('ClientRole')}">
+                    <li class="nav-item ${forwardPath == '/Applications' ? ' active' : ''}">
+                        <a class="nav-link" href="${contextPath}/Applications">My Applications</a>
+                    </li>
+                </c:when>    
+                <c:otherwise>
+                    <c:if test="${pageContext.request.isUserInRole('ManageInterviewRole')}"> 
+                        <li class="nav-item ${forwardPath == '/ApplicationsListAll' ? ' active' : ''}">
+                            <a class="nav-link" href="${contextPath}/ApplicationsListAll">All Applications</a>
+                        </li>
+                    </c:if>
+                </c:otherwise>
+            </c:choose>
             <!-- Move user management into profile -->
             <c:if test="${pageContext.request.isUserInRole('ManageUsersRole')}">
                 <li class="nav-item dropdown">

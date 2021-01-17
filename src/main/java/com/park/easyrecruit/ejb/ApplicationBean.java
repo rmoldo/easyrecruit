@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import javax.ejb.EJBException;
 import javax.ejb.Stateless;
 import javax.persistence.*;
 
@@ -138,7 +139,7 @@ public class ApplicationBean {
             return null;
         }
     }
-
+  
     private Application getApplication(Integer positionId, Integer candidateId) {
         try {
             return em
@@ -158,5 +159,15 @@ public class ApplicationBean {
                 .createQuery("SELECT u FROM User u WHERE u.username = ?1", User.class)
                 .setParameter(1, username)
                 .getSingleResult();
+    }
+  
+    public Collection<ApplicationDetails> getAll() {
+        LOG.info("get all applications");
+        Collection<ApplicationDetails> c = em
+                .createQuery("SELECT a FROM Application a", Application.class)
+                .getResultStream()
+                .map(a -> ApplicationDetails.From(a))
+                .collect(Collectors.toList());
+        return c;
     }
 }

@@ -27,6 +27,11 @@
     <role-name>CeoRole</role-name>
     <group-name>CEO</group-name>
   </security-role-mapping>
+  <security-role-mapping>
+    <role-name>ManageInterviewRole</role-name>
+    <group-name>DEPARTMENTDIRECTOR</group-name>
+    <group-name>RECRUITER</group-name>
+  </security-role-mapping>
   <class-loader delegate="true"/>
   <jsp-config>
     <property name="keepgenerated" value="true">
