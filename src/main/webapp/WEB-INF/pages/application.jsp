@@ -52,30 +52,28 @@
                 <tr>
                     <td class="column-fit">First name:</td>
                     <td>${application.candidate.firstName}</td>
-                </tr>
-                <tr>
-                    <td style="width: 1px">Last name:</td>
+                    <td class="column-fit">Last name:</td>
                     <td>${application.candidate.lastName}</td>
                 </tr>
                 <tr>
-                    <td style="width: 1px">Phone number:</td>
+                    <td>Phone number:</td>
                     <td>${application.candidate.phoneNumber}</td>
-                </tr>
-                <tr>
-                    <td style="width: 1px">Email:</td>
+                    <td>Email:</td>
                     <td>${application.candidate.email}</td>
                 </tr>
             </tbody>
         </table>
         <div class="form-group">
             <label for="positionName">Link to curriculum vitae:</label>
-            <input type="text" class="form-control" name="cvLink" value="${application.cvLink}" required ${edit ? "" : "readonly"}>
+            <input type="url" class="form-control" name="cvLink" value="${application.cvLink}" required ${edit ? "" : "readonly"}>
             <div class="invalid-feedback">
-                Link to curriculum vitae is required.
+                A valid link to curriculum vitae is required.
             </div>
         </div>
     </form>
+
     <hr class="mb-4">
+
     <c:if test="${edit}">
         <div class="row">
             <div class="col d-flex justify-content-around">
@@ -87,7 +85,14 @@
             </div>
         </div>
     </c:if>
-    <c:if test="${comments}">
-        <h4>Comments:</h4>
-    </c:if>
+
+
+    <h4>Comments:</h4>
+    <t:commentSection comments="${application.comments}" 
+                      positionId="${application.position.id}"
+                      candidateId="${application.candidate.id}"
+                      editableCommentsUserId="${application.editableCommentsUserId}"
+                      servletUrl="${pageContext.request.contextPath}/ApplicationComments"
+                      />
+
 </t:pageTemplate>

@@ -21,14 +21,14 @@
     </c:if>
     <h1>Available positions: </h1>
     <br>
-    <c:if test="${pageContext.request.isUserInRole('AdminRole')}">
+    <c:if test="${pageContext.request.isUserInRole('ManagePositionsRole')}">
     <div class="row justify-content-center">
         <a href="Positions/Add" class="btn btn-primary btn-lg">Add position</a>
     </div>
     <br>
     </c:if>
     <c:forEach var="position" items="${positions}">
-        <c:if test="${position.isOpen || pageContext.request.isUserInRole('AdminRole')}">
+        <c:if test="${position.isOpen || pageContext.request.isUserInRole('ManagePositionsRole')}">
             <br>
             <div class="card text-center">
                 <div class="card-body">
@@ -40,7 +40,7 @@
                     </p>
                     <c:choose>
                         <c:when test="${position.isOpen}">
-                            <c:if test="${pageContext.request.isUserInRole('ClientRole')}">
+                            <c:if test="${pageContext.request.isUserInRole('ManageMyApplicationsRole')}">
                                 <a href="Application?positionId=${position.id}" class="btn btn-primary">
                                     Apply for this position
                                 </a>
@@ -55,7 +55,7 @@
                             </c:if>
                         </c:otherwise>
                     </c:choose>
-                    <c:if test="${pageContext.request.isUserInRole('CeoRole')}">
+                    <c:if test="${pageContext.request.isUserInRole('ManagePositionsRole')}">
                         <a href="Positions/Edit?positionId=${position.id}" class="btn btn-primary">Edit</a>
                     </c:if>
                     <c:if test="${pageContext.request.isUserInRole('CeoRole')}">
@@ -77,7 +77,7 @@
                                 </div>
                                 <br>
                             </c:forEach>
-                            <c:if test="${pageContext.request.getRemoteUser() != null}">
+                            <c:if test="${position.isOpen && pageContext.request.isUserInRole('ManageCommentsRole')}">
                                 <form class="needs-validation" novalidate method="POST" action="${pageContext.request.contextPath}/Positions/AddComment">
                                     <input type="hidden" class="form-control" id="creatorUser" name="creatorUser" value="${pageContext.request.remoteUser}" required>
                                     <input type="hidden" class="form-control" id="positionId" name="positionId" value="${position.id}" required>

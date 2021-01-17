@@ -18,12 +18,20 @@
             <li class="nav-item ${forwardPath == '/Positions' ? ' active' : ''}">
                 <a class="nav-link" href="${contextPath}/Positions">Positions</a>
             </li>
-            <c:if test="${pageContext.request.isUserInRole('ClientRole')}">
-                <li class="nav-item ${forwardPath == '/Applications' ? ' active' : ''}">
-                    <a class="nav-link" href="${contextPath}/Applications">My Applications</a>
-                </li>
-            </c:if>
-            <!-- Move user management into profile -->
+            <c:choose>
+                <c:when test="${pageContext.request.isUserInRole('ManageMyApplicationsRole')}">
+                    <li class="nav-item ${forwardPath == '/Applications' ? ' active' : ''}">
+                        <a class="nav-link" href="${contextPath}/Applications">My Applications</a>
+                    </li>
+                </c:when>    
+                <c:otherwise>
+                    <c:if test="${pageContext.request.isUserInRole('ReadAllApplicationsRole')}"> 
+                        <li class="nav-item ${forwardPath == '/ApplicationsListAll' ? ' active' : ''}">
+                            <a class="nav-link" href="${contextPath}/ApplicationsListAll">All Applications</a>
+                        </li>
+                    </c:if>
+                </c:otherwise>
+            </c:choose>
             <c:if test="${pageContext.request.isUserInRole('ManageUsersRole')}">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Manage Users</a>
@@ -45,9 +53,6 @@
             <c:if test="${pageContext.request.getRemoteUser() != null}">
                 <li class="nav-item navbar-text">
                     Welcome back ${pageContext.request.getRemoteUser()}
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="${contextPath}/Profile">Profile</a>
                 </li>
             </c:if> 
             <li class="nav-item">

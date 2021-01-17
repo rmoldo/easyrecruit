@@ -16,22 +16,25 @@ public class ApplicationDetails {
     
     private String cvLink;
     private UserDetails candidate;
-    private Collection<ApplicationComment> comments = new ArrayList<>();
+    private Integer editableCommentsUserId = null;
+    private List<ApplicationComment> comments = new ArrayList<>();
     private PositionDetails position;
+    private Status status;
     
     public static ApplicationDetails From(Application a) {
         if (a == null)
             return null;
         
-        ApplicationDetails ad = new ApplicationDetails();
+        ApplicationDetails ad = new ApplicationDetails();                                  
         ad.cvLink = a.getCvLink();
         ad.candidate = new UserDetails(a.getCandidate());
         ad.comments = new ArrayList<>(a.getComments());
         ad.position = new PositionDetails(a.getPosition());
+        ad.status = a.getStatus();
         return ad;
     }
 
-    public Collection<ApplicationComment> getComments() {
+    public List<ApplicationComment> getComments() {
         return comments;
     }
 
@@ -47,6 +50,10 @@ public class ApplicationDetails {
         return position;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+    
     public void setCvLink(String cvLink) {
         this.cvLink = cvLink;
     }
@@ -55,11 +62,21 @@ public class ApplicationDetails {
         this.candidate = candidate;
     }
 
-    public void setComments(Collection<ApplicationComment> comments) {
+    public void setComments(List<ApplicationComment> comments) {
         this.comments = comments;
     }
 
     public void setPosition(PositionDetails position) {
         this.position = position;
     }
+
+    public Integer getEditableCommentsUserId() {
+        return editableCommentsUserId;
+    }
+
+    public void setEditableCommentsUserId(Integer editableCommentsUserId) {
+        this.editableCommentsUserId = editableCommentsUserId;
+    }
+    
+    
 }

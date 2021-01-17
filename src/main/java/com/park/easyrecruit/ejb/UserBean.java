@@ -136,13 +136,27 @@ public class UserBean {
         user.setPosition(position);
     }
 
-    public void deleteUsers(List<Integer> ids) {
+    public boolean deleteUsers(List<Integer> ids) {
         LOG.info("UserBean:deleteUserByIds");
+
+        boolean openApplication = false;
 
         for (Integer id : ids) {
             User user = em.find(User.class, id);
+
+            if (user.getApplications().size() > 0) {
+                openApplication = true;
+                continue;
+            }
+
             em.remove(user);
         }
+
+        if (openApplication) {
+            return false;
+        }
+
+        return true;
     }
 
     public void deleteUser(Integer userId) {

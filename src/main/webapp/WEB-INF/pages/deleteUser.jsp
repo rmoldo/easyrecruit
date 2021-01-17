@@ -10,8 +10,13 @@
 
 <t:pageTemplate pageTitle="Delete User">
     <c:if test="${delete_error != null}">
-        <div class="alert alert-warning" role="alert">
-            ${delete_error}
+            <div class="alert alert-warning" role="alert">
+                ${delete_error}
+            </div>
+    </c:if>
+    <div class ="container">
+        <div class="card-body">
+            <h5 class="card-title text-uppercase mb-0">Delete User</h5>
         </div>
     </c:if>
     <div class="card-body">

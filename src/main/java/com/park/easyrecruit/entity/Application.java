@@ -5,6 +5,7 @@
  */
 package com.park.easyrecruit.entity;
 
+import com.park.easyrecruit.common.Status;
 import java.io.Serializable;
 import java.util.*;
 import javax.persistence.*;
@@ -23,13 +24,15 @@ public class Application implements Serializable {
     public Application() {
     }
 
-    public Application(Position position, User candidate, String cvLink) {
+    public Application(Position position, User candidate, String cvLink, Status status) {
         this.position = position;
         this.candidate = candidate;
         this.cvLink = cvLink;
+        this.status = status;
     }
 
     private String cvLink;
+    private Status status;
 
     @Id
     @ManyToOne
@@ -42,7 +45,7 @@ public class Application implements Serializable {
     private User candidate;
 
     @OneToMany(mappedBy = "application")
-    private Collection<ApplicationComment> comments = new ArrayList<>();
+    private Collection<ApplicationComment> comments;
 
     public Collection<ApplicationComment> getComments() {
         return comments;
@@ -58,6 +61,14 @@ public class Application implements Serializable {
 
     public String getCvLink() {
         return cvLink;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public void setCvLink(String cvLink) {
