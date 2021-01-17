@@ -10,15 +10,15 @@
 
 <t:pageTemplate pageTitle="Delete User">
     <c:if test="${delete_error != null}">
-            <div class="alert alert-warning" role="alert">
-                ${delete_error}
-            </div>
+        <div class="alert alert-warning" role="alert">
+            ${delete_error}
+        </div>
     </c:if>
     <div class ="container">
         <div class="card-body">
             <h5 class="card-title text-uppercase mb-0">Delete User</h5>
         </div>
-    </c:if>
+    </div>
     <div class="card-body">
         <h5 class="card-title text-uppercase mb-0">Delete User</h5>
     </div>
@@ -55,8 +55,9 @@
                         <td>
                             ${user.position}
                         </td>
-                    </c:forEach>
-            </tbody>
+                    </tr>
+                </tbody>
+            </c:forEach>
         </table>
     </form>
 </t:pageTemplate>
