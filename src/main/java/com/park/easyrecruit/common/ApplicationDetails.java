@@ -16,7 +16,8 @@ public class ApplicationDetails {
     
     private String cvLink;
     private UserDetails candidate;
-    private Collection<ApplicationComment> comments = new ArrayList<>();
+    private Integer editableCommentsUserId = null;
+    private List<ApplicationComment> comments = new ArrayList<>();
     private PositionDetails position;
     private Status status;
     
@@ -33,7 +34,7 @@ public class ApplicationDetails {
         return ad;
     }
 
-    public Collection<ApplicationComment> getComments() {
+    public List<ApplicationComment> getComments() {
         return comments;
     }
 
@@ -61,11 +62,21 @@ public class ApplicationDetails {
         this.candidate = candidate;
     }
 
-    public void setComments(Collection<ApplicationComment> comments) {
+    public void setComments(List<ApplicationComment> comments) {
         this.comments = comments;
     }
 
     public void setPosition(PositionDetails position) {
         this.position = position;
     }
+
+    public Integer getEditableCommentsUserId() {
+        return editableCommentsUserId;
+    }
+
+    public void setEditableCommentsUserId(Integer editableCommentsUserId) {
+        this.editableCommentsUserId = editableCommentsUserId;
+    }
+    
+    
 }
