@@ -38,7 +38,7 @@
                         <a href="${app.cvLink}">${app.cvLink}</a>
                     </td> 
                     <td class="text-truncate">
-                        <a href="${pageContext.request.contextPath}/Interview" class="interview"> Set Interview</a>
+                        <a href="${pageContext.request.contextPath}/Interview?positionId=${app.position.id}&candidateId=${app.candidate.id}" class="interview"> Set Interview</a>
                     </td>
                 </tr>
             </c:forEach>

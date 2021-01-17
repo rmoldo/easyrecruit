@@ -28,8 +28,7 @@ public class Applications extends HttpServlet {
     @Inject
     private ApplicationBean applicationBean;
     
-    @Inject  
-    private InterviewBean interviewBean;
+    
             
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -50,15 +49,5 @@ public class Applications extends HttpServlet {
         request.getRequestDispatcher("/WEB-INF/pages/applications.jsp").forward(request, response);
     }
     
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String interviewer = request.getParameter("interviewer");
-        String typeOfInterview = request.getParameter("typeOfInterview");
-        String date = request.getParameter("date");
-        String comment = request.getParameter("comment");    
-        interviewBean.addInterview(date, interviewer, typeOfInterview, comment);
-        request.getRequestDispatcher("/WEB-INF/pages/applications.jsp").forward(request, response);
-
-    } 
+    
 }

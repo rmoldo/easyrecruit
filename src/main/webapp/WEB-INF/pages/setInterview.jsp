@@ -25,7 +25,9 @@
                         ${interview_status_message}
                       </div>
                 </c:if>
-                <form method="POST" action="${pageContext.request.contextPath}/Applications">
+                <form method="POST">
+                    <input type="hidden"  id="candidateId" name="positionId" value="${candidateId}" required>
+                    <input type="hidden"  id="positionId" name="commentId" value="${positionId}" required>
                     <div class="banner">
                       <h1>Set Interview</h1>
                     </div>
@@ -38,11 +40,11 @@
                         </div>
                         <div class="item">
                           <label for="activity">Type of Interview<span>*</span></label>
-                          <input id="activity" type="text" name="activity" required/>
+                          <input id="activity" type="text" name="typeOfInterview" required/>
                         </div>
                           <div class="item">
                            <label for="bdate">Interview Date <span>*</span></label>
-                           <input id="bdate" type="date" name="bdate" required/>
+                           <input id="bdate" type="date" name="date" required/>
                            <i class="fas fa-calendar-alt"></i>
                         </div>
                         <div class="item">
@@ -51,7 +53,7 @@
                         </div>  
                     </fieldset>
                     <div class="btn-block">
-                        <button type="submit" href="/">Submit</button>
+                        <button type="submit">Submit</button>
                     </div>
                 </form> 
             </div>

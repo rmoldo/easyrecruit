@@ -1,8 +1,10 @@
 package com.park.easyrecruit.servlet.interview;
 
+import com.park.easyrecruit.ejb.InterviewBean;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.HttpConstraint;
 import javax.servlet.annotation.ServletSecurity;
@@ -18,10 +20,20 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "Interview", urlPatterns = {"/Interview"})
 @ServletSecurity(value = @HttpConstraint(rolesAllowed = {"ManageInterviewRole"}))
 public class Interviews extends HttpServlet {
-
+@Inject  
+    private InterviewBean interviewBean;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        Integer positionId;
+        Integer candidateId;
+        
+        positionId = Integer.parseInt(request.getParameter("positionId"));
+        candidateId = Integer.parseInt(request.getParameter("candidateId"));
+        
+        request.setAttribute("positionId", positionId);
+        request.setAttribute("candidateId", candidateId);
         
         request.setAttribute("activePage", "Interview");
         request.getRequestDispatcher("/WEB-INF/pages/setInterview.jsp").forward(request, response);
@@ -30,14 +42,23 @@ public class Interviews extends HttpServlet {
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {        
-        String date = request.getParameter("date");
+            throws ServletException, IOException {
+        
+        Integer positionId;
+        Integer candidateId;
+        
+        positionId = Integer.parseInt(request.getParameter("positionId"));
+        candidateId = Integer.parseInt(request.getParameter("candidateId"));
+        
         String interviewer = request.getParameter("interviewer");
         String typeOfInterview = request.getParameter("typeOfInterview");
-        String comment = request.getParameter("comment");
+        String date = request.getParameter("date");
+        String comment = request.getParameter("comment");    
+        interviewBean.addInterview(date, interviewer, typeOfInterview, comment, positionId, candidateId);
+        response.sendRedirect(request.getContextPath() + "/ApplicationsListAll");
         
-        response.sendRedirect(request.getContextPath());
-    }
+        
+    } 
 
    
 }
