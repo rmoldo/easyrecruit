@@ -9,7 +9,7 @@ import com.park.easyrecruit.ejb.ApplicationBean;
 import java.io.IOException;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.HttpConstraint;
+import javax.servlet.annotation.HttpMethodConstraint;
 import javax.servlet.annotation.ServletSecurity;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,7 +21,12 @@ import javax.servlet.http.HttpServletResponse;
  * @author andrei
  */
 @WebServlet(name = "Applications", urlPatterns = {"/Applications"})
-@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"ManageMyApplicationsRole"}))
+@ServletSecurity(
+        httpMethodConstraints = {
+            @HttpMethodConstraint(value = "GET", rolesAllowed = {"ManageMyApplicationsRole"}),
+            @HttpMethodConstraint(value = "POST", rolesAllowed = {"DepartmentDirectorRole"})
+        }
+)
 public class Applications extends HttpServlet {
 
     @Inject

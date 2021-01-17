@@ -41,6 +41,8 @@
   <security-role-mapping>
     <role-name>ManageMyApplicationsRole</role-name>
     <group-name>CLIENT</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
     <role-name>DepartmentDirectorRole</role-name>
     <group-name>DEPARTMENTDIRECTOR</group-name>
   </security-role-mapping>
