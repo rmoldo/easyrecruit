@@ -15,6 +15,7 @@ import java.io.IOException;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.HttpConstraint;
+import javax.servlet.annotation.HttpMethodConstraint;
 import javax.servlet.annotation.ServletSecurity;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,7 +27,12 @@ import javax.servlet.http.HttpServletResponse;
  * @author andrei
  */
 @WebServlet(name = "Application", urlPatterns = {"/Application"})
-@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"ClientRole","ManageInterviewRole"}))
+@ServletSecurity(
+        httpMethodConstraints = {
+            @HttpMethodConstraint(value = "GET", rolesAllowed = {"ReadAllApplicationsRole", "ManageMyApplicationsRole"}),
+            @HttpMethodConstraint(value = "POST", rolesAllowed = {"ManageMyApplicationsRole"})
+        }
+)
 public class Application extends HttpServlet {
 
     @Inject
@@ -40,8 +46,6 @@ public class Application extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // anyone GET + positionId => read application for current user, or create if not exists
-        // HR GET + positionId + candidateId => read application for specified user
         Integer positionId;
         Integer candidateId = null;
 
@@ -61,14 +65,15 @@ public class Application extends HttpServlet {
         String username = request.getUserPrincipal().getName();
         UserDetails user = userBean.findByUsername(username);
 
-        // TODO andrei: fix role check
-        if (candidateId != null && request.isUserInRole("HR")) {
+        if (candidateId != null && request.isUserInRole("ReadAllApplicationsRole")) {
+            // HR GET + positionId + candidateId => read application for specified user
             application = applicationBean.get(positionId, candidateId);
             if (application == null) {
                 response.setStatus(404);
                 return;
             }
-        } else if (candidateId == null) {
+        } else if (candidateId == null && request.isUserInRole("ManageMyApplicationsRole")) {
+            // anyone GET + positionId => read application for current user, or create if not exists
             // application for current user
             application = applicationBean.get(positionId, username);
             if (application == null) {
@@ -83,8 +88,11 @@ public class Application extends HttpServlet {
                 application.setCvLink("");
             }
             request.setAttribute("edit", true);
+        } else {
+            response.setStatus(400);
+            return;
         }
-        
+
         application.getComments().sort((a, b) -> b.getDateTime().compareTo(a.getDateTime()));
         application.setEditableCommentsUserId(user.getId());
         request.setAttribute("application", application);
@@ -112,7 +120,7 @@ public class Application extends HttpServlet {
 
             applicationBean.save(positionId, request.getUserPrincipal().getName(), ad);
         }
-        
+
         response.sendRedirect(request.getContextPath() + "/Applications");
     }
 }

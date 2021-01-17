@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author andrei
  */
 @WebServlet(name = "Applications", urlPatterns = {"/Applications"})
-@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"ClientRole","ManageInterviewRole"}))
+@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"ManageMyApplicationsRole"}))
 public class Applications extends HttpServlet {
 
     @Inject
@@ -32,8 +32,6 @@ public class Applications extends HttpServlet {
             throws ServletException, IOException {
 
         // anyone GET => applications of current user (My Applications)
-        // HR GET + positionId => list all applications for specified position
-        
         request.setAttribute("applications", applicationBean.getMany(request.getUserPrincipal().getName()));
         request.getRequestDispatcher("/WEB-INF/pages/applications.jsp").forward(request, response);
     }

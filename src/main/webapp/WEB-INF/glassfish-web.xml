@@ -33,6 +33,14 @@
     <group-name>RECRUITER</group-name>
   </security-role-mapping>
   <security-role-mapping>
+    <role-name>ReadAllApplicationsRole</role-name>
+    <group-name>CEO</group-name>
+    <group-name>DEPARTMENTDIRECTOR</group-name>
+    <group-name>RECRUITER</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>ManageMyApplicationsRole</role-name>
+    <group-name>CLIENT</group-name>
     <role-name>DepartmentDirectorRole</role-name>
     <group-name>DEPARTMENTDIRECTOR</group-name>
   </security-role-mapping>
