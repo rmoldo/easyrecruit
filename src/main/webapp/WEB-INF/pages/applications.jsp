@@ -18,7 +18,9 @@
                 <th>Position</th>
                 <th>Department</th>
                 <th>Project</th>
-                <th>Submitted CV</th>   
+                <th>Submitted CV</th>  
+                <th>Application Status</th>
+                <th>Interview Status</th>
             </tr>
         </thead>
         <tbody>

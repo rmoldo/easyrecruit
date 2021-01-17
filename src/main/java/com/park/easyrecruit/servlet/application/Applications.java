@@ -25,10 +25,9 @@ import javax.servlet.http.HttpServletResponse;
 @ServletSecurity(
         httpMethodConstraints = {
             @HttpMethodConstraint(value = "GET", rolesAllowed = {"ManageMyApplicationsRole"}),
-            @HttpMethodConstraint(value = "POST", rolesAllowed = {"DepartmentDirectorRole"})
+            @HttpMethodConstraint(value = "POST", rolesAllowed = {"DepartmentDirectorRole"}),
         }
 )
-@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"InterviewStatusRole"}))
 public class Applications extends HttpServlet {
 
     @Inject

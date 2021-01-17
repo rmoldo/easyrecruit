@@ -38,13 +38,11 @@ public class ApplicationDetails {
         return ad;
     }
 
-    public List<ApplicationComment> getComments() {
-    
     public Interview getInterview() {
         return interview;
     }
     
-    public Collection<ApplicationComment> getComments() {
+    public List<ApplicationComment> getComments() {
         return comments;
     }
 

@@ -46,7 +46,6 @@ public class Application implements Serializable {
 
     @OneToMany(mappedBy = "application")
     private Collection<ApplicationComment> comments;
-    private Collection<ApplicationComment> comments = new ArrayList<>();
     
     @OneToOne
     private Interview interview;
