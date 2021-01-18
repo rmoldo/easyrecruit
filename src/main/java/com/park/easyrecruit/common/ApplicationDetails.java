@@ -20,6 +20,9 @@ public class ApplicationDetails {
     private List<ApplicationComment> comments = new ArrayList<>();
     private PositionDetails position;
     private Status status;
+    private Interview interview;
+
+    
     
     public static ApplicationDetails From(Application a) {
         if (a == null)
@@ -31,9 +34,14 @@ public class ApplicationDetails {
         ad.comments = new ArrayList<>(a.getComments());
         ad.position = new PositionDetails(a.getPosition());
         ad.status = a.getStatus();
+        ad.interview = a.getInterview();
         return ad;
     }
 
+    public Interview getInterview() {
+        return interview;
+    }
+    
     public List<ApplicationComment> getComments() {
         return comments;
     }

@@ -18,8 +18,9 @@
                 <th>Position</th>
                 <th>Department</th>
                 <th>Project</th>
-                <th>Submitted CV</th>
-                <th>Status</th>
+                <th>Submitted CV</th>  
+                <th>Application Status</th>
+                <th>Interview Status</th>
             </tr>
         </thead>
         <tbody>
@@ -35,6 +36,17 @@
                         <a href="${app.cvLink}">${app.cvLink}</a>
                     </td>
                     <td class="text-truncate">${app.status}</td>
+                    <td>
+                        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Show Details</button>
+                            <div id="demo" class="collapse">
+                              <p> 
+                                  ${app.interview.interviewer}<br>
+                                  ${app.interview.typeOfInterview}<br>
+                                  ${app.interview.date}<br>
+                                  ${app.interview.comment}<br>                            
+                              </p>
+                           </div>
+                    </td>
                 </tr>
             </c:forEach>
         </tbody>

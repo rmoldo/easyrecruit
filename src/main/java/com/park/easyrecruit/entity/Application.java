@@ -46,7 +46,18 @@ public class Application implements Serializable {
 
     @OneToMany(mappedBy = "application")
     private Collection<ApplicationComment> comments;
+    
+    @OneToOne
+    private Interview interview;
 
+    public Interview getInterview() {
+        return interview;
+    }
+
+    public void setInterview(Interview interview) {
+        this.interview = interview;
+    }
+    
     public Collection<ApplicationComment> getComments() {
         return comments;
     }
